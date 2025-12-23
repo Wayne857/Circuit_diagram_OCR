@@ -1,0 +1,53 @@
+# 忽略大型数据目录
+imagesdetect/
+imagessegment/
+predict_res/
+runs/
+ultralytics/
+
+# 忽略模型文件
+*.pt
+*.pth
+*.ckpt
+
+# 忽略输出目录
+output/
+results/
+logs/
+
+# Python相关
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+nox/
+site-packages/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+.DS_Store?
+ehthumbs.db
+Icon?
+.directory
+.Spotlight-V100
+.Trashes
+ehthumbs_vista.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
