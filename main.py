@@ -44,17 +44,59 @@ def process_single_image(model, image_processor, image_path, selected_classes, p
             source=str(image_path),
             conf=0.25,
             iou=0.45,
-            save=True,  # 保存检测结果
-            save_txt=False,
-            save_conf=False,
+            save=False,  # 不自动保存检测结果
             show=False,
             device=get_device()
         )
         
+        # 提取并保存检测框内的图像区域
+        original_image = image_processor.load_image(str(image_path))
+        image_filename = Path(image_path).stem
+        
+        # 创建检测结果目录
+        detection_results_dir = output_dir / "detection_results"
+        detection_results_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 类别名称定义
+        class_names = {
+            0: 'arrow',
+            1: 'capacitor', 
+            2: 'chip',
+            3: 'ground',
+            4: 'line',
+            5: 'line_connector',
+            6: 'motor',
+            7: 'resistor',
+            8: 'zener_diode',
+            9: 'mov',
+            10: 'fuse',
+            11: 'inductor'
+        }
+        
+        # 提取并保存检测框内的图像区域
+        for i, result in enumerate(detection_results):
+            boxes = result.boxes
+            if boxes is not None:
+                for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                    x1, y1, x2, y2 = map(int, box)
+                    class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                    
+                    # 提取检测框内的图像区域
+                    cropped_img = original_image[y1:y2, x1:x2]
+                    
+                    # 创建类别子目录并保存裁剪的图像
+                    class_name = class_names.get(class_id, f"class_{class_id}")
+                    class_detection_dir = detection_results_dir / class_name
+                    class_detection_dir.mkdir(exist_ok=True)
+                    
+                    cropped_img_path = class_detection_dir / f"{image_filename}_detected_{class_name}_{i+1}_{j+1}_conf_{conf:.2f}.jpg"
+                    image_processor.save_image(cropped_img, str(cropped_img_path))
+                    
+                    print(f"  保存检测框图像: {cropped_img_path} (类别: {class_name}, 置信度: {conf:.2f})")
+        
         # 生成输出路径
         image_name = Path(image_path).stem
         image_ext = Path(image_path).suffix
-        detection_result_path = detection_output_dir / f"{image_name}_result{image_ext}"
         processed_image_path = processed_output_dir / f"{image_name}_whitened{image_ext}"
         
         # 处理检测结果，将选定类别的检测框区域进行处理
@@ -66,6 +108,8 @@ def process_single_image(model, image_processor, image_path, selected_classes, p
             process_type
         )
         
+        # 检测结果会自动保存到 {output_dir}/detection_results/ 目录中
+        detection_result_path = output_dir / "detection_results" / f"{image_name}{image_ext}"
         print(f"  检测结果已保存到: {detection_result_path}")
         print(f"  处理结果已保存到: {processed_image_path}")
         
@@ -101,15 +145,55 @@ def process_folder_images(model, image_processor, input_folder, selected_classes
                 source=image_path,
                 conf=0.25,
                 iou=0.45,
-                save=True,  # 保存检测结果
-                save_txt=False,
-                save_conf=False,
+                save=False,  # 不自动保存检测结果
                 show=False,
                 device=get_device()
             )
             
-            # 获取输出路径
-            detection_result_path, processed_image_path = config.get_output_paths(image_path)
+            # 提取并保存检测框内的图像区域
+            original_image = image_processor.load_image(image_path)
+            image_filename = Path(image_path).stem
+            
+            # 创建检测结果目录
+            detection_results_dir = Path(output_dir) / "detection_results"
+            detection_results_dir.mkdir(parents=True, exist_ok=True)
+            
+            # 类别名称定义
+            class_names = {
+                0: 'arrow',
+                1: 'capacitor', 
+                2: 'chip',
+                3: 'ground',
+                4: 'line',
+                5: 'line_connector',
+                6: 'motor',
+                7: 'resistor',
+                8: 'zener_diode',
+                9: 'mov',
+                10: 'fuse',
+                11: 'inductor'
+            }
+            
+            # 提取并保存检测框内的图像区域
+            for i, result in enumerate(detection_results):
+                boxes = result.boxes
+                if boxes is not None:
+                    for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                        x1, y1, x2, y2 = map(int, box)
+                        class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                        
+                        # 提取检测框内的图像区域
+                        cropped_img = original_image[y1:y2, x1:x2]
+                        
+                        # 创建类别子目录并保存裁剪的图像
+                        class_name = class_names.get(class_id, f"class_{class_id}")
+                        class_detection_dir = detection_results_dir / class_name
+                        class_detection_dir.mkdir(exist_ok=True)
+                        
+                        cropped_img_path = class_detection_dir / f"{image_filename}_detected_{class_name}_{i+1}_{j+1}_conf_{conf:.2f}.jpg"
+                        image_processor.save_image(cropped_img, str(cropped_img_path))
+                        
+                        print(f"  保存检测框图像: {cropped_img_path} (类别: {class_name}, 置信度: {conf:.2f})")
             
             # 处理检测结果，将选定类别的检测框区域进行处理
             image_processor.process_detection_results(
@@ -120,6 +204,8 @@ def process_folder_images(model, image_processor, input_folder, selected_classes
                 process_type
             )
             
+            # 检测结果会自动保存到 {output_dir}/detection_results/ 目录中
+            detection_result_path = Path(output_dir) / "detection_results" / Path(image_path).name
             print(f"  检测结果已保存到: {detection_result_path}")
             print(f"  处理结果已保存到: {processed_image_path}")
             success_count += 1

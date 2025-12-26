@@ -212,14 +212,39 @@ class ImageProcessor:
         original_output_path = original_dir / f"{image_filename}_original.jpg"
         self.save_image(original_image, str(original_output_path))
         
+        # 创建检测结果目录
+        detection_results_dir = output_path / "detection_results"
+        detection_results_dir.mkdir(exist_ok=True)
+        
         # 执行检测
         detection_results = detection_model.predict(
             source=image_path,
             conf=0.25,
             iou=0.45,
-            save=False,
+            save=False,  # 不自动保存检测结果
             show=False
         )
+        
+        # 提取并保存检测框内的图像区域
+        for i, result in enumerate(detection_results):
+            boxes = result.boxes
+            if boxes is not None:
+                for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                    x1, y1, x2, y2 = map(int, box)
+                    class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                    
+                    # 提取检测框内的图像区域
+                    cropped_img = original_image[y1:y2, x1:x2]
+                    
+                    # 创建类别子目录并保存裁剪的图像
+                    class_name = class_names.get(class_id, f"class_{class_id}")
+                    class_detection_dir = detection_results_dir / class_name
+                    class_detection_dir.mkdir(exist_ok=True)
+                    
+                    cropped_img_path = class_detection_dir / f"{image_filename}_detected_{class_name}_{i+1}_{j+1}_conf_{conf:.2f}.jpg"
+                    self.save_image(cropped_img, str(cropped_img_path))
+                    
+                    print(f"  保存检测框图像: {cropped_img_path} (类别: {class_name}, 置信度: {conf:.2f})")
         
         # 创建掩码以移除指定类别
         mask_to_remove = np.zeros(original_image.shape[:2], dtype=np.uint8)
@@ -301,4 +326,5 @@ class ImageProcessor:
                 segmented_output_path = segmented_dir / f"{image_filename}_segmented.jpg"
                 self.save_image(processed_image, str(segmented_output_path))
         
+        print(f"  检测框内的图像已保存到: {output_path}/detection_results/")
         print(f"  分割结果已保存到: {output_path}")
