@@ -32,10 +32,12 @@ from modelscope import AutoTokenizer
 # ====================== 2. 配置参数 ======================
 MODEL_ID = "knowledgator/gliclass-large-v3.0"
 DATA_DIR = "./text_part/data/dataset"
-MAX_LENGTH = 20
-BATCH_SIZE = 64
-EPOCHS = 100
-LEARNING_RATE = 3e-5
+MAX_LENGTH = 8  # 关键：匹配实际token长度（5-6个），减少padding噪声
+BATCH_SIZE = 8  # 关键：小batch更适合小数据集，提升梯度稳定性
+EPOCHS = 15     # 关键：大幅减少epochs，配合早停防止过拟合
+LEARNING_RATE = 5e-6  # 关键：更小的学习率，适合小数据微调
+WARMUP_RATIO = 0.1    # 新增：学习率预热比例
+WEIGHT_DECAY = 0.001  # 降低权重衰减，小数据无需强正则
 OUTPUT_DIR = "./text_part/gliclass_circuit_model"
 LOG_DIR = "./text_part/gliclass_logs"
 BEST_MODEL_DIR = os.path.join(OUTPUT_DIR, "best_model")
@@ -182,16 +184,18 @@ class GLiClassForClassification(nn.Module):
         self.base_model = base_model
         self.num_labels = num_labels
         
-        # 强制base_model参数可训练
+        # 关键：冻结基础模型大部分层（只微调分类头）
         for param in self.base_model.parameters():
-            param.requires_grad = True
+            param.requires_grad = False  # 先全冻结
+        # 解冻最后2层（少量微调，平衡泛化与拟合）
+        for layer in list(self.base_model.children())[-2:]:
+            for param in layer.parameters():
+                param.requires_grad = True
         
-        # 可训练分类头
+        # 简化分类头（单层线性层，减少过拟合）
         self.classifier = nn.Sequential(
-            nn.Linear(base_model.config.hidden_size, base_model.config.hidden_size),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(base_model.config.hidden_size, num_labels)
+            nn.Linear(base_model.config.hidden_size, num_labels),
+            nn.Dropout(0.05)  # 降低dropout，小数据抗噪声
         )
         
         # 初始化分类头
@@ -205,7 +209,7 @@ class GLiClassForClassification(nn.Module):
         """前向传播（保留梯度）"""
         outputs = self.base_model(
             input_ids=input_ids,
-            attention_mask=attention_mask, **kwargs
+            attention_mask=attention_mask,** kwargs
         )
         
         # 获取<CLS> token
@@ -271,10 +275,10 @@ print(f"✅ GLiClass分类模型加载完成，设备：{device}")
 
 # ====================== 6. 数据集构建（统一使用labels列） ======================
 def tokenize_function(examples):
-    """Tokenization函数"""
+    """Tokenization函数（动态padding，减少噪声）"""
     return tokenizer(
         examples["text"],
-        padding="max_length",
+        padding="longest",  # 关键：动态padding到批次最长，而非固定20
         truncation=True,
         max_length=MAX_LENGTH,
         return_tensors="pt"
@@ -311,7 +315,7 @@ test_dataset = test_dataset.map(lambda x: {"labels": x["labels"].long()})
 
 print(f"✅ 数据集格式转换完成：训练集{len(train_dataset)}条，验证集{len(val_dataset)}条，测试集{len(test_dataset)}条")
 
-# ====================== 7. 训练参数（最终版） ======================
+# ====================== 7. 训练参数 ======================
 training_args = TrainingArguments(
     output_dir=OUTPUT_DIR,
     logging_dir=LOG_DIR,
@@ -319,14 +323,14 @@ training_args = TrainingArguments(
     per_device_train_batch_size=BATCH_SIZE,
     per_device_eval_batch_size=BATCH_SIZE,
     num_train_epochs=EPOCHS,
-    weight_decay=0.01,
+    weight_decay=WEIGHT_DECAY,
     eval_strategy="epoch",
     save_strategy="epoch",
     load_best_model_at_end=True,
     metric_for_best_model="f1",
-    logging_steps=10,
-    fp16=torch.cuda.is_available(),
-    gradient_accumulation_steps=2,
+    logging_steps=5,  # 更频繁监控
+    fp16=False,  # 关闭FP16（小batch下FP16易导致数值不稳定）
+    gradient_accumulation_steps=1,  # 取消梯度累积（小batch无需）
     save_total_limit=3,
     remove_unused_columns=False,
     seed=42,
@@ -334,11 +338,17 @@ training_args = TrainingArguments(
     disable_tqdm=False,
     run_name="gliclass_circuit_training",
     logging_first_step=True,
-    eval_accumulation_steps=10,
+    eval_accumulation_steps=5,
     dataloader_num_workers=0,
     dataloader_pin_memory=True,
     fp16_full_eval=False,
     gradient_checkpointing=False,
+    # 新增：早停（核心！防止过拟合）
+    # early_stopping_patience=3,  # 验证集F1连续3轮不提升则停止
+    # early_stopping_threshold=0.001,
+    # 新增：学习率调度
+    lr_scheduler_type="linear",  # 线性衰减学习率
+    warmup_ratio=WARMUP_RATIO,   # 前10%步数预热学习率
 )
 
 # ====================== 8. 自定义Trainer（优化版 - 无调试输出） ======================

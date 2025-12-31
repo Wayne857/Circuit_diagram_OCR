@@ -57,8 +57,14 @@ def process_single_image(model, image_processor, image_path, selected_classes, p
         detection_results_dir = output_dir / "detection_results"
         detection_results_dir.mkdir(parents=True, exist_ok=True)
         
-        # 类别名称定义
-        class_names = {
+        # 2类别模型的类别名称定义
+        class_names_2class = {
+            0: 'connector',
+            1: 'text'
+        }
+        
+        # 12类别模型的类别名称定义
+        class_names_12class = {
             0: 'arrow',
             1: 'capacitor', 
             2: 'chip',
@@ -81,11 +87,38 @@ def process_single_image(model, image_processor, image_path, selected_classes, p
                     x1, y1, x2, y2 = map(int, box)
                     class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
                     
-                    # 提取检测框内的图像区域
-                    cropped_img = original_image[y1:y2, x1:x2]
+                    # 根据class_names_2class确定类别名称
+                    class_name = class_names_2class.get(class_id, f"class_{class_id}")
+                    
+                    # 如果是text类别，扩大检测框
+                    if class_name == 'text':
+                        # 计算扩大后的坐标
+                        center_x = (x1 + x2) / 2
+                        center_y = (y1 + y2) / 2
+                        width = x2 - x1
+                        height = y2 - y1
+                        
+                        new_width = int(width * 1.2)
+                        new_height = int(height * 1.2)
+                        
+                        x1_new = int(center_x - new_width / 2)
+                        x2_new = int(center_x + new_width / 2)
+                        y1_new = int(center_y - new_height / 2)
+                        y2_new = int(center_y + new_height / 2)
+                        
+                        # 确保坐标在图像范围内
+                        x1_new = max(0, x1_new)
+                        y1_new = max(0, y1_new)
+                        x2_new = min(original_image.shape[1], x2_new)
+                        y2_new = min(original_image.shape[0], y2_new)
+                        
+                        # 提取扩大后的检测框内的图像区域
+                        cropped_img = original_image[y1_new:y2_new, x1_new:x2_new]
+                    else:
+                        # 提取原始检测框内的图像区域
+                        cropped_img = original_image[y1:y2, x1:x2]
                     
                     # 创建类别子目录并保存裁剪的图像
-                    class_name = class_names.get(class_id, f"class_{class_id}")
                     class_detection_dir = detection_results_dir / class_name
                     class_detection_dir.mkdir(exist_ok=True)
                     
@@ -158,8 +191,14 @@ def process_folder_images(model, image_processor, input_folder, selected_classes
             detection_results_dir = Path(output_dir) / "detection_results"
             detection_results_dir.mkdir(parents=True, exist_ok=True)
             
-            # 类别名称定义
-            class_names = {
+            # 2类别模型的类别名称定义
+            class_names_2class = {
+                0: 'text',
+                1: 'connector'
+            }
+            
+            # 12类别模型的类别名称定义
+            class_names_12class = {
                 0: 'arrow',
                 1: 'capacitor', 
                 2: 'chip',
@@ -182,11 +221,38 @@ def process_folder_images(model, image_processor, input_folder, selected_classes
                         x1, y1, x2, y2 = map(int, box)
                         class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
                         
-                        # 提取检测框内的图像区域
-                        cropped_img = original_image[y1:y2, x1:x2]
+                        # 根据class_names_2class确定类别名称
+                        class_name = class_names_2class.get(class_id, f"class_{class_id}")
+                        
+                        # 如果是text类别，扩大检测框
+                        if class_name == 'text':
+                            # 计算扩大后的坐标
+                            center_x = (x1 + x2) / 2
+                            center_y = (y1 + y2) / 2
+                            width = x2 - x1
+                            height = y2 - y1
+                            
+                            new_width = int(width * 1.2)
+                            new_height = int(height * 1.2)
+                            
+                            x1_new = int(center_x - new_width / 2)
+                            x2_new = int(center_x + new_width / 2)
+                            y1_new = int(center_y - new_height / 2)
+                            y2_new = int(center_y + new_height / 2)
+                            
+                            # 确保坐标在图像范围内
+                            x1_new = max(0, x1_new)
+                            y1_new = max(0, y1_new)
+                            x2_new = min(original_image.shape[1], x2_new)
+                            y2_new = min(original_image.shape[0], y2_new)
+                            
+                            # 提取扩大后的检测框内的图像区域
+                            cropped_img = original_image[y1_new:y2_new, x1_new:x2_new]
+                        else:
+                            # 提取原始检测框内的图像区域
+                            cropped_img = original_image[y1:y2, x1:x2]
                         
                         # 创建类别子目录并保存裁剪的图像
-                        class_name = class_names.get(class_id, f"class_{class_id}")
                         class_detection_dir = detection_results_dir / class_name
                         class_detection_dir.mkdir(exist_ok=True)
                         
