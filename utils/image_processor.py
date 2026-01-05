@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from typing import List, Tuple
 from ultralytics import YOLO
+from .text_processor import TextProcessor
 import os
 from pathlib import Path
 
@@ -358,6 +359,82 @@ class ImageProcessor:
                 # 如果没有掩码，只保存处理后的图像
                 segmented_output_path = segmented_dir / f"{image_filename}_segmented.jpg"
                 self.save_image(processed_image, str(segmented_output_path))
+        
+        # 初始化文本处理器并识别text类别的文本
+        text_processor = TextProcessor()
+        
+        # 收集所有text类别的裁剪图像数据
+        text_cropped_images_data = []
+        for i, result in enumerate(detection_results):
+            boxes = result.boxes
+            if boxes is not None:
+                for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                    x1, y1, x2, y2 = map(int, box)
+                    class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                    
+                    # 根据class_names_2class确定类别名称
+                    class_name = class_names_2class.get(class_id, f"class_{class_id}")
+                    
+                    # 如果是text类别，准备进行文本识别
+                    if class_name == 'text':
+                        # 如果是text类别，扩大检测框
+                        if class_name == 'text':
+                            # 计算扩大后的坐标
+                            center_x = (x1 + x2) / 2
+                            center_y = (y1 + y2) / 2
+                            width = x2 - x1
+                            height = y2 - y1
+                            
+                            new_width = int(width * 1.2)
+                            new_height = int(height * 1.2)
+                            
+                            x1_new = int(center_x - new_width / 2)
+                            x2_new = int(center_x + new_width / 2)
+                            y1_new = int(center_y - new_height / 2)
+                            y2_new = int(center_y + new_height / 2)
+                            
+                            # 确保坐标在图像范围内
+                            x1_new = max(0, x1_new)
+                            y1_new = max(0, y1_new)
+                            x2_new = min(original_image.shape[1], x2_new)
+                            y2_new = min(original_image.shape[0], y2_new)
+                            
+                            # 提取扩大后的检测框内的图像区域
+                            cropped_img = original_image[y1_new:y2_new, x1_new:x2_new]
+                        else:
+                            # 提取原始检测框内的图像区域
+                            cropped_img = original_image[y1:y2, x1:x2]
+                        
+                        # 添加到待处理列表
+                        text_cropped_images_data.append({
+                            'image': cropped_img,
+                            'name': f"{image_filename}_text_{i+1}_{j+1}",
+                            'bbox': (x1, y1, x2, y2),  # 保存原始坐标
+                            'confidence': float(conf)
+                        })
+        
+        # 如果有text类别的图像，进行并发文本识别
+        if text_cropped_images_data:
+            print(f"  开始识别 {len(text_cropped_images_data)} 个text类别的图像")
+            text_results = text_processor.recognize_texts_concurrent(text_cropped_images_data, max_workers=5)
+            
+            # 保存文本识别结果到txt文件
+            text_result_file = output_path / "text_results.txt"
+            with open(text_result_file, 'w', encoding='utf-8') as f:
+                f.write("文本识别结果:\n")  # 添加文件头
+                for result in text_results:
+                    if result['success']:
+                        # 解析文本识别结果
+                        data = result['data']
+                        if 'parsing_res_list' in data and data['parsing_res_list']:
+                            for item in data['parsing_res_list']:
+                                text_content = item.get('text', '') if isinstance(item, dict) else str(item)
+                                f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {text_content}\n")
+                        else:
+                            f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {data}\n")
+                    else:
+                        f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
+            print(f"  文本识别结果已保存到: {text_result_file}")
         
         print(f"  检测框内的图像已保存到: {output_path}/detection_results/")
         print(f"  分割结果已保存到: {output_path}")

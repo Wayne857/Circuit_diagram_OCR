@@ -17,6 +17,7 @@ sys.path.insert(0, str(project_root))
 
 from ultralytics import YOLO
 from utils.image_processor import ImageProcessor
+from utils.text_processor import TextProcessor
 from utils.config import Config
 
 def get_device():
@@ -143,6 +144,83 @@ def process_single_image(model, image_processor, image_path, selected_classes, p
         
         # 检测结果会自动保存到 {output_dir}/detection_results/ 目录中
         detection_result_path = output_dir / "detection_results" / f"{image_name}{image_ext}"
+        # 初始化文本处理器并识别text类别的文本
+        text_processor = TextProcessor()
+        
+        # 收集所有text类别的裁剪图像数据
+        text_cropped_images_data = []
+        for i, result in enumerate(detection_results):
+            boxes = result.boxes
+            if boxes is not None:
+                for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                    x1, y1, x2, y2 = map(int, box)
+                    class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                    
+                    # 根据class_names_2class确定类别名称
+                    class_name = class_names_2class.get(class_id, f"class_{class_id}")
+                    
+                    # 如果是text类别，准备进行文本识别
+                    if class_name == 'text':
+                        # 如果是text类别，扩大检测框
+                        if class_name == 'text':
+                            # 计算扩大后的坐标
+                            center_x = (x1 + x2) / 2
+                            center_y = (y1 + y2) / 2
+                            width = x2 - x1
+                            height = y2 - y1
+                            
+                            new_width = int(width * 1.2)
+                            new_height = int(height * 1.2)
+                            
+                            x1_new = int(center_x - new_width / 2)
+                            x2_new = int(center_x + new_width / 2)
+                            y1_new = int(center_y - new_height / 2)
+                            y2_new = int(center_y + new_height / 2)
+                            
+                            # 确保坐标在图像范围内
+                            x1_new = max(0, x1_new)
+                            y1_new = max(0, y1_new)
+                            x2_new = min(original_image.shape[1], x2_new)
+                            y2_new = min(original_image.shape[0], y2_new)
+                            
+                            # 提取扩大后的检测框内的图像区域
+                            cropped_img = original_image[y1_new:y2_new, x1_new:x2_new]
+                        else:
+                            # 提取原始检测框内的图像区域
+                            cropped_img = original_image[y1:y2, x1:x2]
+                        
+                        # 添加到待处理列表
+                        text_cropped_images_data.append({
+                            'image': cropped_img,
+                            'name': f"{image_filename}_text_{i+1}_{j+1}",
+                            'bbox': (x1, y1, x2, y2),  # 保存原始坐标
+                            'confidence': float(conf)
+                        })
+        
+        # 如果有text类别的图像，进行并发文本识别
+        if text_cropped_images_data:
+            print(f"  开始识别 {len(text_cropped_images_data)} 个text类别的图像")
+            text_results = text_processor.recognize_texts_concurrent(text_cropped_images_data, max_workers=5)
+            
+            # 保存文本识别结果到txt文件
+            text_result_file = Path(output_dir) / "text_results.txt"
+            mode = 'w'  # 使用写入模式，因为这是单个图像处理
+            with open(text_result_file, mode, encoding='utf-8') as f:
+                f.write("文本识别结果:\n")  # 添加文件头
+                for result in text_results:
+                    if result['success']:
+                        # 解析文本识别结果
+                        data = result['data']
+                        if 'parsing_res_list' in data and data['parsing_res_list']:
+                            for item in data['parsing_res_list']:
+                                text_content = item.get('text', '') if isinstance(item, dict) else str(item)
+                                f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {text_content}\n")
+                        else:
+                            f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {data}\n")
+                    else:
+                        f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
+            print(f"  文本识别结果已保存到: {text_result_file}")
+        
         print(f"  检测结果已保存到: {detection_result_path}")
         print(f"  处理结果已保存到: {processed_image_path}")
         
@@ -272,6 +350,84 @@ def process_folder_images(model, image_processor, input_folder, selected_classes
             
             # 检测结果会自动保存到 {output_dir}/detection_results/ 目录中
             detection_result_path = Path(output_dir) / "detection_results" / Path(image_path).name
+            # 初始化文本处理器并识别text类别的文本
+            text_processor = TextProcessor()
+            
+            # 收集所有text类别的裁剪图像数据
+            text_cropped_images_data = []
+            for i, result in enumerate(detection_results):
+                boxes = result.boxes
+                if boxes is not None:
+                    for j, (box, conf) in enumerate(zip(boxes.xyxy, boxes.conf)):
+                        x1, y1, x2, y2 = map(int, box)
+                        class_id = int(boxes.cls[j]) if boxes.cls is not None else 0
+                        
+                        # 根据class_names_2class确定类别名称
+                        class_name = class_names_2class.get(class_id, f"class_{class_id}")
+                        
+                        # 如果是text类别，准备进行文本识别
+                        if class_name == 'text':
+                            # 如果是text类别，扩大检测框
+                            if class_name == 'text':
+                                # 计算扩大后的坐标
+                                center_x = (x1 + x2) / 2
+                                center_y = (y1 + y2) / 2
+                                width = x2 - x1
+                                height = y2 - y1
+                                
+                                new_width = int(width * 1.2)
+                                new_height = int(height * 1.2)
+                                
+                                x1_new = int(center_x - new_width / 2)
+                                x2_new = int(center_x + new_width / 2)
+                                y1_new = int(center_y - new_height / 2)
+                                y2_new = int(center_y + new_height / 2)
+                                
+                                # 确保坐标在图像范围内
+                                x1_new = max(0, x1_new)
+                                y1_new = max(0, y1_new)
+                                x2_new = min(original_image.shape[1], x2_new)
+                                y2_new = min(original_image.shape[0], y2_new)
+                                
+                                # 提取扩大后的检测框内的图像区域
+                                cropped_img = original_image[y1_new:y2_new, x1_new:x2_new]
+                            else:
+                                # 提取原始检测框内的图像区域
+                                cropped_img = original_image[y1:y2, x1:x2]
+                            
+                            # 添加到待处理列表
+                            text_cropped_images_data.append({
+                                'image': cropped_img,
+                                'name': f"{image_filename}_text_{i+1}_{j+1}",
+                                'bbox': (x1, y1, x2, y2),  # 保存原始坐标
+                                'confidence': float(conf)
+                            })
+            
+            # 如果有text类别的图像，进行并发文本识别
+            if text_cropped_images_data:
+                print(f"  开始识别 {len(text_cropped_images_data)} 个text类别的图像")
+                text_results = text_processor.recognize_texts_concurrent(text_cropped_images_data, max_workers=5)
+                
+                # 保存文本识别结果到txt文件
+                text_result_file = Path(output_dir) / "text_results.txt"
+                mode = 'a' if i > 0 else 'w'  # 第一个图像使用写入模式，后续使用追加模式
+                with open(text_result_file, mode, encoding='utf-8') as f:
+                    if mode == 'w':
+                        f.write("文本识别结果:\n")  # 添加文件头
+                    for result in text_results:
+                        if result['success']:
+                            # 解析文本识别结果
+                            data = result['data']
+                            if 'parsing_res_list' in data and data['parsing_res_list']:
+                                for item in data['parsing_res_list']:
+                                    text_content = item.get('text', '') if isinstance(item, dict) else str(item)
+                                    f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {text_content}\n")
+                            else:
+                                f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {data}\n")
+                        else:
+                            f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
+                print(f"  文本识别结果已保存到: {text_result_file}")
+            
             print(f"  检测结果已保存到: {detection_result_path}")
             print(f"  处理结果已保存到: {processed_image_path}")
             success_count += 1
