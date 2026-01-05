@@ -3,7 +3,6 @@ imagesdetect/
 imagessegment/
 predict_res/
 runs/
-ultralytics/
 
 # 忽略模型文件
 *.pt
