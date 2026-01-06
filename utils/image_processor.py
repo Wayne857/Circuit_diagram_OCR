@@ -424,14 +424,10 @@ class ImageProcessor:
                 f.write("文本识别结果:\n")  # 添加文件头
                 for result in text_results:
                     if result['success']:
-                        # 解析文本识别结果
-                        data = result['data']
-                        if 'parsing_res_list' in data and data['parsing_res_list']:
-                            for item in data['parsing_res_list']:
-                                text_content = item.get('text', '') if isinstance(item, dict) else str(item)
-                                f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {text_content}\n")
-                        else:
-                            f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别文本: {data}\n")
+                        # 使用text_processor中提取的内容
+                        extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                        
+                        f.write(f"文本结果: {extracted_content}, 文本坐标: {result['bbox_coords']}\n")
                     else:
                         f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
             print(f"  文本识别结果已保存到: {text_result_file}")

@@ -225,12 +225,16 @@ class TextProcessor:
             # 在终端输出识别结果
             if result['success']:
                 data = result['data']
-                if 'parsing_res_list' in data and data['parsing_res_list']:
-                    for item in data['parsing_res_list']:
-                        text_content = item.get('text', '') if isinstance(item, dict) else str(item)
-                        print(f"  - 识别结果: {text_content}")
-                else:
-                    print(f"  - 识别结果: {data}")
+                extracted_content = self._extract_content_from_result(data)
+                result['extracted_content'] = extracted_content
+                print(f"  - 识别结果: {extracted_content}")
+                
+                # 详细输出，用于调试
+                print(f"  - 原始数据类型: {type(data)}")
+                if isinstance(data, dict):
+                    print(f"  - 字典键: {data.keys()}")
+                    if 'parsing_res_list' in data:
+                        print(f"  - parsing_res_list: {data['parsing_res_list']}")
             else:
                 print(f"  - 识别失败: {result.get('error', 'Unknown error')}")
             
@@ -251,6 +255,53 @@ class TextProcessor:
                 os.remove(temp_path)
             if temp_path:
                 print(f"已清理临时文件: {temp_path}")
+
+    def _extract_content_from_result(self, data):
+        """
+        从PaddleOCR结果中提取content字段内容
+        """
+        import re
+        
+        # 检查是否是PaddleOCRVLResult对象（根据终端输出，这是一个特殊对象）
+        if hasattr(data, 'parsing_res_list'):
+            # 这是PaddleOCRVLResult对象，直接获取其parsing_res_list属性
+            parsing_list = data.parsing_res_list
+        elif isinstance(data, dict) and "parsing_res_list" in data:
+            # 普通字典格式
+            parsing_list = data.get("parsing_res_list")
+        else:
+            # 如果不是预期格式，转换为字符串后处理
+            text_str = str(data)
+            # 尝试从字符串表示中提取content与#之间的内容
+            content_match = re.search(r'content:\s*(.+?)(?=\n|\r\n|#################)', text_str, re.DOTALL)
+            if content_match:
+                return content_match.group(1).strip()
+            else:
+                # 尝试从多行文本中找到content行
+                lines = text_str.split('\n')
+                for line in lines:
+                    line = line.strip()
+                    if line.lower().startswith('content:'):
+                        return line[8:].strip()  # 去掉'content:'前缀
+            # 如果都没找到，返回空字符串
+            return ""
+        print(f"########{str(parsing_list)[30:]}")
+        # 直接将parsing_list转换为str进行正则
+        parsing_str = str(parsing_list)
+        # 使用正则提取content与#之间的内容
+        content_match = re.search(r'content:\s*(.+?)(?=\n|\r\n|#################)', parsing_str, re.DOTALL)
+        if content_match:
+            return content_match.group(1).strip()
+        else:
+            # 尝试从多行文本中找到content行
+            lines = parsing_str.split('\n')
+            for line in lines:
+                line = line.strip()
+                if line.lower().startswith('content:'):
+                    return line[8:].strip()  # 去掉'content:'前缀
+        # 如果都没找到，返回空字符串
+        return ""
+
 
     def recognize_texts_concurrent(self, cropped_images_data: List[Dict[str, Any]], 
                                   max_workers: int = 5) -> List[Dict[str, Any]]:
