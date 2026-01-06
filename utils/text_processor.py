@@ -184,21 +184,27 @@ class TextProcessor:
                 final_image = np.zeros((1000, 1000, 3), dtype=np.uint8)
                 final_image.fill(255)  # 填充白色背景
                 
-                # 计算居中位置
-                start_y = (1000 - new_h) // 2
-                start_x = (1000 - new_w) // 2
+                # 计算居中位置，但确保不会超出画布边界
+                start_y = max(0, (1000 - new_h) // 2)
+                start_x = max(0, (1000 - new_w) // 2)
                 
-                # 确保不会超出边界
+                # 计算实际放置位置和尺寸
                 end_y = min(start_y + new_h, 1000)
                 end_x = min(start_x + new_w, 1000)
                 
-                # 将放大后的图像放置在中央
-                # 确保只复制有效的区域
-                src_h = end_y - start_y
-                src_w = end_x - start_x
+                # 确保不超过resized_image的实际尺寸
+                actual_h = min(new_h, resized_image.shape[0])
+                actual_w = min(new_w, resized_image.shape[1])
                 
-                if src_h > 0 and src_w > 0:
-                    final_image[start_y:end_y, start_x:end_x] = resized_image[0:src_h, 0:src_w]
+                # 将放大后的图像放置在中央，确保尺寸匹配
+                paste_h = end_y - start_y
+                paste_w = end_x - start_x
+                
+                if paste_h > 0 and paste_w > 0:
+                    # 取较小的尺寸以避免形状不匹配
+                    src_h = min(paste_h, actual_h)
+                    src_w = min(paste_w, actual_w)
+                    final_image[start_y:start_y+src_h, start_x:start_x+src_w] = resized_image[0:src_h, 0:src_w]
                 
                 processed_image = final_image
                 print(f"图像已放置在1000x1000画布中央: 位置 ({start_x}, {start_y})")
@@ -208,8 +214,30 @@ class TextProcessor:
                 cv2.imwrite(debug_output_path, processed_image)
                 print(f"预处理图像已保存至: {debug_output_path}")
             else:
-                processed_image = cropped_image
-                print(f"图像无需预处理: 尺寸 ({w}x{h}) >= 200")
+                # 即使图像尺寸 >= 200，仍然放置在2倍尺寸的空白背景中央
+                new_h, new_w = h, w
+                # 创建长宽均为原图像2倍的空白图片，将原图像放置在正中央
+                canvas_h, canvas_w = new_h * 2, new_w * 2
+                final_image = np.zeros((canvas_h, canvas_w, 3), dtype=np.uint8)
+                final_image.fill(255)  # 填充白色背景
+                
+                # 计算居中位置
+                start_y = (canvas_h - new_h) // 2
+                start_x = (canvas_w - new_w) // 2
+                
+                # 确保不会超出边界
+                end_y = min(start_y + new_h, canvas_h)
+                end_x = min(start_x + new_w, canvas_w)
+                
+                # 将原图像放置在中央，确保只复制有效的区域
+                src_h = end_y - start_y
+                src_w = end_x - start_x
+                
+                if src_h > 0 and src_w > 0:
+                    final_image[start_y:end_y, start_x:end_x] = cropped_image[0:src_h, 0:src_w]
+                
+                processed_image = final_image
+                print(f"图像已放置在{canvas_w}x{canvas_h}画布中央: 位置 ({start_x}, {start_y})")
             
             # 使用临时文件来确保文件名唯一且安全
             with tempfile.NamedTemporaryFile(suffix='.jpg', delete=False) as temp_file:
