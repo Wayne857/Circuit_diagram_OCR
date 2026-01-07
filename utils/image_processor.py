@@ -3,6 +3,7 @@ import numpy as np
 from typing import List, Tuple
 from ultralytics import YOLO
 from .text_processor import TextProcessor
+from .fasttext_classifier import FastTextComponentClassifier
 import os
 from pathlib import Path
 
@@ -420,14 +421,55 @@ class ImageProcessor:
             
             # 保存文本识别结果到txt文件
             text_result_file = output_path / "text_results.txt"
+            
+            # 初始化FastText分类器
+            try:
+                # 使用绝对路径来确保模型文件可以被找到
+                import os
+                model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'component_fasttext.bin')
+                classifier = FastTextComponentClassifier(model_path)
+                
+                # 收集所有成功识别的文本内容，用于批量分类
+                texts_to_classify = []
+                for result in text_results:
+                    if result['success']:
+                        extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                        texts_to_classify.append(extracted_content)
+                
+                # 批量进行分类预测
+                classification_results = []
+                if texts_to_classify:
+                    classification_results = classifier.predict_batch(texts_to_classify)
+            except Exception as e:
+                print(f"  FastText分类器初始化或预测失败: {e}")
+                classification_results = [None] * len([r for r in text_results if r['success']])
+            
+            # 写入结果文件
             with open(text_result_file, 'w', encoding='utf-8') as f:
-                f.write("文本识别结果:\n")  # 添加文件头
+                f.write("文本识别与分类结果:\n")  # 更新文件头
+                
+                # 跟踪分类结果的索引
+                classification_idx = 0
+                
                 for result in text_results:
                     if result['success']:
                         # 使用text_processor中提取的内容
                         extracted_content = result.get('extracted_content', str(result.get('data', '')))
                         
+                        # 获取对应的分类结果
+                        classification_result = None
+                        if classification_idx < len(classification_results):
+                            classification_result = classification_results[classification_idx]
+                            classification_idx += 1
+                        
+                        # 写入文本结果和坐标
                         f.write(f"文本结果: {extracted_content}, 文本坐标: {result['bbox_coords']}\n")
+                        
+                        # 如果分类成功，写入分类结果
+                        if classification_result:
+                            f.write(f"分类结果: {classification_result['predicted_label']}, 置信度: {classification_result['confidence']}\n")
+                        else:
+                            f.write(f"分类结果: 未分类\n")
                     else:
                         f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
             print(f"  文本识别结果已保存到: {text_result_file}")
