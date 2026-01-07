@@ -313,7 +313,10 @@ class ImageProcessor:
         self.save_image(processed_image, str(processed_output_path))
         
         # 对处理后的图像进行分割
-        segmentation_results = segmentation_model(processed_image, conf=segmentation_conf)
+        segmentation_results = segmentation_model(processed_image, conf=segmentation_conf, iou=0.45)
+        
+        # 收集分割结果
+        segmentation_info = []
         
         # 保存分割的整体结果
         if segmentation_results and len(segmentation_results) > 0:
@@ -350,6 +353,22 @@ class ImageProcessor:
                     
                     # 获取类别名称
                     class_name = class_names_12class.get(class_id, f"class_{class_id}")
+                    
+                    # 获取检测框坐标
+                    if seg_result.boxes is not None and len(seg_result.boxes) > i:
+                        box = seg_result.boxes.xyxy[i]
+                        bbox_coords = (int(box[0]), int(box[1]), int(box[2]), int(box[3]))
+                    else:
+                        bbox_coords = None
+                    
+                    # 保存分割坐标信息
+                    segmentation_info.append({
+                        'class_id': class_id,
+                        'class_name': class_name,
+                        'bbox_coords': bbox_coords,
+                        'mask_coords': mask.astype(int).tolist() if len(mask) > 0 else [],
+                        'confidence': confidence
+                    })
                     
                     # 保存该类别的分割结果
                     class_output_path = class_dirs[class_id] / f"{image_filename}_{class_name}_instance_{i+1}_conf_{confidence:.2f}.jpg"
@@ -472,6 +491,12 @@ class ImageProcessor:
                             f.write(f"分类结果: 未分类\n")
                     else:
                         f.write(f"图像名称: {result['image_name']}, 坐标: {result['bbox_coords']}, 识别失败: {result.get('error', 'Unknown error')}\n")
+                
+                # 添加分割结果
+                if segmentation_info:
+                    f.write("\n分割结果:\n")
+                    for seg_info in segmentation_info:
+                        f.write(f"类别: {seg_info['class_name']}, 检测框坐标: {seg_info['bbox_coords']}, 分割坐标: {seg_info['mask_coords'][:10]}... (置信度: {seg_info['confidence']:.2f})\n")  # 只显示前10个坐标点以避免输出过长
             print(f"  文本识别结果已保存到: {text_result_file}")
         
         print(f"  检测框内的图像已保存到: {output_path}/detection_results/")
