@@ -1,1755 +1,2235 @@
-__label__芯片 u4_esp8266
-__label__压敏电阻 110v
-__label__压敏电阻 rv1
-__label__芯片 u39
-__label__二极管 3a 1000v
-__label__电感 l_filter_sdio_82uh
-__label__芯片 modbus_ascii_rts
-__label__芯片 u41
-__label__芯片 profinet_power
-__label__芯片 can_low_reset
-__label__芯片 mipi_dsi_data1+
-__label__芯片 gpiog0_input
-__label__电机 m11
-__label__电容 c_ceramic_4_20ma_10nf
-__label__芯片 obd2_sae_j1850_pwm-
-__label__芯片 vcc_cam
-__label__芯片 vdd_gps
-__label__电感 l_power_nfc_22uh
-__label__电机 47v
-__label__芯片 lcd_rs_ctrl
-__label__电阻 r_voltage_div_top_100k
-__label__芯片 debug_test_rx
-__label__芯片 gpioc7_adc
-__label__二极管 2a 1200v
-__label__电容 c_filter_uart_1nf
-__label__芯片 devicenet_wake
-__label__电阻 can_low_term
-__label__芯片 thermal_sense
-__label__芯片 iso9141_2_l_line
-__label__接地 gnd
-__label__二极管 d40
-__label__接地 gnd43
-__label__芯片 lpc1768
-__label__芯片 power_monitor
-__label__电阻 r56 130ω
-__label__芯片 uart_tx
-__label__芯片 reset_n_pulldown
-__label__电阻 r_pullup_i2c_4_7k
-__label__芯片 profinet_rxd+
-__label__芯片 timer_clk
-__label__芯片 gpioa3_exti
-__label__芯片 cam_cs
-__label__二极管 0.5a 800v
-__label__芯片 buzzer_driver_ctrl
-__label__电感 510mh
-__label__电阻 4-20ma_loop+
-__label__压敏电阻 100v/10ka
-__label__二极管 3a 700v
-__label__电阻 r7
-__label__芯片 lin_slave_data
-__label__芯片 gpioh1_output
-__label__芯片 u44 stm32f412
-__label__芯片 adc2
-__label__电机 m61
-__label__芯片 usb3_tx2+
-__label__芯片 4-20ma_com
-__label__芯片 jtag_tdi_2
-__label__电阻 r_current_limit_2k2
-__label__电阻 r58 190ω
-__label__电机 m29
-__label__芯片 boot_mode_sel1
-__label__压敏电阻 240v
-__label__芯片 sclk
-__label__芯片 profibus_dp_power
-__label__压敏电阻 33v
-__label__芯片 sdio_d6
-__label__芯片 int_1
-__label__芯片 opamp_compensation
-__label__芯片 uart_rts_1
-__label__电感 l16
-__label__芯片 timer_ch2
-__label__芯片 iso9141_power
-__label__芯片 usb_dp
-__label__芯片 sdio_d3
-__label__芯片 modbus_ascii_cts
-__label__芯片 pwm_deadtime
-__label__芯片 zigbee_data
-__label__电容 c_filter_zigbee_10nf
-__label__芯片 vss_periph_gnd
-__label__接地 gnd_4_20ma
-__label__电阻 r_pulldown_spi_4_7k
-__label__芯片 hdmi_tx_data0
-__label__二极管 d27
-__label__芯片 stm32f030
-__label__芯片 devicenet_can_l
-__label__接地 gnd_kwp2000
-__label__接地 gnd13
-__label__电阻 r_load_relay_220r
-__label__二极管 d17
-__label__电阻 r33
-__label__芯片 vref_in
-__label__压敏电阻 rv25
-__label__芯片 stm32h753
-__label__电容 c_electrolytic_5v_680uf
-__label__二极管 d52
-__label__二极管 d_esd_eth
-__label__电容 33nf
-__label__接地 dgnd
-__label__芯片 hdmi_tx_data1_n
-__label__芯片 rs232_err
-__label__电阻 r_pullup_uart_4_7k
-__label__芯片 u26 stm32f429
-__label__芯片 kwp2000_k_line
-__label__电阻 560ω
-__label__芯片 timer_2_ch0
-__label__电容 c_ceramic_nfc_10nf
-__label__芯片 gpiod1_output
-__label__压敏电阻 rv23
-__label__芯片 obd2_wake
-__label__芯片 hart_reset
-__label__二极管 d_flyback_motor
-__label__芯片 spi_sclk_8mhz
-__label__二极管 1a 600v
-__label__电阻 r_term_4_20ma_250r
-__label__芯片 button_input
-__label__芯片 gpioc2_exti
-__label__压敏电阻 rv61
-__label__二极管 d_clamp_profibus_5v
-__label__芯片 vss_wifi_gnd
-__label__电感 l39
-__label__接地 dgnd
-__label__芯片 reset_n_watchdog
-__label__二极管 0.5a 600v
-__label__电机 m51
-__label__电容 c6/l4
-__label__芯片 iso9141_clk
-__label__电感 l_filter_most_10uh
-__label__电感 680μh
-__label__电感 l30
-__label__芯片 comp_inp0
-__label__电阻 43kω
-__label__电容 22nf
-__label__芯片 nfc_tx
-__label__芯片 vcc_lcd
-__label__芯片 rtc_clk_out
-__label__芯片 sdio_8bit_d6
-__label__二极管 d_led_driver_green
-__label__芯片 adc_diff_inn0
-__label__芯片 uart_rx_3
-__label__电阻 r41
-__label__电阻 r40 3.3mω
-__label__芯片 u8 51单片机
-__label__芯片 usart_clk
-__label__芯片 wifi_5g_rx
-__label__接地 gnd
-__label__压敏电阻 rv32 280v
-__label__二极管 0.3a 1200v
-__label__芯片 can_high_power
-__label__芯片 spi_1_sck
-__label__芯片 vdd_wifi
-__label__芯片 reset_request_mcu
-__label__芯片 stm32wb57
-__label__芯片 jtag_tdo
-__label__电机 m13
-__label__芯片 jtag_tdi
-__label__芯片 reset_request
-__label__电机 5v
-__label__电容 91nf
-__label__芯片 uart_tx_9600
-__label__压敏电阻 rv11
-__label__芯片 u1(stm32f103)+d1(1a 400v)
-__label__二极管 3a 500v
-__label__电阻 r_current_limit_5k6
-__label__电感 l60
-__label__电感 l_filter_spi_100uh
-__label__芯片 vss_ldo_gnd
-__label__电机 20v 0.65a
-__label__芯片 comp_inp1
-__label__芯片 vss_usb_host_gnd
-__label__芯片 debug_1_tx
-__label__二极管 d_clamp_device_net_5v
-__label__芯片 can_l_1
-__label__电阻 r_pullup_uart_10k
-__label__电阻 r_current_limit_12k
-__label__芯片 stm32f767
-__label__接地 gnd28 agnd
-__label__芯片 gpioc11_uart
-__label__电容 2.7μf
-__label__芯片 lin_master_tx
-__label__压敏电阻 tvs_wifi_6v8
-__label__接地 gnd_sdio
-__label__压敏电阻 100v
-__label__芯片 spi_miso
-__label__电感 l54
-__label__芯片 opamp_1_out
-__label__芯片 debug_test_tx
-__label__芯片 gpioa0_pullup
-__label__芯片 vcc_3.3v_filtered
-__label__二极管 d_clamp_usb_5v
-__label__二极管 d59
-__label__芯片 spi_cs_b
-__label__电感 910mh
-__label__芯片 gpiod6_adc
-__label__芯片 u45
-__label__芯片 sdio_d5
-__label__芯片 rtc_data
-__label__电机 m45
-__label__芯片 u16 msp430f149
-__label__电容 c_ceramic_ethernetip_100pf
-__label__接地 gnd_devicenet
-__label__接地 gnd12 dgnd
-__label__压敏电阻 rv46 43v
-__label__电阻 rs422_term
-__label__电机 m25
-__label__芯片 pwm_2_out0
-__label__芯片 iso9141_wake
-__label__接地 pgnd
-__label__电阻 r_pulldown_spi_10k
-__label__芯片 debug_data_2
-__label__电机 m57
-__label__芯片 kwp2000_err
-__label__芯片 usb3_rx1+
-__label__芯片 can_low_speed
-__label__电机 m3/rv3
-__label__压敏电阻 tvs_bt_6v8
-__label__芯片 ram_data0
-__label__电容 c_electrolytic_5v_100uf
-__label__芯片 u35
-__label__电感 28mh
-__label__芯片 gpiob11_i2c
-__label__电阻 r_gnd_div_68k
-__label__芯片 zigbee_wake
-__label__芯片 modbus_rtu_rx
-__label__芯片 i2s_data
-__label__芯片 sd_wp
-__label__芯片 busy
-__label__芯片 qspi_cs_b
-__label__接地 sgnd
-__label__芯片 sdio_d2
-__label__芯片 power_save_en
-__label__芯片 i2s_sdata_in
-__label__芯片 boot_mode1
-__label__二极管 2a 600v
-__label__芯片 adc_in9
-__label__芯片 stm32f413
-__label__芯片 kwp2000_reset
-__label__电容 c_ceramic_hart_100pf
-__label__二极管 0.3a 200v
-__label__芯片 int_2
-__label__二极管 d7
-__label__电阻 r18 47kω
-__label__电感 3.3mh
-__label__芯片 i2c_scl+i2c_sda
-__label__电机 12v 1a
-__label__电阻 20kω
-__label__电机 m15
-__label__芯片 lin_slave_rx
-__label__芯片 i2s_24bit_sdata_in
-__label__芯片 boot_mode2
-__label__电阻 r_gnd_div_33k
-__label__接地 obd2_chassis_gnd
-__label__芯片 vddq_memory
-__label__电感 330mh
-__label__芯片 lin_slave_err
-__label__芯片 spi_sclk_phase
-__label__接地 gnd4 sgnd
-__label__芯片 i2s_lrck
-__label__压敏电阻 230v
-__label__电容 c5
-__label__二极管 d1
-__label__芯片 adc_in0_12bit
-__label__芯片 irq_3
-__label__芯片 pwm_out3
-__label__电容 c_filter_profibus_10nf
-__label__芯片 dac_diff_out1n
-__label__二极管 d45
-__label__电机 m38 3v
-__label__芯片 dac_clk
-__label__电容 c37
-__label__电感 11mh
-__label__电阻 obd2_can_term
-__label__二极管 d_led_driver_blue
-__label__芯片 pic16f877a
-__label__芯片 dac2
-__label__压敏电阻 470v
-__label__接地 gnd1
-__label__芯片 reset_b
-__label__芯片 kwp2000_wake
-__label__接地 gnd25
-__label__二极管 0.5a 900v
-__label__接地 pgnd
-__label__芯片 u51
-__label__接地 gnd35
-__label__芯片 i2s_clk
-__label__电感 l11
-__label__电感 l_filter_i2c_15uh
-__label__电阻 r28 1.2kω
-__label__电感 27mh
-__label__电阻 r_vcc_div_15k
-__label__芯片 vcore_1.8v
-__label__芯片 u48 stm32f446
-__label__电容 c34 2n2f
-__label__芯片 eeprom_scl
-__label__电感 36mh
-__label__芯片 spi_si_slave
-__label__电容 510nf
-__label__电感 l25
-__label__电阻 devicenet_term
-__label__芯片 jtag_tck
-__label__接地 gnd31
-__label__压敏电阻 rv4_47v
-__label__二极管 0.5a 500v
-__label__芯片 lcd_sda
-__label__电阻 r_term_rs485_120r
-__label__二极管 d39
-__label__电容 c19
-__label__芯片 sensor_trig_out
-__label__二极管 d25
-__label__芯片 spi_sclk&3
-__label__电容 75nf
-__label__电阻 68kω
-__label__电感 470μh
-__label__电阻 usb3_term
-__label__芯片 reset_n_activelow
-__label__电阻 1kω
-__label__芯片 adc_in0/9
-__label__电阻 910ω
-__label__芯片 pwm_sync
-__label__芯片 usb3_tx1-
-__label__压敏电阻 rv2 22v
-__label__电机 m1
-__label__芯片 usb_dp_pullup
-__label__芯片 devicenet_power
-__label__二极管 d_esd_nfc
-__label__芯片 wifi_tx
-__label__压敏电阻 tvs_hart_12v
-__label__电感 l36
-__label__二极管 1a 500v
-__label__芯片 sdio_d0
-__label__电阻 820ω
-__label__压敏电阻 rv35
-__label__接地 gnd_iso9141
-__label__芯片 ram_clk
-__label__电感 l27
-__label__电感 3.9mh
-__label__芯片 rs422_tx-
-__label__接地 gnd33
-__label__芯片 adc_in0
-__label__压敏电阻 rv41
-__label__芯片 sleep_mode_ctrl
-__label__电阻 r_pullup_spi_4_7k
-__label__芯片 uart_rts_3
-__label__芯片 4-20ma_wake
-__label__芯片 can_h_2
-__label__二极管 d_clamp_lin_12v
-__label__电阻 r20 120ω
-__label__二极管 1a 1000v
-__label__二极管 d23
-__label__芯片 vdd_pll
-__label__电感 l2 22mh
-__label__芯片 swd_nrst
-__label__芯片 vcc_led
-__label__芯片 profinet_mdc
-__label__芯片 u30 stm32l071
-__label__电机 m17
-__label__芯片 int
-__label__芯片 u54 stm32l151
-__label__芯片 uart_cts_2
-__label__电感 12mh
-__label__电阻 r2 470ω
-__label__电容 c_electrolytic_3_3v_220uf
-__label__芯片 uart_tx%4
-__label__芯片 devicenet_reset
-__label__接地 gnd52 dgnd
-__label__电感 l48
-__label__芯片 ram_cs_b
-__label__芯片 hdmi_tx_clk_n
-__label__芯片 jtag_emu1
-__label__芯片 modbus_tcp_reset
-__label__芯片 wifi_5g_err
-__label__芯片 sleep_mode
-__label__电感 1.5mh
-__label__芯片 atmega2560
-__label__二极管 3a 1200v
-__label__二极管 1a 300v
-__label__接地 gnd
-__label__芯片 wifi_5g_clk
-__label__芯片 irq_1
-__label__压敏电阻 rv33
-__label__芯片 gpioa9_dac
-__label__芯片 gpioc6_adc
-__label__芯片 i2c_sda_slave
-__label__接地 gnd_obd2
-__label__接地 gnd23
-__label__芯片 obd2_clk
-__label__芯片 eth_2_tx_n
-__label__芯片 iso11898_can_h
-__label__接地 gnd39
-__label__电阻 r_pulldown_i2c_10k
-__label__二极管 1a 400v
-__label__电阻 r_current_limit_3k3
-__label__电容 c_electrolytic_gnd_100uf
-__label__芯片 vcc_3.3v
-__label__芯片 gpioc1_output
-__label__芯片 i2c_1_sda
-__label__电阻 r_term_eth_50r
-__label__芯片 rs422_err
-__label__芯片 iso11898_reset
-__label__芯片 swd_swo
-__label__芯片 u2 stm32f407
-__label__接地 pgnd
-__label__电容 47μf
-__label__二极管 0.3a 300v
-__label__电容 c20 1μ5f
-__label__压敏电阻 tvs_profibus_12v
-__label__电阻 r5/330ω
-__label__电容 c18 680nf
-__label__芯片 bt_5_0_tx
-__label__芯片 gpiod0_input
-__label__芯片 ethernetip_tx_n
-__label__芯片 hdmi2_0_tx_data0
-__label__压敏电阻 75v
-__label__二极管 d11
-__label__电感 47mh
-__label__接地 gnd#电源地
-__label__芯片 gpioc9_spi
-__label__芯片 vcc_usb
-__label__电容 c45
-__label__电阻 r57
-__label__芯片 sdio_8bit_clk
-__label__压敏电阻 tvs_4_20ma_12v
-__label__电机 m40 6v
-__label__芯片 i2c_scl#1
-__label__接地 gnd_signal_sig
-__label__芯片 u11
-__label__接地 gnd41
-__label__芯片 rtc_clk
-__label__二极管 d1_0.5a 200v-do-41
-__label__芯片 u63
-__label__电感 16mh
-__label__芯片 kwp2000_clk
-__label__芯片 rs485_re_ind
-__label__接地 gnd21
-__label__压敏电阻 1000v
-__label__芯片 eth_1_rx_p
-__label__二极管 d_clamp_ethernetip_5v
-__label__芯片 profinet_wake
-__label__电阻 r34 6.8kω
-__label__电阻 rs485_term
-__label__芯片 profinet_txd-
-__label__芯片 adc_vrefp
-__label__芯片 modbus_tcp_data
-__label__芯片 gpioa2_exti
-__label__电容 12nf
-__label__芯片 config0
-__label__电阻 r_pulldown_uart_4_7k
-__label__压敏电阻 rv59
-__label__芯片 comp_1_inn
-__label__芯片 gpiod8_spi
-__label__电感 l22
-__label__芯片 i2s_24bit_clk
-__label__接地 gnd47
-__label__电感 l_power_zigbee_33uh
-__label__电机 m30 1.1a
-__label__电容 c56 620nf
-__label__电容 c_decouple_motor_47uf
-__label__芯片 sensor_echo_in
-__label__芯片 gpiod7_adc
-__label__芯片 eeprom_sda
-__label__芯片 atmega8
-__label__芯片 ale
-__label__芯片 obd2_l_line
-__label__芯片 mipi_dsi_clk+
-__label__芯片 can_low_clk
-__label__二极管 d37
-__label__芯片 gpiod2_exti
-__label__二极管 d43
-__label__芯片 int_3
-__label__二极管 3a 800v
-__label__压敏电阻 tvs_sdio_6v8
-__label__电阻 1mω
-__label__电容 c57
-__label__芯片 wake_on_gpio
-__label__芯片 scl
-__label__芯片 cs0_b
-__label__芯片 uart_cts_1
-__label__压敏电阻 rv5/68v
-__label__芯片 u6 arduino uno
-__label__电阻 r_term_device_net_120r
-__label__接地 gnd42 agnd
-__label__接地 gnd48 dgnd
-__label__芯片 vdd_sensor
-__label__二极管 d3
-__label__二极管 d36
-__label__二极管 d4_3a 800v
-__label__压敏电阻 rv31
-__label__芯片 config2
-__label__芯片 spi_miso_master
-__label__芯片 gpioa0@7
-__label__压敏电阻 rv57
-__label__二极管 1a 1100v
-__label__电阻 110ω
-__label__电阻 r1
-__label__芯片 u18 raspberry pi pico
-__label__电容 c5/1μ5f
-__label__芯片 timer_reset
-__label__电阻 r_pulldown_uart_10k
-__label__电阻 r_term_usb_45r
-__label__芯片 can_h_channel1
-__label__接地 gnd_ascii
-__label__电阻 r_vcc_div_82k
-__label__芯片 hart_rx
-__label__芯片 u61
-__label__接地 gnd7
-__label__二极管 3a 300v
-__label__芯片 obd2_reserved_3
-__label__芯片 most_clock
-__label__电容 c_ceramic_zigbee_100pf
-__label__电感 l5/150μh
-__label__电感 l40
-__label__二极管 d_esd_hdmi
-__label__芯片 iso14230_4_kwp
-__label__芯片 nrf52832
-__label__接地 pgnd
-__label__电容 c30 220pf
-__label__芯片 gpiod10_uart
-__label__电容 c_ceramic_can_100pf
-__label__压敏电阻 rv40 1100v
-__label__接地 sgnd
-__label__芯片 lin_master_clk
-__label__芯片 jtag_trst_b
-__label__芯片 lora_rx
-__label__电感 1.2mh
-__label__电容 c_ceramic_lin_100pf
-__label__电阻 lin_bus_term
-__label__电机 0.7a
-__label__芯片 obd2_err
-__label__电容 c48 87nf
-__label__芯片 gpiob10_i2c
-__label__电容 c4_100pf
-__label__芯片 u33
-__label__二极管 d61
-__label__电阻 r5
-__label__芯片 ascii_power
-__label__电机 38v
-__label__芯片 en_usb
-__label__电机 m5
-__label__二极管 d21
-__label__二极管 d16 2a 800v
-__label__电容 2μ2f
+__label__二极管 d_esd_zigbee
 __label__芯片 capture_out1
-__label__芯片 en_periph
-__label__电阻 2k2ω
-__label__芯片 mipi_csi_wake
-__label__压敏电阻 680v
-__label__电机 m27
-__label__芯片 led_ctrl
-__label__芯片 capture_out0
-__label__电阻 r15
-__label__接地 gnd49
-__label__二极管 d2 0.5a 200v
-__label__芯片 profinet_err
-__label__芯片 hold
-__label__电容 c58 870nf
-__label__电机 motor_current_fb
-__label__电容 c_decouple_device_net_22uf
-__label__芯片 eeprom_sda
-__label__芯片 reset
-__label__电感 120mh
-__label__电阻 r52 51kω
-__label__芯片 most_power
-__label__电阻 r_current_limit_15k
-__label__芯片 eth_1_tx_n
-__label__电容 c_electrolytic_3_3v_470uf
-__label__二极管 d_clamp_hart_5v
-__label__芯片 eth_rx_p
-__label__压敏电阻 rv62 400v
-__label__电感 l21
-__label__电容 c2 22μf
-__label__电阻 r54 91kω
-__label__芯片 ethernetip_power
-__label__二极管 d2 0.5a 200v
-__label__电容 c16 330nf
-__label__电容 c_filter_mipi_10nf
-__label__电容 c43
-__label__芯片 sdio_8bit_d2
-__label__电容 c_filter_wifi_1nf
-__label__芯片 vss_sensor_gnd
-__label__芯片 dac_diff_out0p
-__label__电阻 wifi_5g_term
+__label__电阻 12r15.0ω
+__label__芯片 lin_wake
 __label__压敏电阻 rv37
-__label__电感 l37
-__label__芯片 gpiof1_output
-__label__芯片 most_wake
-__label__二极管 3a 1100v
-__label__电容 c_decouple_buzzer_22uf
-__label__接地 gnd29
-__label__电机 m37
-__label__电阻 r4_10kω
-__label__电感 l2 22mh
-__label__芯片 done
-__label__芯片 sdio_8bit_cmd
-__label__芯片 usb3_tx1+
-__label__芯片 mipi_dsi_clk-
-__label__电机 17v
-__label__压敏电阻 rv24 51v
-__label__电阻 r_vcc_div_68k
-__label__压敏电阻 56v
-__label__电容 c31
-__label__芯片 qspi_io1
-__label__芯片 u7
-__label__二极管 d54
-__label__电阻 240ω
-__label__电阻 r12 680ω
-__label__电容 c49
-__label__芯片 can_h_1
-__label__二极管 d62
-__label__电阻 4k7ω
-__label__芯片 gpiob7_adc
-__label__接地 agnd
-__label__电阻 360ω
-__label__芯片 flash_clk
-__label__芯片 gpiob2_exti
-__label__压敏电阻 tvs_eth_8v2
-__label__芯片 pwm2
-__label__芯片 wifi_5g_tx
-__label__电感 150mh
-__label__芯片 sd_cmd
-__label__电容 c_electrolytic_9v_680uf
-__label__芯片 sd_d1
-__label__芯片 bt_5_0_wake
-__label__芯片 swd_clk
-__label__电机 0.25a
-__label__二极管 d5/0.3a 100v
-__label__接地 gnd38 agnd
-__label__接地 gnd44 pgnd
-__label__芯片 gpiod5_pwm
-__label__芯片 timer_2_clk
-__label__电阻 3.9kω
-__label__芯片 dac_2_out0
-__label__芯片 profinet_rxd-
-__label__芯片 profibus_dp_data+
-__label__电阻 sdio_4bit_term
-__label__芯片 sensor_scl
-__label__电机 m6 24v 0.8a
-__label__芯片 gpiod3_exti
-__label__二极管 d12 3a 400v
-__label__芯片 u47
-__label__电阻 r6 2.2kω
-__label__芯片 rs232_cts
-__label__芯片 profibus_dp_gnd
-__label__芯片 canopen_can_h
-__label__芯片 lin_slave_clk
-__label__芯片 adc_calib
-__label__芯片 flash_clk
-__label__电机 m42 8v
-__label__芯片 lin_slave_tx
-__label__二极管 0.3a 500v
-__label__电容 180nf
-__label__芯片 u43
-__label__芯片 rs422_reset
-__label__芯片 iso15765_can_l
-__label__芯片 spi_cs0_b
-__label__电阻 r30 5.6kω
-__label__电阻 r36 220kω
-__label__芯片 gpioc4_pwm
-__label__电阻 r1(100ω)+c1(10μf)
-__label__压敏电阻 tvs_nfc_6v8
-__label__芯片 hart_tx
-__label__芯片 sdio_4bit_clk
-__label__芯片 dac_out0
-__label__二极管 d28
-__label__电机 m1_12v-0.5a
-__label__芯片 canopen_err
-__label__接地 gnd4_sgnd
-__label__芯片 qspi_clk
-__label__芯片 vdd_usb_host
-__label__芯片 hdmi_rx
-__label__芯片 power_ok
-__label__芯片 oe_b
-__label__电阻 r_pullup_can_10k
-__label__芯片 sdio_d4
-__label__芯片 ethernetip_mdio
-__label__压敏电阻 rv30 190v
-__label__芯片 rs232_rxd_ind
-__label__电感 l14 150μh
-__label__芯片 vcc_gps
-__label__电阻 r26 82kω
-__label__接地 agnd
-__label__电阻 r61
-__label__芯片 vcc
-__label__芯片 usart_rx
-__label__电阻 150ω
-__label__电阻 r_current_limit_8k2
-__label__芯片 u10(pic16f877a)
-__label__芯片 sdio_4bit_err
-__label__芯片 u29
-__label__电感 l56
-__label__电感 270mh
-__label__芯片 ram_data1
-__label__接地 gnd54 sgnd
-__label__芯片 power_en
-__label__电容 2μ2f
-__label__芯片 rtc_clk_in
-__label__接地 gnd_i2c
-__label__芯片 boot_mode_sel0
-__label__芯片 jtag_tms_1
-__label__电容 c3-47nf
-__label__电感 l32
-__label__芯片 vout_switch
-__label__芯片 dac_diff_out0n
-__label__电阻 mipi_csi_term
-__label__芯片 u19
-__label__芯片 jtag_tdi_1
-__label__电机 m1
-__label__电机 m8 9v 0.4a
-__label__芯片 sae_j2284_can_h
-__label__接地 gnd6 agnd
-__label__芯片 swd_clk_test
-__label__电阻 r_term_zigbee_50r
-__label__芯片 fault
-__label__二极管 d53
-__label__芯片 bt_5_0_err
-__label__芯片 opamp_1_inn
-__label__芯片 gpiog1_output
-__label__电容 c36 4n7f
-__label__芯片 vcc_usb_device
-__label__芯片 stm32f030(5v)
-__label__芯片 stm32f439
-__label__芯片 gpioc0_input
-__label__芯片 usb_dp_3.3v
-__label__电机 4.5v
-__label__芯片 iso9141_2_k_line
-__label__芯片 hdmi_rx_data0
-__label__芯片 gpioc10_uart
-__label__芯片 vcc_usb_host
-__label__芯片 motor_driver_in1
-__label__电容 1n5f
-__label__芯片 pic18f4550
-__label__压敏电阻 36v
-__label__芯片 en_sd
-__label__电阻 1.5kω
-__label__二极管 3a 200v
-__label__电阻 iso9141_term
-__label__芯片 rs485_reset
-__label__芯片 iso11519_can_l
-__label__芯片 gpiob5_pwm
-__label__芯片 can_err
-__label__压敏电阻 rv22 27v
-__label__电机 m48 19v
-__label__电感 l_filter_ethernetip_68uh
-__label__电阻 r_voltage_div_bottom_22k
-__label__芯片 vcc_bt
-__label__芯片 uart_5_rx
-__label__芯片 vout_3.3v
-__label__电感 560μh
-__label__二极管 1a 800v
-__label__电阻 27kω
-__label__电感 l58
-__label__芯片 hdmi2_0_tx_data1_n
-__label__压敏电阻 rv55
-__label__芯片 eth_tx_p
-__label__电容 51nf
-__label__接地 gnd19
-__label__芯片 gpiod4_pwm
-__label__电容 c_filter_4_20ma_1nf
-__label__电容 c38 8n2f
-__label__接地 gnd59
-__label__芯片 boot_mode_sel2
-__label__芯片 vdd_ana
-__label__电容 c_ceramic_mipi_100pf
-__label__芯片 usb_dp+usb_dm
-__label__芯片 current_sense
-__label__芯片 gpioc8_spi
-__label__接地 sgnd
-__label__芯片 vdd_ldo
-__label__电阻 2.7kω
-__label__电机 m56
-__label__接地 gnd24 agnd
-__label__接地 gnd_nfc
-__label__接地 gnd3
-__label__芯片 vssd_digital_gnd
-__label__芯片 relay_driver
-__label__电容 c_electrolytic_24v_680uf
-__label__电感 l34
-__label__电感 9.1mh
-__label__电感 l_power_usb_47uh
-__label__二极管 1a 600v/do-41
-__label__芯片 vcc_sensor
-__label__芯片 hdmi_tx_data2
-__label__芯片 wake_on_usb_host
-__label__二极管 d38
-__label__芯片 zigbee_tx
-__label__芯片 rs485_re
-__label__电机 27v
-__label__接地 agnd
-__label__压敏电阻 rv21
-__label__芯片 u1
-__label__芯片 cs1_b
-__label__芯片 bt_rx
-__label__芯片 pwm_out1
-__label__电感 l10 47μh
-__label__芯片 pwm_2_out1
-__label__二极管 d1
-__label__芯片 devicenet_vref
-__label__芯片 mipi_csi_data1+
-__label__压敏电阻 rv34 430v
-__label__接地 gnd_hdmi
-__label__电阻 r1_100ω-1%
-__label__芯片 sd_cmd
-__label__电阻 r9
-__label__二极管 d57
-__label__芯片 eth_2_rx_p
-__label__芯片 lora_tx
-__label__接地 gnd
-__label__芯片 iso11519_can_h
-__label__芯片 we_b
-__label__芯片 i2c_2_scl
-__label__电机 m58
-__label__电容 c_ceramic_hdmi2_0_10nf
-__label__二极管 d41
-__label__电容 10μf
-__label__芯片 vss_ana_gnd
-__label__芯片 battery_detect
-__label__芯片 spi_2_mosi
-__label__电容 c12 56nf
-__label__电机 34v
-__label__芯片 vss_eth_gnd
-__label__芯片 can_low_err
-__label__二极管 2a 200v
-__label__电机 m50 22v
-__label__芯片 gnd_pin
-__label__芯片 rs422_tx+
-__label__接地 gnd37
-__label__电机 m63
-__label__接地 gnd30 dgnd
-__label__电容 c33
-__label__电机 30v
-__label__芯片 canopen_reset
-__label__芯片 sdio_d7
-__label__芯片 rs232_reset
-__label__芯片 wake_up
-__label__压敏电阻 rv29
-__label__芯片 u53
-__label__电容 c55
-__label__接地 agnd
-__label__芯片 i2c_a1_address
-__label__电感 l5
-__label__芯片 swd_clk_2
-__label__电机 m16 28v 0.9a
-__label__芯片 qspi_io3
-__label__电机 1.6a
-__label__电阻 r_load_sensor_220r
-__label__电感 180mh
-__label__芯片 mipi_csi_clk-
-__label__芯片 lin_rx
-__label__电感 l20
-__label__电感 l1_10mh-5%
-__label__芯片 stm32l100
-__label__电感 100μh
-__label__电容 560nf
-__label__电容 c_ceramic_sdio_100pf
-__label__压敏电阻 rv53
-__label__接地 gnd61
-__label__芯片 u10 stm32l476
-__label__电阻 r59
-__label__二极管 0.5a 400v
-__label__芯片 uart_cts_3
-__label__压敏电阻 750v
-__label__芯片 adc_in5
-__label__芯片 eth_rst
-__label__芯片 trst_b_test
-__label__电感 620mh
-__label__芯片 nfc_data
-__label__芯片 buzzer_ctrl
-__label__电机 m2 12v 0.5a
-__label__芯片 u15
-__label__芯片 jtag_tck_testpoint
-__label__接地 gnd63
-__label__芯片 gpiod11_uart
-__label__芯片 vdd_eth
-__label__电阻 r_vcc_div_180k
-__label__芯片 qspi_io0
-__label__电阻 r10 3.3kω
-__label__电阻 r_gnd_div_220k
-__label__芯片 nfc_clk
-__label__芯片 gpiob4_pwm
-__label__电感 l4 1mh
-__label__压敏电阻 220v
-__label__芯片 u4 esp8266
-__label__电阻 r_gnd_div_150k
-__label__芯片 4-20ma_signal_out
-__label__二极管 3a 800v/to-220
-__label__芯片 vss_led_gnd
-__label__芯片 nrst
-__label__压敏电阻 rv13
-__label__芯片 uart_4_tx
-__label__二极管 1a 200v
-__label__芯片 mipi_dsi_data0-
-__label__接地 dgnd
-__label__芯片 u21
-__label__芯片 voltage_monitor_3_3v
-__label__接地 gnd_usb
-__label__电阻 47ω
-__label__电阻 r11
-__label__芯片 jtag_tdo_1
-__label__芯片 dac_1_out1
-__label__芯片 rs422_power
-__label__电阻 r42 10mω
-__label__电机 motor_temp_fb
-__label__电机 m60
-__label__芯片 rtc_rst
-__label__芯片 lcd_rst
-__label__芯片 sensor_clk
-__label__芯片 iso11898_can_l
-__label__压敏电阻 rv1_22v-10ka
-__label__接地 gnd50 sgnd
-__label__芯片 sdio_4bit_d0
-__label__芯片 most_clk
-__label__芯片 hdmi_tx_data2_n
-__label__芯片 rs485_err
-__label__二极管 d18
-__label__芯片 temp_sensor_in
-__label__电机 m47
-__label__电机 motor_power_en
-__label__电容 c_decouple_ic_1uf
-__label__芯片 u40 stm32f105
-__label__压敏电阻 910v
-__label__电阻 r35
-__label__压敏电阻 tvs_device_net_12v
-__label__芯片 gpio2
-__label__电阻 75kω
-__label__芯片 modbus_rtu_rts
-__label__芯片 obd2_sae_j1850_pwm+
-__label__芯片 hdmi_tx_clk
-__label__接地 gnd_spi
-__label__电阻 r_pulldown_spi_22k
-__label__芯片 esp32-c3
-__label__芯片 vin_battery
-__label__芯片 obd2_k_line
-__label__芯片 adc_in8
-__label__电容 c_filter_lin_1nf
-__label__芯片 bt_5_0_rx
-__label__电容 c_filter_vcc_10uf
-__label__芯片 nc
-__label__芯片 pwm_in0
-__label__电机 3v/0.1a
-__label__电容 c24 6μ8f
-__label__芯片 stm32f411
-__label__电容 c_decouple_usb_1uf
-__label__接地 gnd_电源地-pcb
-__label__电容 c3
-__label__芯片 u9
-__label__电机 m41
-__label__芯片 qspi_clk
-__label__电机 13v
-__label__芯片 can_low_wake
-__label__电机 m10 18v 0.7a
-__label__芯片 comp_inn1
-__label__芯片 opamp_inp0
-__label__芯片 rs232_txd_ind
-__label__芯片 obd2_reserved_9
-__label__芯片 mipi_dsi_err
-__label__压敏电阻 68v
-__label__芯片 adc_1_in1
-__label__芯片 mipi_csi_clk+
-__label__电阻 r45
-__label__电机 9v 0.4a
-__label__接地 pgnd
-__label__芯片 modbus_rtu_cts
-__label__电阻 r31
-__label__电感 91mh
-__label__二极管 d22
-__label__芯片 vdd_lcd
-__label__芯片 adc_in1
-__label__芯片 lin_master_wake
-__label__接地 sgnd
-__label__芯片 vss_aux_gnd
-__label__电感 l3
-__label__芯片 vss_gnd
-__label__二极管 2a 900v
-__label__电感 l17
-__label__芯片 rs485_b_ind
-__label__二极管 d20
-__label__芯片 qspi_io1
-__label__电阻 profibus_term
-__label__芯片 4-20ma_signal_in
-__label__电感 l47
-__label__电机 m36 1.9a
-__label__电感 l23
-__label__电阻 r_vcc_div_150k
-__label__电阻 470kω
-__label__芯片 vdd_4.2v
-__label__芯片 eth_tx
-__label__接地 gnd_wifi
-__label__芯片 rs485_de
-__label__电感 51mh
-__label__电机 m31
-__label__芯片 opamp_1_inp
-__label__芯片 spi_mosi_master
-__label__电感 l42
-__label__芯片 gpiob9_dac
-__label__芯片 stm32h747
-__label__压敏电阻 rv16 560v
-__label__芯片 uart_tx+uart_rx
-__label__电容 c_electrolytic_12v_470uf
-__label__二极管 d10(0.5a 400v)
-__label__芯片 u38 atmega128
-__label__电机 m55
-__label__芯片 sensor_sda
-__label__接地 gnd_mipi
-__label__电阻 r25
-__label__电容 6n8f
-__label__电阻 r_term_profibus_150r
 __label__电阻 4-20ma_term
-__label__芯片 vss_lora_gnd
-__label__芯片 power_monitor_5v
-__label__电容 c9
-__label__电容 c_filter_bt_10nf
-__label__芯片 gpioa0+gpioa1
-__label__芯片 vdd_reg
-__label__压敏电阻 rv26 91v
-__label__二极管 0.3a 100v
-__label__芯片 comp_2_inp
-__label__芯片 jtag_trst_b_1
-__label__芯片 sdio_8bit_d3
-__label__芯片 u23
-__label__芯片 swd_reset
-__label__电感 l12 68μh
-__label__二极管 d46
-__label__电感 87mh
-__label__电容 c7
-__label__芯片 4-20ma_reset
-__label__接地 agnd
-__label__芯片 gps_rx
-__label__电感 l38
-__label__二极管 0.3a 1000v
-__label__接地 gnd8 pgnd
-__label__电感 l59
-__label__电阻 r10(2.2kω)
-__label__接地 gnd45
-__label__电机 m59
-__label__电容 c52 270nf
-__label__电感 4.7mh
-__label__电机 7.5v
-__label__电阻 220ω
-__label__芯片 lcd_rs
-__label__芯片 usb3_wake
-__label__二极管 d50
-__label__芯片 jtag_vref
-__label__电阻 r60 280ω
-__label__芯片 vref_2.5v
-__label__电机 1.3a
-__label__芯片 swd_vref
-__label__电阻 r38 1m5ω
-__label__电感 820μh
-__label__电机 10v 0.45a
-__label__芯片 debug_data
-__label__芯片 modbus_ascii_rx
-__label__芯片 iso9141_data
-__label__电容 470nf
-__label__压敏电阻 rv3-33v
-__label__电阻 r_gnd_div_22k
-__label__电容 c1_10μf-10%
-__label__电感 l26
-__label__芯片 sd_clk
-__label__电容 c17
-__label__二极管 3a 900v
-__label__芯片 adc1
-__label__芯片 eth_2_rx_n
-__label__接地 gnd/电源地
-__label__电感 390mh
-__label__电感 1.5mh
-__label__电容 68nf
-__label__电感 56μh
-__label__芯片 gpioa8_dac
-__label__电容 c_ceramic_spi_0_1uf
-__label__二极管 0.5a 300v
-__label__芯片 debug_tx
-__label__二极管 d13
-__label__芯片 rs485_a_ind
-__label__电阻 r_gnd_div_47k
-__label__电感 5.6mh
-__label__芯片 adc_2_in1
-__label__芯片 qspi_io3
-__label__电感 l_filter_can_82uh
-__label__压敏电阻 rv58 260v
-__label__电容 c59
-__label__芯片 u56 cc1352p
-__label__芯片 usb_otg_dp
-__label__二极管 d2+gnd
-__label__电感 l7
-__label__电感 l55
-__label__接地 gnd53
-__label__芯片 comp_2_out
-__label__芯片 comp_hysteresis
-__label__接地 gnd_profinet
-__label__芯片 dac1
-__label__芯片 uart_tx_1
-__label__电阻 r_gnd_div_270k
-__label__芯片 int_4
-__label__芯片 most_data-
-__label__芯片 boot_sel
-__label__电容 100nf
-__label__电容 c28 47pf
-__label__电阻 r46 8.2kω
-__label__电容 4n7f
-__label__接地 gnd17
-__label__芯片 spi_holdb
-__label__芯片 profibus_dp_data-
-__label__芯片 hdmi2_0_tx_data2_n
-__label__压敏电阻 rv5
-__label__压敏电阻 rv60 330v
-__label__电阻 bt_5_0_term
-__label__电容 c_decouple_ic_22uf
-__label__压敏电阻 510v
-__label__芯片 vcc_sd
-__label__芯片 ram_addr0
-__label__电机 m49
-__label__芯片 cs2_b
-__label__芯片 bt_5_0_clk
-__label__压敏电阻 330v/2ka
-__label__电阻 r_vcc_div_10k
-__label__接地 sgnd
-__label__电感 33mh
-__label__电阻 r_pullup_can_4_7k
-__label__电感 l9
-__label__压敏电阻 170v
-__label__芯片 uart_rx_1
-__label__电机 m22 1.5a
-__label__接地 gnd11
-__label__压敏电阻 rv12 270v
-__label__芯片 adc_in0_diff
-__label__芯片 en_sensor
-__label__芯片 rs232_rts
-__label__电阻 kwp2000_term
-__label__芯片 u20 stm32g071
-__label__电阻 r2 470ω
-__label__电感 6.8mh
-__label__芯片 vcc_2.5v
-__label__芯片 i2s_mclk
-__label__芯片 wake_on_usb
-__label__电阻 r_load_sensor_330r
-__label__电感 l8 10μh
-__label__电阻 r_gnd_div_82k
-__label__电机 m2 12v 0.5a
-__label__芯片 modbus_tcp_clk
-__label__芯片 can_3_l
-__label__电阻 33kω
-__label__电机 motor_speed_fb
-__label__电容 c2 22μf
-__label__接地 gnd_zigbee
-__label__电机 m18 48v 1.5a
-__label__芯片 temp_sensor_power
-__label__芯片 hdmi2_0_tx_clk
-__label__二极管 d_clamp_rs485_5v
-__label__芯片 debug_rx
-__label__芯片 adc_ref
-__label__电感 10mh/1a
-__label__电阻 r8 100ω
-__label__芯片 can_h_!5
-__label__电机 m1(12v)+rv1(22v)
-__label__芯片 lin_slave_reset
-__label__芯片 sdio_d1
-__label__芯片 swd_gnd
-__label__芯片 dac_ref_n
-__label__芯片 pwm_out2
-__label__电阻 mipi_dsi_term
-__label__芯片 power_save
-__label__压敏电阻 125v
-__label__二极管 d_esd_mipi
-__label__芯片 adc_vrefn
-__label__二极管 d60
-__label__芯片 u14 stm32h743
-__label__芯片 spi_so_slave
-__label__电机 5v
-__label__压敏电阻 450v
-__label__电容 c21
-__label__压敏电阻 rv44 24v
-__label__芯片 i2c_2_sda
-__label__芯片 uart_tx_port1
-__label__芯片 dac_2_out1
-__label__芯片 usart_cs
-__label__电容 c_electrolytic_9v_470uf
-__label__电阻 r_term_lin_1k
-__label__芯片 rtc_data
-__label__电阻 100kω
-__label__芯片 jtag_etr
-__label__芯片 i2c_scl_master
-__label__芯片 can_high_clk
-__label__芯片 sdio_4bit_d1
-__label__电阻 r19
-__label__电容 c14 82nf
-__label__芯片 iso9141_err
-__label__电阻 nfc_term
-__label__芯片 comp_2_inn
-__label__芯片 i2c_scl_slew
-__label__芯片 spi_1_miso
-__label__电感 l45
-__label__芯片 jtag_tck_debug
-__label__芯片 sdio_8bit_err
-__label__芯片 zigbee_rx
-__label__芯片 u2 stm32f407
-__label__压敏电阻 rv8 120v
-__label__芯片 spi_csb_slave
-__label__二极管 d35
-__label__压敏电阻 rv17
-__label__芯片 opamp_inn1
-__label__压敏电阻 rv51
-__label__芯片 eth_rx
-__label__电阻 r_term_can_120r
-__label__芯片 gpioc5_pwm
-__label__芯片 capture_in0
-__label__芯片 can_3_h
-__label__芯片 lin_master_power
-__label__芯片 rs485_de_ind
-__label__电感 43mh
-__label__电感 l51
-__label__电感 l19
-__label__芯片 ethernetip_tx_p
-__label__芯片 wifi_5g_wake
-__label__芯片 motor_driver_in0
-__label__芯片 vddd_digital
-__label__芯片 rs232_cts_ind
-__label__压敏电阻 rv63
-__label__芯片 mipi_csi_err
-__label__二极管 d26
-__label__压敏电阻 tvs_rs485_12v
-__label__芯片 thermal_sense_mcu
-__label__电阻 r_gnd_div_100k
-__label__芯片 can_high_speed
-__label__芯片 flash_cs_b
-__label__接地 gnd_lin
-__label__芯片 spi_2_cs
-__label__电感 l6 220μh
-__label__芯片 gpiob1_output
-__label__芯片 sd_cd
-__label__压敏电阻 rv14 390v
-__label__电机 m14 16v 0.55a
-__label__芯片 opamp_2_out
-__label__芯片 i2c_sda_master
-__label__芯片 addr
-__label__电感 l41
-__label__芯片 capture_in1
-__label__芯片 vss_bt_gnd
-__label__压敏电阻 10v
-__label__芯片 vss_sd_gnd
-__label__电感 l_filter_lin_22uh
-__label__接地 gnd16 dgnd
-__label__电感 l_power_buzzer_82uh
-__label__接地 gnd27
-__label__芯片 esp32-wroom-32
-__label__芯片 sdio_clk
-__label__电感 l_power_sensor_56uh
-__label__芯片 standby_mode_ctrl
-__label__二极管 0.5a 700v
-__label__芯片 swd_power
-__label__芯片 gpiod9_spi
-__label__芯片 lin_slave_power
-__label__接地 gnd_bt
-__label__芯片 obd2_reserved_1
-__label__芯片 flash_di
-__label__电容 10μf
-__label__电阻 1.2mω
-__label__芯片 sdio_8bit_wake
-__label__芯片 lcd_cs
-__label__芯片 jtag_tms
-__label__芯片 ethernetip_rx_n
-__label__芯片 timer_1_clk
-__label__芯片 vcc_aux
-__label__电容 c_filter_ethernetip_10nf
-__label__压敏电阻 rv10 180v
-__label__芯片 lin_master_data
-__label__芯片 u60 pic32mx795f512l
-__label__芯片 jtag_tck_1
-__label__二极管 1a 900v
-__label__芯片 rs422_rx+
-__label__电容 c4-u2
-__label__二极管 d9
-__label__二极管 d_esd_i2s
-__label__芯片 comp_1_out
-__label__芯片 jtag_tdo
-__label__电机 m28 0.9a
-__label__电容 c_filter_sdio_10nf
-__label__接地 gnd9
-__label__电容 33nf
-__label__芯片 pwm_1_out1
-__label__二极管 2a 300v
-__label__接地 pgnd
-__label__芯片 jtag_tms_test
-__label__芯片 usb_otg_vbus
-__label__芯片 rs485_b
-__label__电感 13mh
-__label__芯片 i2s_24bit_sdata_out
-__label__电阻 r49
-__label__电感 l_filter_modbus_10uh
-__label__接地 gnd
-__label__芯片 obd2_sae_j1850_vpw
-__label__芯片 comp_out1
-__label__接地 gnd60 agnd
-__label__压敏电阻 rv36 620v
-__label__接地 gnd2 dgnd
-__label__芯片 hdmi_tx
-__label__电机 m39
-__label__芯片 u3-atmega328p
-__label__芯片 swd_io_1
-__label__芯片 adc_in6
-__label__芯片 timer_ch1
-__label__芯片 u62 stm32f042
-__label__芯片 mipi_dsi_data0+
-__label__芯片 hart_vcc
-__label__电阻 r3-l2
-__label__芯片 timer_ch3
-__label__二极管 0.3a 700v
-__label__芯片 usb_d-
-__label__二极管 d5
-__label__电阻 39kω
-__label__二极管 d6 1a 600v
-__label__电机 m33
-__label__芯片 jtag_emu0
-__label__电容 1nf
-__label__电阻 r_load_led_330r
-__label__芯片 debug_clk_2
-__label__芯片 u4/d4
-__label__芯片 eth_rx_n
-__label__电容 c22 3μ3f
-__label__芯片 vss_usb_device_gnd
-__label__芯片 vref_out
-__label__接地 gnd1
-__label__电阻 r3-1kω
-__label__电感 l3-47μh
-__label__电感 l4_1mh
-__label__芯片 bt_5_0_data
-__label__电阻 sdio_8bit_term
-__label__芯片 vbat_backup
-__label__芯片 i2c_sda$2
-__label__电容 c_decouple_lin_10uf
-__label__芯片 vbus_usb
-__label__电阻 hdmi2_0_term
-__label__电容 c40 15nf
-__label__芯片 jtag_tck(10)
-__label__电机 m12 7.2v 0.35a
-__label__芯片 modbus_rtu_tx
-__label__电容 c_ceramic_device_net_10nf
-__label__电阻 r_pulldown_can_4_7k
-__label__芯片 dac_1_out0
-__label__二极管 d24
-__label__芯片 jtag_tdi_test
-__label__压敏电阻 15v
-__label__压敏电阻 rv45
-__label__电阻 r62 430ω
-__label__芯片 spi_1_mosi
-__label__芯片 jtag_tms
-__label__电容 c8 10nf
-__label__芯片 stm32f103
-__label__接地 gnd46 agnd
-__label__芯片 can_h_5v
-__label__电容 c1$10μf
-__label__芯片 usb_id
-__label__芯片 debug_clk
-__label__电容 c4 1μf
-__label__芯片 buzzer_driver
-__label__压敏电阻 rv9
-__label__芯片 usb3_rx2+
-__label__电感 l15 330μh
-__label__电容 22pf
-__label__电阻 r_load_relay_330r
-__label__芯片 nfc_rx
-__label__电容 c_filter_nfc_1nf
-__label__电感 l53
-__label__电感 l_power_mipi_33uh
-__label__电感 l_filter_hdmi_33uh
-__label__芯片 adc_diff_inp0
-__label__芯片 rs232_power
-__label__电容 c50 120nf
-__label__芯片 usb3_rx2-
-__label__电容 c_electrolytic_usb_220uf
-__label__芯片 qspi_io2
-__label__接地 gnd5
-__label__压敏电阻 78v
-__label__芯片 ram_addr1
-__label__芯片 pwm_clk
-__label__电容 c53
-__label__芯片 eth_clk
-__label__芯片 most_err
-__label__芯片 uart_tx_2
-__label__电阻 r51
-__label__芯片 u32 stm32wb55
-__label__芯片 jtag_tdo_test
-__label__二极管 2a 800v
-__label__芯片 vdd_usb_device
-__label__芯片 sda
-__label__芯片 lcd_d4_data
-__label__芯片 stm32f107
-__label__芯片 ascii_reset
-__label__电阻 r_pullup_can_22k
-__label__芯片 error
-__label__二极管 0.5a 100v
-__label__芯片 u24 pic24fj64ga002
-__label__压敏电阻 rv52 105v
-__label__芯片 pwm_1_out0
-__label__芯片 rtc_clk_out
-__label__电阻 10m5ω
-__label__电阻 12kω
-__label__电机 26v
-__label__芯片 vcc_periph
-__label__电阻 160ω
-__label__接地 pgnd(功率地)
-__label__芯片 nfc_wake
-__label__芯片 config1
-__label__芯片 irq_2
-__label__二极管 d_esd_bt
-__label__电感 l_power_relay_68uh
-__label__芯片 eth_1_rx_n
-__label__压敏电阻 150v
-__label__芯片 relay_ctrl
-__label__电容 c2(22μf)+l1(10mh)
-__label__芯片 eeprom_cs_b
-__label__二极管 2a 400v/sma
-__label__压敏电阻 rv54 140v
-__label__二极管 2a 500v
-__label__电机 5v 0.2a
-__label__电容 c_ceramic_wifi_10nf
-__label__芯片 jtag_trst
-__label__二极管 1a 400v
-__label__芯片 wake_on_gpio_a0
-__label__芯片 usb_d+
-__label__芯片 lcd_dc
-__label__芯片 vdd_1.2v
-__label__电机 motor_stall_det
-__label__电感 l31
-__label__芯片 wifi_2_4g_tx
-__label__电机 m21
-__label__压敏电阻 rv15
-__label__接地 gnd_modbus
-__label__电机 1.2a
-__label__电容 3n3f
-__label__芯片 sdio_8bit_d1
-__label__电感 l49
-__label__芯片 mipi_dsi_wake
-__label__电容 c29
-__label__芯片 lin_master_err
-__label__芯片 u27
-__label__压敏电阻 330v
-__label__接地 gnd18 sgnd
-__label__芯片 sdio_4bit_cmd
-__label__电感 l_power_i2s_22uh
-__label__芯片 sd_data3
-__label__压敏电阻 rv39
-__label__芯片 hdmi2_0_wake
-__label__二极管 2a 400v
-__label__芯片 gpiob6_adc
-__label__芯片 can_l_2
-__label__芯片 jtag_tck_open
-__label__电阻 r29
-__label__接地 gnd57
-__label__电容 c6 220nf
-__label__电容 c_decouple_led_47uf
-__label__芯片 sensor_trig
-__label__电感 10mh
-__label__电感 l_filter_uart_27uh
-__label__电容 c_electrolytic_12v_220uf
-__label__芯片 i2s_sdata_out
-__label__芯片 opamp_inn0
-__label__压敏电阻 rv7
-__label__电感 l44
-__label__芯片 gpioe1_output
-__label__电阻 r_current_limit_1k
-__label__芯片 status
-__label__芯片 current_sense_motor
-__label__电容 c_decouple_sensor_22uf
-__label__二极管 d55
-__label__电容 c25
-__label__芯片 nrf9160
-__label__芯片 gpioa1_output
-__label__电阻 r_pulldown_spi_10k
-__label__芯片 u22 esp32-s3
-__label__芯片 i2c_1_scl
-__label__二极管 0.3a 800v
-__label__电阻 r_term_hart_250r
-__label__芯片 devicenet_can_h
-__label__电感 6.8μh
-__label__电阻 r16 22kω
-__label__电容 c35
-__label__芯片 vssa_pll_gnd
-__label__芯片 select1
-__label__电阻 180ω
-__label__压敏电阻 rv42 1500v
-__label__芯片 adc_in0+adc_in1
-__label__芯片 vdd_lora
-__label__芯片 i2s_24bit_mclk
-__label__芯片 dac_out2
-__label__二极管 d1@0.5a 200v
-__label__芯片 hdmi_rx_data1
-__label__电容 c_filter_spi_100nf
-__label__芯片 nfc_err
-__label__芯片 obd2_can_h
-__label__电机 m52 25v
-__label__电容 10pf/16v
-__label__电机 motor_in1_pwm
-__label__电容 c_filter_hdmi2_0_1nf
-__label__电阻 r_current_limit_9k1
-__label__芯片 u25
-__label__芯片 vss_gps_gnd
-__label__芯片 hart_power
-__label__电容 c41
-__label__电机 m35
-__label__芯片 ethernetip_err
-__label__芯片 lpc1850
-__label__接地 gnd_hart
-__label__二极管 d44
-__label__电机 28v 0.9a
-__label__电容 c_decouple_profibus_10uf
-__label__电容 c54 390nf
-__label__芯片 vcc_wifi
-__label__电阻 r23
-__label__电感 39mh
-__label__二极管 2a 1000v
-__label__压敏电阻 rv38 870v
-__label__芯片 wake_in
-__label__芯片 spi_1_cs
-__label__芯片 cle
-__label__电感 l_filter_vcc_10uh
-__label__芯片 boot_mode0
-__label__芯片 arduino uno r3
-__label__芯片 reset_n+wake_up
-__label__芯片 en_wifi
-__label__电容 c_electrolytic_24v_1000uf
-__label__芯片 u1&stm32f103
-__label__芯片 modbus_tcp_power
-__label__芯片 rtc_clk_in
-__label__芯片 cs3_b
-__label__芯片 lin_wake
-__label__芯片 can_low_data
-__label__芯片 wake_on_uart_1
-__label__接地 gnd58 pgnd
-__label__芯片 swd_io_test
-__label__接地 gnd2 dgnd
-__label__芯片 lin_slave_wake
-__label__电阻 r1+c1
-__label__二极管 d4 3a 800v
-__label__压敏电阻 rv49
-__label__芯片 vin_input_9v
-__label__电阻 r_vcc_div_47k
-__label__接地 gnd10(agnd)
-__label__电阻 r55
-__label__接地 gnd10 agnd
-__label__芯片 vcc_3.3v_regulated
-__label__芯片 lin_wake
-__label__芯片 spi_2_miso
-__label__压敏电阻 rv28 130v
-__label__芯片 sdio_cmd
-__label__电感 870mh
-__label__芯片 gpiob0_input
-__label__电容 c44 39nf
-__label__芯片 en_cam
-__label__芯片 sae_j2284_can_l
-__label__芯片 gps_tx
-__label__芯片 usb3_err
-__label__压敏电阻 rv3
-__label__芯片 uart_tx_3
-__label__芯片 vssa_analog_gnd
-__label__芯片 hdmi2_0_tx_clk_n
-__label__芯片 opamp_gain1
-__label__电感 24mh
-__label__电机 40v
-__label__二极管 d_led_driver_red
-__label__芯片 ram_addr1
-__label__芯片 stm32f103
-__label__二极管 d33
-__label__电容 c26 10pf
-__label__接地 dgnd
-__label__芯片 uart_rx_2
-__label__芯片 irq_4
-__label__芯片 reset_n
-__label__压敏电阻 rv27
-__label__芯片 swd_clk
-__label__芯片 u31
-__label__接地 pgnd
-__label__芯片 flash_do
-__label__芯片 usb_dm
-__label__芯片 sdio_4bit_d3
-__label__芯片 opamp_out1
-__label__芯片 uart_rts_2
-__label__电阻 r48 16kω
 __label__电容 4μ7f
-__label__芯片 spi_sck_slave
-__label__电阻 330ω
-__label__芯片 opamp_gain0
-__label__电容 c_decouple_spi_10uf
-__label__电容 c_decouple_i2c_22uf
-__label__电阻 r_load_buzzer_1k5
-__label__二极管 0.5a 400v
-__label__电容 c_decouple_relay_10uf
-__label__芯片 gpioa0_function1
-__label__电阻 r32 10ω
-__label__芯片 comp_thresh
-__label__芯片 mipi_dsi_data1-
-__label__电容 c_electrolytic_12v_1000uf
-__label__电阻 r_vcc_div_33k
-__label__芯片 adc_in3
-__label__芯片 obd2_power
-__label__电阻 r_vcc_div_22k
-__label__电容 100pf
-__label__芯片 zigbee_err
-__label__电容 c47
-__label__芯片 can_l
-__label__芯片 sd_d0
-__label__接地 gnd
-__label__接地 gnd
-__label__电容 c10(68nf)
-__label__芯片 stm32l051
-__label__芯片 ram_addr0
-__label__电机 m1*12v
-__label__芯片 vdd_cam
-__label__电机 m10(48v 1.5a)
-__label__电容 8μ2f
-__label__芯片 eeprom_cs_b
-__label__接地 sgnd
-__label__芯片 lcd_d7_data
-__label__电感 l1%10mh
-__label__芯片 stm32f756
-__label__芯片 vdd_5v
-__label__电机 1a
-__label__芯片 select2
-__label__芯片 hdmi_rx_clk
-__label__二极管 d48
-__label__电机 m43
-__label__电机 m24 0.3a
-__label__电容 c_electrolytic_3_3v_680uf
-__label__电感 l_power_motor_100uh
-__label__压敏电阻 rv1$22v
-__label__接地 gnd40 pgnd
-__label__芯片 hdmi2_0_err
-__label__芯片 cc2652r
-__label__接地 gnd26 pgnd
-__label__芯片 spi_sclk_master1
-__label__电容 c_ceramic_eth_10nf
-__label__芯片 vdd_sd
-__label__芯片 pwm_in1
-__label__芯片 vss_sram_gnd
-__label__芯片 gpioa0_input
-__label__二极管 d_clamp_can_3_3v
-__label__芯片 mipi_csi_data0+
-__label__电容 c_decouple_uart_10uf
-__label__芯片 dvi
-__label__电感 l33
-__label__芯片 ram_clk
-__label__芯片 can_high_reset
-__label__电阻 r_current_limit_4k7
-__label__芯片 eth_mdio
-__label__电容 c10 47nf
-__label__芯片 adc_2_in0
-__label__二极管 2a 600v
-__label__电容 c_decouple_can_22uf
-__label__芯片 hart_wake
-__label__二极管 d_esd_wifi
-__label__芯片 vdd_bt
-__label__芯片 eth_1_tx_p
-__label__电阻 r_pullup_i2c_10k
-__label__压敏电阻 18v
-__label__压敏电阻 tvs_ethernetip_8v2
-__label__芯片 hdmi_tx_data0_n
-__label__电容 c_ceramic_most_10nf
-__label__电感 l46
-__label__芯片 sd_d2
-__label__电阻 most_term
-__label__电感 7.5mh
-__label__电机 m2-gnd2
-__label__芯片 lcd_en
-__label__电容 c61
-__label__芯片 u1+d1
-__label__芯片 iso11898_err
-__label__电机 42v
-__label__二极管 d19
-__label__电容 c_ceramic_profibus_100pf
-__label__电阻 r5/c3
-__label__二极管 d47
-__label__芯片 attiny85
-__label__电机 9v
-__label__芯片 mode1
-__label__接地 gnd_uart
-__label__电感 2.7mh
-__label__芯片 hdmi_tx_data1
-__label__芯片 opamp_out0
-__label__芯片 led_driver
-__label__芯片 can_low_power
-__label__接地 gnd_rs485
-__label__电机 motor_in2_pwm
-__label__芯片 vrefp_positive
-__label__芯片 wake_on_uart
-__label__电容 c27
-__label__芯片 rs232_tx
-__label__电机 m9
-__label__芯片 gpioa11_i2c
-__label__芯片 ascii_rx_port
-__label__芯片 u49
-__label__芯片 i2s_24bit_wake
-__label__接地 gnd_most
-__label__芯片 obd2_reserved_8
-__label__电阻 r_gnd_div_180k
-__label__芯片 i2c_scl_slave
-__label__芯片 hdmi2_0_tx_data2
-__label__电容 c2+l1
-__label__电感 l52
-__label__芯片 can_h+can_l
-__label__电感 l18
-__label__芯片 gpioa4_pwm
-__label__电机 m3-24v
-__label__芯片 stm32f207
-__label__芯片 gpioc3_exti
-__label__芯片 opamp_2_inn
-__label__芯片 opamp_inp1
-__label__电容 c_filter_gnd_100nf
-__label__芯片 iso11898_power
-__label__电阻 r17
-__label__芯片 dac_out1
-__label__电机 m19
-__label__电机 45v
-__label__电机 m26 0.6a
-__label__电机 m32 1.4a
-__label__芯片 i2s_lrck
-__label__芯片 pwm1
-__label__电容 c_filter_hart_10nf
-__label__芯片 i2s_clk
-__label__电机 m4_6v 0.3a
-__label__电感 18mh
-__label__接地 gnd_digital_dig
-__label__芯片 obd2_can_l
-__label__芯片 u5/esp32
-__label__芯片 u46 stm32f427
-__label__芯片 motor_pwm
+__label__电阻 r10 3.3kω
+__label__芯片 usb3_rx1+
+__label__电机 motor_in1_pwm
+__label__压敏电阻 53tvs3_10.0v
+__label__二极管 1a 300v
+__label__电机 10v 0.45a
+__label__芯片 ram_cs_b
+__label__二极管 d2+gnd
+__label__压敏电阻 rv15
+__label__芯片 gpioc6_adc
 __label__压敏电阻 rv43
-__label__电阻 r_term_hdmi_50r
-__label__芯片 jtag_rtck
-__label__芯片 lcd_d5
-__label__芯片 i2s_24bit_lrck
-__label__芯片 dac_vref
-__label__电感 2.2mh
-__label__电机 15v 0.6a
-__label__二极管 d8 3a 600v
-__label__芯片 bt_tx
-__label__芯片 comp_inn0
-__label__电阻 4.7kω
+__label__芯片 vss_gnd
+__label__芯片 sd_d2
+__label__电机 m57
+__label__芯片 sdio_8bit_clk
+__label__芯片 i2c_a2_address
+__label__二极管 0.5a 900v
+__label__接地 agnd
+__label__电机 motor_temp_fb
+__label__电阻 5r5.6ω
+__label__芯片 adc_1_in0
+__label__接地 gnd52 dgnd
+__label__芯片 95nfc_tx_1.8v4
+__label__电感 l40
+__label__芯片 35jtag_tdi_5.0v~4
+__label__电容 c62 1.8μf
+__label__电感 l_filter_eth_47uh
+__label__电阻 r_vcc_div_47k
+__label__芯片 49wifi_tx_3.3v}8
+__label__芯片 swd_clk
+__label__芯片 u1+d1
+__label__电容 1n5f
+__label__接地 383pgnd
+__label__芯片 wifi_2_4g_clk
+__label__芯片 ram_addr0
+__label__电阻 r1(100ω)+c1(10μf)
+__label__二极管 28d28_1.0a_100v!5
+__label__芯片 hdmi2_0_tx_data0_n
+__label__电感 l_power_usb_47uh
+__label__电阻 r8 100ω
+__label__芯片 i2c_a1_address
+__label__压敏电阻 52tvs2_8.2v
+__label__电阻 r56 130ω
+__label__芯片 modbus_tcp_clk
+__label__电阻 r_gnd_div_150k
+__label__芯片 u4_esp8266
+__label__电机 64m64_36.0v_3.6a.9
+__label__接地 372dgnd
+__label__接地 gnd_eth
+__label__电阻 r45
+__label__接地 550gnd(6
+__label__接地 30dgnd3
+__label__芯片 14gpioc0_5.0v7
+__label__电阻 43r3.9kω(0
+__label__电感 11l6.8mh
+__label__芯片 modbus_ascii_cts
+__label__电阻 390ω
+__label__芯片 gps_rx
+__label__芯片 34jtag_tms_3.3v=3
+__label__芯片 hdmi2_0_tx_data2_n
+__label__芯片 obd2_sae_j1850_pwm+
+__label__电感 71l150.0μh6
+__label__电容 100c33.0pf5
+__label__二极管 0.3a 300v
+__label__芯片 i2c_2_scl
+__label__芯片 sd_clk
+__label__电感 44l1.8h(9
+__label__芯片 gpiod1_output
+__label__电容 41c1.0mf^6
+__label__电容 c40 15nf
+__label__芯片 30dac_out1_1.2v/9
+__label__电机 37m37_5.6a+2
+__label__电阻 r_vcc_div_100k
+__label__芯片 gpiob1_output
+__label__接地 gnd_uart
+__label__芯片 i2c_1_scl
 __label__芯片 adc_clk
-__label__芯片 u3-rv2
-__label__电机 23v
-__label__压敏电阻 360v
-__label__电感 l43
-__label__电机 36v 1.2a
-__label__芯片 dac_diff_out1p
-__label__芯片 adc_bypass
-__label__电容 c_electrolytic_18v_680uf
-__label__芯片 eth_mdc
-__label__二极管 d_rectifier_12v
-__label__电感 8.2mh
-__label__芯片 usb_dp_otg
-__label__芯片 en_lcd
-__label__电阻 r39
+__label__电容 3c1.5μf
+__label__接地 627gnd&3
+__label__二极管 2a 600v
+__label__电感 l3-47μh
+__label__接地 18sgnd
+__label__芯片 wifi_2_4g_rx
+__label__芯片 iso14230_4_kwp
+__label__电容 c_ceramic_can_100pf
+__label__压敏电阻 68v
+__label__电容 79c910.0nf4
+__label__电容 68c120.0nf3
+__label__接地 pgnd
+__label__电机 m52 25v
+__label__电容 51c6.8mf]6
+__label__二极管 d25
+__label__二极管 d13
+__label__电阻 r_pullup_can_10k
+__label__电感 24mh
+__label__压敏电阻 tvs_nfc_6v8
+__label__电机 m37
+__label__压敏电阻 77tvs27_22.0v@7
+__label__电容 60c33.0mf<5
+__label__芯片 sdio_4bit_d3
+__label__电感 330mh
+__label__芯片 gpiod11_uart
+__label__电阻 33r680.0ω0
+__label__芯片 u38 atmega128
+__label__芯片 gpio1
+__label__芯片 hdmi_tx
+__label__芯片 stm32f103
+__label__电阻 85r6.8mω2
+__label__二极管 1a 1000v
+__label__二极管 d22
+__label__电容 c_electrolytic_3_3v_470uf
+__label__电机 4m4_9.0v
+__label__压敏电阻 rv45
+__label__电容 c_electrolytic_9v_680uf
+__label__芯片 hdmi_tx_data1_n
+__label__压敏电阻 rv25
+__label__接地 gnd21
+__label__电感 7.5mh
+__label__接地 gnd23
+__label__电感 l44
+__label__芯片 ethernetip_tx_p
+__label__芯片 54zigbee_rx_3.3v"3
+__label__芯片 ethernetip_wake
+__label__电阻 40r2.2kω@7
+__label__电机 2m2_5.0v
+__label__芯片 most_clk
+__label__电容 58c22.0mf"3
+__label__电容 c12 56nf
+__label__二极管 d53
+__label__电容 11c6.8μf
+__label__压敏电阻 tvs_bt_6v8
+__label__二极管 2a 300v
+__label__压敏电阻 rv23
+__label__电感 560μh
+__label__电阻 r35
+__label__芯片 en_lora
+__label__芯片 lcd_cs
+__label__芯片 jtag_tdo_2
+__label__芯片 spi_mosi_master
+__label__电容 c_filter_spi_100nf
+__label__压敏电阻 rv53
+__label__电容 6c2.7μf
+__label__芯片 jtag_trst_b_1
+__label__电容 c_decouple_relay_10uf
+__label__电阻 44r4.7kω)1
+__label__芯片 obd2_reserved_11
+__label__芯片 lcd_d7_data
+__label__电感 l_power_mcu_68uh
+__label__芯片 50wifi_rx_3.3v|9
+__label__芯片 cs3_b
+__label__二极管 0.5a 600v
+__label__芯片 battery_detect_12v
+__label__芯片 vref_2.5v
+__label__芯片 usb_dp+usb_dm
+__label__电容 c5/1μ5f
+__label__芯片 gpiob0_input
+__label__芯片 pwm_1_out1
+__label__电感 l7
+__label__电阻 r_term_most_100r
+__label__芯片 jtag_rtck
+__label__电机 17v
+__label__芯片 12gpioa0_3.3v8
+__label__芯片 ram_addr1
+__label__二极管 d2 0.5a 200v
+__label__二极管 2d2_1.5a_400v
+__label__芯片 en_sensor
+__label__芯片 led_driver_ctrl
+__label__电感 51l6.8h]6
+__label__芯片 profibus_dp_gnd
+__label__芯片 wifi_2_4g_tx
+__label__电阻 31r470.0ω2
+__label__电机 42v
+__label__二极管 21d21_3.0a_200v2
+__label__芯片 gpioa3_exti
+__label__电容 52c8.2mf{7
+__label__电机 m11
+__label__电容 33nf
+__label__芯片 comp_inn1
+__label__芯片 flash_cs_b
+__label__芯片 comp_out1
+__label__芯片 u19
+__label__电机 m33
+__label__二极管 2a 400v
+__label__芯片 adc_in0
+__label__电感 1l1.0mh
+__label__电感 33mh
+__label__压敏电阻 80tvs30_39.0v(0
+__label__压敏电阻 95v
+__label__芯片 profibus_dp_data+
+__label__电阻 r_voltage_div_bottom_22k
+__label__芯片 vcc_3.3v
+__label__芯片 16gpioe0_1.8v5
+__label__电阻 r34 6.8kω
+__label__芯片 sdio_8bit_d1
+__label__芯片 swd_io_1
+__label__电阻 r_load_relay_330r
+__label__电机 51m51_3.3v_0.1a]6
+__label__芯片 comp_2_inp
+__label__电容 c54 390nf
+__label__电机 65m65_48.0v_4.8a0
 __label__芯片 jtag_srst_b
-__label__芯片 atmega328p
-__label__电阻 r13
+__label__电感 39l820.0mh~4
+__label__压敏电阻 74tvs24_12.0v%4
+__label__芯片 timer_reset
+__label__芯片 sdio_8bit_d5
+__label__芯片 config0
+__label__接地 gnd4_sgnd
+__label__二极管 44d44_d_led_driver_green_2.0v-1
+__label__压敏电阻 tvs_eth_8v2
+__label__芯片 profinet_rxd-
+__label__芯片 i2c_scl_slew
+__label__芯片 rs485_de_ind
+__label__二极管 0.5a 300v
+__label__电机 m47
+__label__芯片 dac_out0
+__label__电感 47mh
+__label__压敏电阻 tvs_hart_12v
+__label__电容 61c39.0mf>6
+__label__电阻 r7
+__label__电感 1.5mh
+__label__二极管 d54
+__label__芯片 jtag_tck
+__label__电容 c2 22μf
+__label__二极管 d_flyback_motor
+__label__二极管 20d20_2.7a_200v3
+__label__芯片 i2c_scl_bus1
+__label__二极管 d_esd_i2s
+__label__芯片 dac_vref
+__label__二极管 3a 800v/to-220
+__label__芯片 modbus_rtu_rts
+__label__电阻 66r220.0kω"3
+__label__二极管 d5/0.3a 100v
+__label__芯片 sdio_8bit_wake
+__label__电感 22l39.0mh3
+__label__电容 c14 82nf
+__label__电感 910mh
+__label__电感 16l12.0mh8
+__label__电感 l_power_sensor_56uh
+__label__电机 m38 3v
+__label__电感 l18
+__label__接地 gnd
+__label__芯片 pwm_1_out0
+__label__电机 m26 0.6a
+__label__芯片 gpioa10_i2c
+__label__电机 18m18_4.5a7
+__label__芯片 opamp_1_inp
+__label__接地 705gnd[1
+__label__芯片 spi_2_cs
+__label__芯片 rs232_reset
+__label__电机 60m60_motor_temp_fb_1.2v<5
+__label__芯片 vdd_lcd
+__label__芯片 vdd_periph
+__label__电容 84c2.2nf9
+__label__电感 6l2.7mh
+__label__芯片 lin_master_tx
+__label__电阻 r39
+__label__芯片 lin_slave_err
+__label__电感 24l56.0mh1
+__label__芯片 comp_2_inn
+__label__芯片 7uart_rx_1.8v
+__label__二极管 29d29_1.2a_600v*6
+__label__芯片 en_usb
+__label__电机 m4 6v 0.3a
+__label__电感 l_power_buzzer_82uh
+__label__电阻 63r120.0kω\0
+__label__二极管 1a 900v
+__label__电阻 r25
+__label__芯片 dac_diff_out0n
+__label__二极管 49d49_d_esd_eth_3.3v]6
+__label__电阻 r_gnd_div_47k
+__label__电容 35c390.0μf(0
+__label__芯片 can_h
+__label__芯片 adc2
+__label__芯片 83usb3_tx1-_5.0v2
+__label__芯片 spi_sck_slave
+__label__二极管 36d36_3.0a_800v=3
+__label__二极管 d35
+__label__芯片 arduino uno r3
+__label__电阻 470kω
+__label__芯片 opamp_out1
+__label__芯片 hdmi2_0_tx_data2
+__label__电容 c_electrolytic_vcc_470uf
+__label__电机 44m44_36.0v_3.0a(9
+__label__电感 60l27.0μh<5
+__label__芯片 spi_mosi
+__label__接地 gnd28 agnd
+__label__电阻 27r220.0ω6
+__label__芯片 u61
+__label__芯片 wake_on_gpio
+__label__电容 c35
+__label__电机 m13
+__label__电容 5c2.2μf
+__label__电容 c48 87nf
+__label__芯片 rs232_err
+__label__芯片 devicenet_wake
+__label__电阻 7r7.5ω
+__label__电阻 r49
+__label__电感 l4_1mh
+__label__电感 52l7.5h{7
+__label__电容 89c5.6nf4
+__label__芯片 gpiof0_input
+__label__电容 c_filter_uart_1nf
+__label__芯片 vdd_sram
+__label__芯片 sdio_d4
+__label__芯片 spi_sclk_8mhz
+__label__芯片 spi_1_sck
+__label__芯片 sdio_4bit_cmd
+__label__电容 7c3.3μf
+__label__芯片 stm32f756
+__label__芯片 rs485_de
+__label__接地 dgnd
+__label__电阻 22r91.0ω
+__label__压敏电阻 rv1_22v-10ka
+__label__二极管 d3
+__label__芯片 u37
+__label__电机 68m68_9.0v_0.9a3
+__label__二极管 1a 1100v
+__label__芯片 canopen_err
+__label__电感 12l7.5mh
+__label__电阻 r4 10kω
+__label__压敏电阻 58tvs8_27.0v
+__label__二极管 3a 1100v
+__label__电感 54l9.1h|9
+__label__电容 98c22.0pf3
+__label__电阻 r_load_sensor_220r
+__label__电阻 50r12.0kω&7
+__label__芯片 wake_on_lan_eth
+__label__芯片 reset_request
+__label__芯片 profinet_power
+__label__电感 l36
+__label__芯片 gpiob5_pwm
+__label__芯片 jtag_tck
+__label__压敏电阻 220v/5ka
+__label__电容 c29
+__label__电容 6n8f
+__label__二极管 2a 1000v
+__label__压敏电阻 rv59
+__label__芯片 profinet_txd+
+__label__芯片 spi_holdb
+__label__芯片 u18 raspberry pi pico
+__label__二极管 d_clamp_ethernetip_5v
+__label__接地 gnd
+__label__芯片 dac_out2
+__label__电感 1.5mh
+__label__芯片 i2c_scl_slave
+__label__电容 c42 27nf
+__label__二极管 d19
+__label__电容 c45
+__label__电感 62l39.0μh?7
+__label__芯片 qspi_io1
+__label__芯片 gpioa4_pwm
+__label__二极管 2a 200v
+__label__芯片 dac_diff_out1n
+__label__芯片 4-20ma_signal_out
+__label__芯片 i2c_sda_slave
+__label__电阻 r_vcc_div_150k
+__label__芯片 19gpioh0_2.5v2
+__label__电感 25l68.0mh0
+__label__电阻 sdio_8bit_term
+__label__接地 gnd57
+__label__芯片 spi_2_sck
+__label__芯片 rs232_cts_ind
+__label__芯片 adc_in3
+__label__芯片 timer_1_clk
+__label__二极管 2a 600v
+__label__芯片 vbus_usb
+__label__芯片 vdd_gps
+__label__电阻 r_pulldown_can_22k
+__label__芯片 56nfc_rx_5.0v<5
+__label__电机 m54
+__label__芯片 can_low_wake
+__label__芯片 gpioa5_pwm
+__label__电容 51nf
+__label__芯片 u30 stm32l071
+__label__接地 527gnd@3
+__label__芯片 uart_tx_1
+__label__电感 11mh
+__label__芯片 cs0_b
+__label__电容 c_electrolytic_9v_470uf
+__label__芯片 u42 stm32f373
+__label__电机 m9
+__label__芯片 vcc_3.3v_regulated
+__label__压敏电阻 51tvs1_6.8v
+__label__二极管 d11
+__label__电感 2l1.2mh
+__label__电机 10m10_60.0v
+__label__芯片 vdd_usb_host
+__label__电感 750mh
+__label__芯片 mipi_csi_clk+
+__label__芯片 iso11898_reset
+__label__二极管 0.3a 500v
+__label__芯片 lin_rx
+__label__芯片 profinet_mdc
+__label__二极管 d_clamp_rs485_5v
+__label__芯片 u3-atmega328p
+__label__芯片 85hdmi2_0_tx_data0_3.3v4
+__label__电阻 47ω
+__label__电感 4l1.8mh
+__label__芯片 u29
+__label__电阻 80r2.7mω7
+__label__电阻 r1_100ω-1%
+__label__二极管 40d40_4.2a_800v&7
+__label__芯片 sdio_d7
+__label__电阻 r_term_eth_50r
+__label__电容 c50 120nf
+__label__电阻 r_pulldown_i2c_10k
+__label__芯片 77obd2_can_l_2.5v6
+__label__芯片 99current_sense_2.5v8
+__label__电阻 1mω
+__label__芯片 5spi_miso_5.0v
+__label__接地 dgnd(数字地)
+__label__芯片 usb_otg_dp
+__label__芯片 lcd_d5
+__label__芯片 jtag_tdi_1
+__label__电机 m3
+__label__接地 4gnd
+__label__电阻 68r330.0kω<5
+__label__电感 7l3.3mh
+__label__电容 c_ceramic_lin_100pf
+__label__电容 c2+l1
+__label__芯片 mipi_csi_data1-
+__label__芯片 65profibus_dp_5.0v4
+__label__电阻 r_current_limit_15k
+__label__电感 51mh
+__label__芯片 i2c_sda
+__label__电感 150mh
+__label__二极管 46d46_d_flyback_motor_12.0v+3
+__label__电机 5m5_12.0v
+__label__压敏电阻 1000v
+__label__接地 20gnd2
+__label__芯片 gpioc4_pwm
+__label__芯片 timer_2_clk
+__label__电感 l_power_i2s_22uh
+__label__电阻 r_pullup_spi_4_7k
+__label__芯片 adc_in0_12bit
+__label__接地 sgnd(信号地)
+__label__电阻 1kω
+__label__电容 c1
+__label__压敏电阻 100v/10ka
+__label__芯片 profinet_wake
+__label__电容 c21
+__label__电阻 13r18.0ω
+__label__芯片 rs485_b_ind
+__label__芯片 kwp2000_reset
+__label__电容 82c1.5nf7
+__label__芯片 lin_master_reset
+__label__芯片 spi_2_miso
+__label__芯片 jtag_tdi_2
+__label__芯片 power_monitor_5v
+__label__电阻 hart_term
+__label__电容 c_ceramic_hdmi_1nf
+__label__芯片 buzzer_ctrl
+__label__电容 59c27.0mf'4
+__label__接地 22gnd4
+__label__电机 1.2a
+__label__电感 470μh
+__label__芯片 vss_bat_gnd
+__label__芯片 51bt_tx_1.8v\0
+__label__二极管 d_clamp_modbus_5v
+__label__芯片 comp_2_out
+__label__芯片 can_high_power
+__label__电机 m14 16v 0.55a
+__label__二极管 d1_0.5a 200v-do-41
+__label__电阻 45r5.6kω+2
+__label__二极管 d10(0.5a 400v)
+__label__电机 1.6a
+__label__电感 19mh
+__label__电阻 sdio_4bit_term
+__label__芯片 qspi_clk
+__label__电阻 14r22.0ω
+__label__压敏电阻 rv27
+__label__电容 18c18.0μf7
+__label__电阻 r5/c3
+__label__接地 gnd12 dgnd
+__label__电感 l16
+__label__电容 c_decouple_buzzer_22uf
+__label__芯片 lcd_d4_data
+__label__电阻 38r1.5kω!5
+__label__芯片 vcc_aux
+__label__电感 17l15.0mh9
+__label__电容 10μf
+__label__电容 2.7μf
+__label__芯片 bt_tx
+__label__电感 l_filter_spi_100uh
+__label__电阻 bt_5_0_term
+__label__芯片 dac_2_out0
+__label__芯片 vdd_pll
+__label__芯片 u63
+__label__芯片 swd_reset
+__label__压敏电阻 tvs_rs485_12v
+__label__芯片 wifi_5g_rx
+__label__接地 13dgnd
+__label__芯片 current_sense
+__label__电容 68nf
+__label__电阻 r33
+__label__电感 l23
+__label__电阻 240ω
+__label__芯片 jtag_trst_b
+__label__二极管 0.5a 100v
+__label__压敏电阻 rv19
+__label__芯片 gpioa9_dac
+__label__二极管 37d37_3.3a_800v~4
+__label__电阻 3r3.3ω
+__label__芯片 sdio_8bit_d4
+__label__二极管 d_clamp_usb_5v
+__label__芯片 u24 pic24fj64ga002
+__label__芯片 vdd_cam
+__label__芯片 reset_n_pulldown
+__label__接地 gnd1
+__label__电阻 96r47.0mω3
+__label__电感 l1%10mh
+__label__芯片 mipi_csi_err
+__label__接地 gnd29
+__label__芯片 spi_so_slave
+__label__芯片 swd_clk_1
+__label__电机 m32 1.4a
+__label__芯片 37swd_clk_1.8v^6
+__label__电阻 10m5ω
+__label__电感 2.7mh
+__label__电感 19l22.0mh6
+__label__二极管 3a 1200v
+__label__接地 24gnd68
+__label__电阻 r5/330ω
+__label__芯片 mipi_csi_data0+
+__label__电容 10c5.6μf
+__label__压敏电阻 110v
+__label__电阻 25r150.0ω9
+__label__芯片 rs232_rx
+__label__电机 46m46_60.0v_5.0a-1
+__label__芯片 zigbee_wake
+__label__芯片 boot_mode1
+__label__电感 42l1.2h&7
+__label__电机 3m3_6.0v
+__label__芯片 2i2c_sda_3.3v
+__label__电机 69m69_6.0v_0.6a4
+__label__芯片 canopen_can_l
+__label__二极管 d26
+__label__电感 37l560.0mh+2
+__label__芯片 ethernetip_power
+__label__芯片 int_2
+__label__接地 gnd48 dgnd
+__label__芯片 adc_osc
+__label__电阻 46r6.8kω=3
+__label__芯片 vcc_2.5v
+__label__芯片 esp32
+__label__芯片 i2s_clk
+__label__芯片 sdio_8bit_d0
+__label__电阻 42r3.3kω/9
+__label__芯片 38swd_io_1.8v&7
+__label__电感 50l5.6h[5
+__label__电阻 zigbee_term
+__label__接地 gnd17
+__label__电阻 20kω
+__label__芯片 jtag_tdo_1
+__label__芯片 int_3
+__label__芯片 pwm_clk
+__label__芯片 vcc_eth
+__label__电容 65c82.0mf0
+__label__芯片 gpiod9_spi
+__label__芯片 u43
+__label__电阻 220ω
+__label__芯片 vcc_cam
+__label__芯片 ethernetip_rx_p
+__label__芯片 lcd_d5_data
+__label__电感 l25
+__label__电感 l_power_zigbee_33uh
+__label__芯片 can_h_5v
+__label__电机 m15
+__label__二极管 15d15_1.5a_200v9
+__label__芯片 vdd_sd
+__label__压敏电阻 78tvs28_27.0v-8
+__label__二极管 d_clamp_hart_5v
+__label__芯片 profibus_dp_data-
+__label__接地 gnd_devicenet
+__label__芯片 eth_2_tx_p
+__label__电容 c18 680nf
+__label__电感 28mh
+__label__二极管 33d33_2.2a_600v(0
+__label__芯片 vss_ldo_gnd
+__label__电阻 83r4.7mω0
+__label__芯片 hold
+__label__电感 3.3mh
+__label__芯片 ethernetip_err
+__label__电阻 devicenet_term
+__label__接地 gnd59
+__label__芯片 vdd_eth
+__label__压敏电阻 rv61
+__label__压敏电阻 10v
+__label__芯片 i2c_sda_master
+__label__电感 l_power_bt_47uh
+__label__电阻 nfc_term
+__label__芯片 3spi_sclk_5.0v
+__label__电阻 72r680.0kω.9
+__label__二极管 d2 0.5a 200v
+__label__接地 gnd32 sgnd
+__label__压敏电阻 300v
+__label__芯片 modbus_ascii_rts
+__label__芯片 u54 stm32l151
+__label__芯片 u21
+__label__电机 m44 11v
+__label__二极管 d7
+__label__芯片 eeprom_scl
+__label__电机 m10(48v 1.5a)
+__label__电感 41l1.0h^6
+__label__芯片 qspi_io3
+__label__芯片 vss_lora_gnd
+__label__芯片 u11
+__label__电容 38c680.0μf=3
+__label__接地 gnd7
+__label__电容 10pf/16v
+__label__电机 17m17_4.0a9
+__label__电阻 r_pulldown_uart_22k
+__label__电机 32m32_2.2a@7
+__label__二极管 38d38_3.6a_800v`5
+__label__电容 c39
+__label__芯片 rs422_reset
+__label__电阻 93r27.0mω0
+__label__电容 c_electrolytic_9v_330uf
+__label__接地 gnd2 dgnd
+__label__芯片 spi_miso_master
+__label__接地 gnd13
+__label__芯片 lora_tx
+__label__压敏电阻 360v
+__label__芯片 lora_rx
+__label__电阻 r_vcc_div_68k
+__label__电机 0.25a
+__label__电阻 43kω
+__label__接地 505gnd!1
+__label__芯片 ascii_err
+__label__接地 gnd35
+__label__压敏电阻 62tvs12_56.0v9
+__label__二极管 1a 600v/do-41
+__label__芯片 flash_do
+__label__二极管 11d11_0.5a_200v
+__label__芯片 jtag_tdo_test
+__label__接地 sgnd
+__label__二极管 16d16_1.8a_200v7
+__label__芯片 wifi_2_4g_err
+__label__电阻 220ω
+__label__压敏电阻 tvs_wifi_6v8
+__label__电机 66m66_60.0v_6.0a1
+__label__芯片 timer_ch0
+__label__二极管 1a 800v
+__label__压敏电阻 rv44 24v
+__label__芯片 gpioc5_pwm
+__label__压敏电阻 rv30 190v
+__label__压敏电阻 rv38 870v
+__label__芯片 jtag_tck_debug
+__label__电容 c56 620nf
+__label__二极管 3a 1300v
+__label__电容 c4-u2
+__label__二极管 d50
+__label__接地 28agnd1
+__label__电机 43m43_24.0v_2.0a*8
+__label__电容 15c10.0μf
+__label__压敏电阻 rv41
+__label__芯片 i2c_sda$2
+__label__电感 5.6mh
+__label__芯片 u13
+__label__二极管 30d30_1.5a_600v@7
+__label__芯片 vssa_pll_gnd
+__label__电感 35l390.0mh(0
+__label__芯片 rs485_reset
+__label__芯片 jtag_tck_test
+__label__电容 94c10.0pf9
+__label__芯片 obd2_reserved_12
+__label__电容 22c39.0μf3
+__label__芯片 config2
+__label__电感 l_filter_hart_10uh
+__label__电阻 r_gnd_div_22k
+__label__电机 15v 0.6a
+__label__电阻 65r180.0kω:2
+__label__电感 16mh
+__label__电容 c4_100pf
+__label__芯片 debug_clk
+__label__电容 470nf
+__label__电感 9.1mh
+__label__电机 54m54_motor_en_24.0v|9
+__label__电容 c_filter_hdmi2_0_1nf
+__label__接地 gnd20 agnd
+__label__电感 l_filter_modbus_10uh
+__label__电感 390mh
+__label__压敏电阻 rv13
+__label__芯片 i2s_24bit_wake
+__label__电容 42c1.2mf&7
+__label__电阻 79r2.2mω6
+__label__电感 l30
+__label__电容 47c3.3mf_2
+__label__接地 gnd19
+__label__电容 c22 3μ3f
+__label__电机 m8 9v 0.4a
+__label__电容 c_decouple_mcu_1uf
+__label__电感 l_power_wifi_56uh
+__label__二极管 0.5a 400v
+__label__接地 561agnd)7
+__label__二极管 d33
+__label__压敏电阻 rv29
+__label__芯片 spi_sclk_master
+__label__接地 gnd_rs422
+__label__芯片 debug_test_tx
+__label__接地 gnd41
+__label__电机 30m30_1.2a!5
+__label__二极管 48d48_d_clamp_rs485_5.0v[5
+__label__芯片 vcc_lora
+__label__芯片 gpiod7_adc
+__label__芯片 lin_slave_power
+__label__芯片 hdmi_tx_data0_n
+__label__电机 m53
+__label__二极管 3a 500v
+__label__电阻 24r120.0ω8
+__label__电阻 64r150.0kω;1
+__label__电阻 r1
+__label__芯片 modbus_ascii_tx
+__label__芯片 jtag_tdi
+__label__接地 gnd16 dgnd
+__label__芯片 canopen_wake
+__label__芯片 84hdmi2_0_tx_clk_3.3v3
+__label__电感 l_filter_i2c_15uh
+__label__接地 gnd3
+__label__芯片 jtag_tms_test
+__label__电阻 r_vcc_div_82k
+__label__电阻 23r100.0ω
+__label__电感 10mh/1a
+__label__电阻 r24 56kω
+__label__芯片 44mipi_dsi_data0_1.8v+3
+__label__芯片 button_input
+__label__电阻 r_load_led_330r
+__label__芯片 hdmi2_0_tx_clk
+__label__电容 75c470.0nf0
+__label__芯片 boot_sel
+__label__接地 agnd
+__label__芯片 ascii_reset
+__label__芯片 uart_cts_2
+__label__压敏电阻 510v
+__label__电机 m20 0.8a
+__label__芯片 u45
+__label__二极管 d46
+__label__压敏电阻 910v
+__label__芯片 opamp_inn1
+__label__电机 m27
+__label__电容 c33
+__label__芯片 stm32f207
+__label__芯片 sdio_d3
+__label__芯片 gpio2
+__label__芯片 profinet_rxd+
+__label__芯片 vref_out
+__label__接地 gnd
+__label__接地 14dgnd
+__label__芯片 39eth_tx_p_3.3v*8
+__label__芯片 usb3_rx1-
+__label__芯片 thermal_sense
+__label__芯片 qspi_io1
+__label__电阻 29r330.0ω4
+__label__芯片 obd2_12v_power
+__label__芯片 usb3_rx2-
+__label__芯片 motor_driver_pwm
+__label__二极管 1a 400v
+__label__压敏电阻 rv50 87v
+__label__芯片 standby_mode_ctrl
+__label__电机 29m29_10.0a%4
+__label__电机 45v
+__label__电阻 r_gnd_div_220k
+__label__接地 438gnd_4
+__label__芯片 rs422_tx-
+__label__芯片 devicenet_vref
+__label__电机 9m9_48.0v
+__label__芯片 rs485_re_ind
+__label__电机 20m20_5.5a5
+__label__电阻 r_load_sensor_330r
+__label__芯片 can_high_reset
+__label__电机 4.5v
+__label__接地 gnd31
+__label__电容 48c3.9mf+3
+__label__电机 m55
+__label__电感 l43
+__label__电感 53l8.2h}8
+__label__电感 l49
+__label__二极管 d_esd_mipi
+__label__接地 394sgnd
+__label__芯片 hdmi_tx_data2
+__label__接地 gnd53
+__label__电机 24m24_7.5a1
+__label__芯片 61canopen_can_h_2.5v0
+__label__芯片 uart_tx%4
+__label__二极管 42d42_d_clamp_can_3.3v(9
+__label__二极管 7d7_3.9a_400v
+__label__电阻 r5
+__label__二极管 3a 900v
+__label__芯片 swd_clk_2
+__label__电阻 110ω
+__label__电机 70m70_5.0v_0.5a5
+__label__压敏电阻 tvs_can_5v
+__label__芯片 vddio_3.3v
+__label__接地 sgnd
+__label__电阻 r_term_zigbee_50r
+__label__电机 42m42_12.0v_1.0a&7
+__label__二极管 d41
+__label__电容 150nf
+__label__电感 3l1.5mh
+__label__电容 c_electrolytic_5v_100uf
+__label__电机 m2 12v 0.5a
+__label__压敏电阻 rv57
+__label__电感 31l180.0mh*6
+__label__接地 gnd
+__label__芯片 vcc_bt
+__label__电感 l5/150μh
+__label__电阻 r37
+__label__电容 c25
+__label__压敏电阻 rv21
+__label__电容 30c150.0μf!5
+__label__电感 45l2.2h)0
+__label__芯片 100wake_on_lan_3.3v9
+__label__芯片 profibus_dp_reset
+__label__电机 23v
+__label__芯片 vdd_ldo
+__label__芯片 debug_rx
+__label__芯片 modbus_rtu_rx
+__label__芯片 sdio_d0
+__label__芯片 94zigbee_tx_3.3v3
+__label__电容 c3
+__label__电容 c_ceramic_hdmi2_0_10nf
+__label__芯片 i2s_clk
+__label__电阻 78r1.8mω5
+__label__芯片 can_low_data
+__label__电容 c_decouple_i2c_22uf
+__label__芯片 usart_cs
+__label__芯片 lin_slave_rx
+__label__接地 27gnd96
+__label__芯片 voltage_monitor
+__label__电阻 r_current_limit_5k6
+__label__电阻 r62 430ω
+__label__电感 15l10.0mh
+__label__芯片 vcore_1.8v
+__label__电感 l6 220μh
+__label__二极管 d_esd_eth
+__label__电阻 kwp2000_term
+__label__电感 l_filter_uart_27uh
+__label__电阻 100r91.0mω7
+__label__芯片 spi_sclk+mosi+miso
+__label__电机 m63
+__label__电阻 r52 51kω
+__label__电机 40m40_8.2a`5
+__label__电容 99c27.0pf4
+__label__压敏电阻 78v
+__label__电容 c4 1μf
+__label__芯片 can_h_channel1
+__label__电感 l33
+__label__芯片 sensor_trig
+__label__电机 7.5v
+__label__芯片 28adc_in7_4.7v@7
+__label__芯片 config1
+__label__芯片 21adc_in0_1.2v0
+__label__电阻 r_term_4_20ma_250r
+__label__电阻 r_pullup_can_4_7k
+__label__压敏电阻 rv1$22v
+__label__芯片 en_periph
+__label__芯片 can_low_reset
+__label__电阻 r_pullup_uart_4_7k
+__label__芯片 52bt_rx_1.8v;1
+__label__芯片 gpioc8_spi
+__label__电阻 82r3.9mω9
+__label__芯片 uart_5_rx
+__label__芯片 comp_1_out
+__label__二极管 3a 300v
+__label__电感 l20
+__label__电容 18nf
+__label__芯片 can_h_terminated
+__label__二极管 1a 600v
+__label__芯片 uart_rts_1
+__label__二极管 25d25_0.5a_100v$2
+__label__芯片 relay_driver_ctrl
+__label__电阻 95r39.0mω2
+__label__芯片 wake_in
+__label__芯片 4spi_mosi_5.0v
+__label__芯片 gpioa6_adc
+__label__芯片 stm32h753
+__label__芯片 gpioc3_exti
+__label__电机 35m35_3.9a(0
+__label__电容 19c22.0μf6
+__label__电容 93c9.1nf8
+__label__芯片 vdd_ana
+__label__芯片 32pwm_out1_3.3v)1
+__label__电容 86c3.3nf1
+__label__芯片 ethernetip_mdc
+__label__电容 c19
+__label__接地 gnd_zigbee
+__label__芯片 lcd_rst
+__label__电机 m1
+__label__电阻 mipi_dsi_term
+__label__芯片 dac_diff_out1p
+__label__电机 m4_6v 0.3a
+__label__芯片 sdio_8bit_d7
+__label__芯片 rs485_power
+__label__接地 pgnd
+__label__芯片 u2 stm32f407
+__label__二极管 d45
+__label__芯片 opamp_inp1
+__label__芯片 vss_sram_gnd
+__label__二极管 d23
+__label__芯片 jtag_emu0
+__label__芯片 pwm_2_out0
+__label__接地 pgnd
+__label__电阻 r10(2.2kω)
+__label__芯片 adc_in6
+__label__电容 c37
+__label__电感 l31
+__label__芯片 dac_1_out0
+__label__芯片 iso9141_err
+__label__电感 l_power_led_33uh
+__label__压敏电阻 220v
+__label__电容 c_filter_nfc_1nf
+__label__芯片 stm32l100
+__label__接地 gnd5
+__label__芯片 gpiod2_exti
+__label__芯片 vdd_wifi
+__label__压敏电阻 68tvs18_120.0v2
+__label__接地 agnd
+__label__压敏电阻 tvs_ethernetip_8v2
+__label__电阻 51r15.0kω*8
+__label__电机 28v 0.9a
+__label__芯片 nrst
+__label__电机 57m57_motor_current_fb_1.8v:2
+__label__电阻 r60 280ω
+__label__芯片 sd_clk
+__label__电机 5v
+__label__电感 l50
+__label__芯片 gpioa0@7
+__label__芯片 sensor_echo
+__label__芯片 devicenet_power
+__label__电感 34l330.0mh/9
+__label__电感 32l220.0mh@7
+__label__二极管 d43
+__label__芯片 lcd_rs
+__label__芯片 rtc_data
+__label__芯片 sd_data0
+__label__二极管 d48
+__label__电感 l52
+__label__芯片 eth_1_rx_p
+__label__芯片 zigbee_tx
+__label__接地 gnd_usb
+__label__二极管 d27
+__label__芯片 profinet_err
+__label__芯片 bt_5_0_clk
+__label__二极管 d_esd_bt
+__label__电机 m1(12v)+rv1(22v)
+__label__电容 57c18.0mf:2
+__label__电感 l32
+__label__二极管 d59
+__label__压敏电阻 680v
+__label__芯片 reset
+__label__芯片 sda
+__label__电阻 74r910.0kω1
+__label__电感 61l33.0μh>6
+__label__芯片 rtc_clk_out
+__label__电容 44c1.8mf(9
+__label__芯片 debug_data
+__label__芯片 stm32f439
+__label__电容 10μf
+__label__电阻 56r39.0kω+3
+__label__接地 gnd_4_20ma
+__label__接地 2gnd
+__label__芯片 eth_2_rx_p
+__label__芯片 u10 stm32l476
+__label__芯片 31pwm_out0_5.0v(0
+__label__芯片 96temp_sensor_in_1.2v5
+__label__芯片 usb3_tx1-
+__label__芯片 17gpiof0_1.8v4
+__label__芯片 flash_di
+__label__接地 gnd51
+__label__电阻 r59
+__label__接地 dgnd
+__label__芯片 u23
+__label__芯片 wake_up
+__label__压敏电阻 73tvs23_10.0v&3
+__label__接地 gnd_digital_dig
+__label__芯片 gpioa1_output
+__label__芯片 jtag_tms
+__label__芯片 80most_data+_3.3v9
+__label__电机 27v
+__label__接地 16pgnd
+__label__二极管 d1
+__label__电感 l_power_relay_68uh
+__label__芯片 usb_dp_pullup
+__label__芯片 error
+__label__二极管 0.3a 800v
+__label__芯片 modbus_rtu_cts
+__label__电阻 rs485_term
+__label__二极管 d44
+__label__电感 73l220.0μh8
+__label__芯片 gpiob4_pwm
+__label__电阻 2k2ω
+__label__压敏电阻 170v
+__label__芯片 en_lcd
+__label__芯片 obd2_reserved_9
+__label__二极管 d8 3a 600v
+__label__电机 m1
+__label__电机 47m47_18.0v_1.5a_2
+__label__电容 c_electrolytic_12v_220uf
+__label__二极管 0.3a 100v
+__label__芯片 iso11519_can_l
+__label__接地 gnd_rs485
+__label__电阻 r_pullup_i2c_22k
+__label__电阻 88r10.0mω5
+__label__电感 l29
+__label__芯片 i2c_1_sda
+__label__芯片 sdio_d1
+__label__电阻 86r8.2mω3
+__label__芯片 irq_2
+__label__电阻 16r33.0ω
+__label__芯片 zigbee_data
+__label__电容 71c220.0nf6
+__label__芯片 nfc_rx
+__label__电感 2.7mh
+__label__芯片 usb_d-
+__label__芯片 profinet_txd-
+__label__二极管 d39
+__label__芯片 gpioc10_uart
+__label__电机 9v
+__label__电阻 47r8.2kω~4
+__label__芯片 hdmi_tx_data0
+__label__电阻 wifi_5g_term
+__label__接地 gnd18 sgnd
+__label__压敏电阻 rv39
+__label__电容 87c3.9nf2
+__label__电容 c_electrolytic_usb_220uf
+__label__压敏电阻 rv5/68v
+__label__电容 c_decouple_led_47uf
+__label__电感 10l5.6mh
+__label__芯片 lcd_scl
+__label__接地 661gnd-7
+__label__电感 30l150.0mh!5
+__label__芯片 26adc_in5_3.3v!5
+__label__电感 79l680.0μh4
+__label__接地 gnd49
+__label__芯片 u62 stm32f042
+__label__压敏电阻 79tvs29_33.0v/9
+__label__接地 549gnd/5
+__label__电容 83c1.8nf8
+__label__电容 2μ2f
+__label__芯片 ascii_rx_port
+__label__电感 l13
+__label__电容 c10(68nf)
+__label__压敏电阻 1300v
 __label__压敏电阻 39v
+__label__芯片 vss_wifi_gnd
+__label__电容 c_electrolytic_24v_1000uf
+__label__电感 27l91.0mh$2
+__label__压敏电阻 15v
+__label__电阻 21r82.0ω
+__label__电阻 330ω
+__label__接地 516gnd*2
+__label__接地 sgnd
+__label__电机 26m26_8.5a#1
+__label__电容 88c4.7nf3
+__label__电机 52m52_motor_in1_12.0v{7
+__label__压敏电阻 rv54 140v
+__label__芯片 vss_cam_gnd
+__label__电感 l11
+__label__芯片 u31
+__label__压敏电阻 330v
+__label__芯片 spi_sclk_master1
+__label__电容 c_ceramic_profibus_100pf
+__label__芯片 vdd_lora
+__label__电容 c55
+__label__二极管 d61
+__label__芯片 gpiob8_dac
+__label__压敏电阻 33v
+__label__电容 67c100.0nf2
 __label__电阻 r_pullup_uart_22k
-__label__电感 l62
+__label__二极管 d_rectifier_12v
+__label__电感 77l470.0μh2
+__label__电感 l_filter_profibus_68uh
+__label__芯片 jtag_emu1
+__label__电容 73c330.0nf8
+__label__接地 405gnd_1
+__label__电容 36c470.0μf)1
+__label__芯片 42hdmi_tx_data0_5.0v-1
+__label__电阻 94r33.0mω1
+__label__压敏电阻 470v
+__label__电感 l_power_mipi_33uh
+__label__接地 483gnd&9
+__label__压敏电阻 rv8 120v
+__label__芯片 jtag_tdo
+__label__二极管 d_led_driver_blue
+__label__芯片 can_high_wake
+__label__芯片 71rs485_b_3.3v0
+__label__电感 82μh
+__label__电容 34c330.0μf/9
+__label__电感 l53
+__label__芯片 hdmi_rx
+__label__电机 m50 22v
+__label__芯片 usb3_tx1+
+__label__芯片 en_sd
+__label__芯片 gpiod4_pwm
+__label__接地 gnd43
+__label__电阻 r36 220kω
+__label__电阻 r_current_limit_8k2
+__label__二极管 1a 400v
+__label__电机 m12 7.2v 0.35a
+__label__接地 gnd
+__label__芯片 debug_1_rx
+__label__电感 l57
+__label__电感 l21
+__label__芯片 eth_tx_n
+__label__电容 39c820.0μf~4
+__label__芯片 stm32f411
+__label__电阻 30r390.0ω3
+__label__电感 870mh
+__label__芯片 hart_rx
+__label__芯片 u47
+__label__电阻 37r1.2kω%4
+__label__接地 33pgnd6
+__label__芯片 can_low_power
+__label__电容 560nf
+__label__二极管 d_led_driver_green
+__label__电容 c_decouple_spi_10uf
+__label__芯片 ethernetip_rx_n
+__label__电阻 19r56.0ω
+__label__二极管 d_clamp_device_net_5v
+__label__接地 gnd_power_pwr
+__label__芯片 addr
+__label__芯片 mipi_dsi_clk-
+__label__电感 47l3.3h_2
+__label__芯片 reset_n-8
+__label__电阻 160ω
+__label__芯片 pwm_out2
+__label__电感 76l390.0μh1
+__label__芯片 kwp2000_l_line
+__label__芯片 obd2_clk
+__label__二极管 d_esd_hdmi
+__label__芯片 pic18f4550
+__label__芯片 hart_reset
+__label__芯片 pwm_2_out1
+__label__二极管 41d41_d_clamp_usb_5.0v*8
+__label__芯片 atmega2560
+__label__电感 l45
+__label__压敏电阻 rv10 180v
+__label__芯片 jtag_tck(10)
+__label__电阻 99r82.0mω6
+__label__芯片 gpioe1_output
+__label__电容 c_filter_most_1nf
+__label__电容 81c1.2nf6
+__label__芯片 rs485_err
+__label__电阻 820ω
+__label__电阻 9r9.1ω
+__label__芯片 modbus_rtu_tx
+__label__芯片 vin_battery
+__label__芯片 sd_cmd
+__label__芯片 rtc_clk
+__label__电容 78c820.0nf3
+__label__芯片 gpioa8_dac
+__label__芯片 opamp_inn0
+__label__芯片 vddd_digital
+__label__芯片 u22 esp32-s3
+__label__芯片 nfc_err
+__label__电机 m28 0.9a
+__label__电感 12mh
+__label__接地 17sgnd
+__label__电阻 r3-1kω
+__label__芯片 bt_5_0_rx
+__label__接地 gnd
+__label__电阻 r_pulldown_uart_10k
+__label__电机 62m62_12.0v_1.2a?7
+__label__芯片 lcd_dc
+__label__电阻 r_term_hart_250r
+__label__芯片 capture_in1
+__label__芯片 gpiod10_uart
+__label__电容 510nf
+__label__压敏电阻 66tvs16_91.0v4
+__label__电阻 r53
+__label__二极管 d17
+__label__接地 dgnd
+__label__电阻 4k7ω
+__label__芯片 sdio_d6
+__label__电容 c_ceramic_eth_10nf
+__label__芯片 vcc_usb
+__label__电阻 obd2_can_term
+__label__芯片 lcd_rs_ctrl
+__label__二极管 2a 800v
+__label__接地 gnd_ethernetip
+__label__电感 l47
+__label__芯片 rtc_clk_out
+__label__接地 gnd_hdmi
+__label__芯片 obd2_k_line
+__label__接地 gnd9
+__label__芯片 modbus_tcp_err
+__label__电阻 iso9141_term
+__label__电感 13l8.2mh
+__label__二极管 2a 400v/sma
+__label__接地 gnd11
+__label__电机 m43
+__label__压敏电阻 64tvs14_75.0v6
+__label__接地 gnd63
+__label__接地 650gnd)6
+__label__二极管 10d10_6.8a_400v
+__label__芯片 sdio_d2
+__label__电容 c_electrolytic_24v_680uf
+__label__芯片 cs2_b
+__label__二极管 0.5a 700v
+__label__芯片 uart_tx
+__label__压敏电阻 rv33
+__label__电阻 r26 82kω
+__label__电容 c_ceramic_mipi_100pf
+__label__电阻 r_load_buzzer_1k5
+__label__电容 16c12.0μf8
+__label__电感 29l120.0mh%4
+__label__芯片 vss_bt_gnd
+__label__芯片 lin_slave_clk
+__label__芯片 swd_power
+__label__电容 c10 47nf
+__label__芯片 u1&stm32f103
+__label__电容 c_decouple_lin_10uf
+__label__电阻 8r8.2ω
+__label__芯片 can_low_clk
+__label__芯片 adc_in4
+__label__电阻 69r390.0kω>6
+__label__芯片 uart_rx_3
+__label__压敏电阻 rv6 82v
+__label__芯片 swd_vref
+__label__电阻 150ω
+__label__接地 gnd_modbus
+__label__芯片 timer_trig
+__label__电容 70c180.0nf5
+__label__电容 26c82.0μf#1
+__label__芯片 mipi_dsi_err
+__label__芯片 jtag_tdi_test
+__label__电容 c_electrolytic_gnd_100uf
+__label__芯片 rs232_cts
+__label__电阻 10r10.0ω
+__label__电阻 r16 22kω
+__label__芯片 u10(pic16f877a)
+__label__芯片 comp_inp0
+__label__电容 c20 1μ5f
+__label__二极管 27d27_0.9a_100v%4
+__label__电容 85c2.7nf0
+__label__芯片 vcc_3.3v+gnd
+__label__电容 17c15.0μf9
+__label__电容 c36 4n7f
+__label__芯片 gpiob3_exti
+__label__芯片 sd_data2
+__label__电阻 r_current_limit_9k1
+__label__电感 l35
+__label__电机 30v
+__label__压敏电阻 rv49
+__label__芯片 boot_mode_sel1
+__label__接地 683gnd+9
+__label__芯片 gpioa7_adc
+__label__接地 gnd3-pgnd
+__label__芯片 sdio_4bit_d0
+__label__电容 c_ceramic_zigbee_100pf
+__label__芯片 gpiof1_output
+__label__电机 2a
+__label__电容 8c3.9μf
+__label__接地 gnd56 agnd
+__label__芯片 dac_ref_n
+__label__芯片 jtag_tck_testpoint
+__label__二极管 d20
+__label__电感 46l2.7h-1
+__label__电容 55c12.0mf\0
+__label__二极管 3a 700v
+__label__二极管 d38
+__label__电容 100pf
+__label__电阻 39kω
+__label__电感 l_filter_ethernetip_68uh
+__label__芯片 opamp_compensation
+__label__电感 l48
+__label__芯片 sdio_d5
+__label__芯片 usart_clk
+__label__电感 l39
+__label__芯片 rs422_rx-
+__label__二极管 d4_3a 800v
+__label__压敏电阻 rv18 820v
+__label__电感 270mh
+__label__芯片 58modbus_rx_2.5v?7
+__label__电感 63l47.0μh8
+__label__接地 10gnd
+__label__压敏电阻 56tvs6_18.0v
+__label__电容 8μ2f
+__label__芯片 adc_vrefp
+__label__电阻 r55
+__label__二极管 8d8_4.7a_400v
+__label__芯片 qspi_clk
+__label__芯片 62canopen_can_l_2.5v1
+__label__芯片 iso9141_power
+__label__电容 c_decouple_device_net_22uf
+__label__电阻 r_vcc_div_22k
+__label__芯片 ready
+__label__电感 l55
+__label__芯片 sd_d1
+__label__芯片 can_stb
+__label__芯片 cam_sda
+__label__芯片 adc_in7
+__label__电容 c23
+__label__二极管 0.3a 200v
+__label__二极管 d36
+__label__芯片 vcc_led
+__label__芯片 irq_1
+__label__芯片 spi_cs2_b
+__label__电阻 49r10.0kω^6
+__label__接地 594sgnd~0
+__label__芯片 i2s_mclk
+__label__电感 72l180.0μh7
+__label__电容 c_decouple_ic_22uf
+__label__芯片 22adc_in1_1.5v#1
+__label__电阻 39r1.8kω*6
+__label__芯片 modbus_tcp_power
+__label__接地 gnd25
+__label__电阻 r_gnd_div_33k
+__label__电机 m42 8v
+__label__压敏电阻 tvs_zigbee_6v8
+__label__电阻 r_pulldown_i2c_4_7k
+__label__芯片 debug_clk_2
+__label__芯片 dac1
+__label__电阻 r30 5.6kω
+__label__电容 20c27.0μf5
+__label__芯片 en_main
+__label__电机 12v 1a
+__label__电阻 92r22.0mω9
+__label__接地 gnd14 sgnd
+__label__电容 22nf
+__label__电机 m10 18v 0.7a
+__label__芯片 spi_wpb
+__label__电阻 54r27.0kω-1
+__label__芯片 i2s_24bit_clk
+__label__电感 l56
+__label__芯片 bt_5_0_wake
+__label__芯片 irq_3
+__label__芯片 gpioh1_output
+__label__芯片 vss_led_gnd
+__label__电阻 r17
+__label__芯片 reset_n_activelow
+__label__芯片 rs422_power
+__label__电机 1.8a
+__label__芯片 vss_usb_host_gnd
+__label__电感 l46
+__label__芯片 qspi_cs_b
+__label__芯片 wake_on_usb
+__label__芯片 mipi_csi_data1+
+__label__电感 18l18.0mh7
+__label__芯片 70rs485_a_3.3v9
+__label__电机 5v
+__label__芯片 4-20ma_power
+__label__电感 40l910.0mh`5
+__label__芯片 adc_in9
+__label__电容 c63
+__label__芯片 sensor_trig_out
+__label__电阻 r_pulldown_spi_22k
+__label__芯片 iso11898_can_l
+__label__芯片 esp32-wroom-32
+__label__芯片 kwp2000_wake
+__label__压敏电阻 rv9
+__label__芯片 uart_tx+uart_rx
+__label__芯片 cc2652r
+__label__芯片 most_data-
+__label__电机 m49
+__label__压敏电阻 rv3
+__label__电容 c_filter_vcc_10uf
+__label__接地 gnd_profibus
+__label__电容 c_filter_mipi_10nf
+__label__电容 22pf
+__label__芯片 timer_ch1
+__label__芯片 reset_n+wake_up
+__label__电阻 r_gnd_div_270k
+__label__芯片 attiny85
+__label__芯片 bt_5_0_data
+__label__芯片 sensor_data
+__label__电容 c7
+__label__接地 gnd_mipi
+__label__二极管 18d18_2.2a_200v5
+__label__电容 c52 270nf
+__label__芯片 wake_up
+__label__电容 c_filter_i2c_10nf
+__label__电阻 r9
+__label__电机 m60
+__label__电机 m45
+__label__芯片 pwm_out0
+__label__接地 5gnd
+__label__电感 14l9.1mh
+__label__电阻 r_gnd_div_100k
+__label__芯片 buzzer_driver
+__label__压敏电阻 rv4_47v
+__label__接地 672gnd_8
+__label__电阻 r_vcc_div_120k
+__label__芯片 vcc_usb_host
+__label__芯片 vss_gps_gnd
+__label__电阻 r_vcc_div_180k
+__label__电机 m19
+__label__电感 9l4.7mh
+__label__芯片 swd_clk
+__label__接地 pgnd
+__label__芯片 reset_n
+__label__芯片 u50 stm32f769
+__label__电机 25m25_8.0a0
+__label__电感 510mh
+__label__电阻 r_pulldown_spi_10k
+__label__电阻 r_pulldown_i2c_22k
+__label__压敏电阻 rv17
+__label__芯片 stm32h747
+__label__芯片 u1
+__label__电阻 28r270.0ω5
+__label__芯片 u1
+__label__接地 gnd_canopen
+__label__二极管 0.5a 800v
+__label__芯片 voltage_monitor_3_3v
+__label__芯片 en_cam
+__label__芯片 devicenet_reset
+__label__电机 0.7a
+__label__二极管 d6 1a 600v
+__label__电容 470pf
+__label__电机 53m53_motor_in2_12.0v}8
+__label__电阻 r_voltage_div_top_100k
+__label__电容 c44 39nf
+__label__电阻 r40 3.3mω
+__label__芯片 i2c_scl_10k
+__label__芯片 u35
+__label__二极管 d_clamp_sdio_3_3v
+__label__电感 27mh
+__label__芯片 iso9141_clk
+__label__芯片 can_3_l
+__label__电阻 1r1.2ω
+__label__芯片 u3
+__label__电感 43mh
+__label__接地 gnd_sdio
+__label__电阻 i2s_24bit_term
+__label__电机 21m21_6.0a4
+__label__接地 gnd_profinet
+__label__电阻 r_term_lin_1k
+__label__电感 l1
+__label__电阻 r21
+__label__电容 72c270.0nf7
+__label__芯片 72rs422_tx+_5.0v1
+__label__电阻 20r68.0ω
+__label__电机 34m34_3.3a/9
+__label__接地 gnd61
+__label__芯片 hart_vcc
+__label__电容 c59
+__label__二极管 d21
+__label__压敏电阻 rv52 105v
+__label__芯片 i2c_scl
+__label__芯片 nc
+__label__接地 gnd_电源地-pcb
+__label__芯片 wifi_5g_err
+__label__芯片 vcc
+__label__芯片 atmega328p
+__label__二极管 0.5a 400v
+__label__芯片 irq_4
+__label__芯片 vdd_led
+__label__芯片 profibus_dp_err
+__label__接地 gnd50 sgnd
+__label__电阻 r_pulldown_uart_4_7k
+__label__芯片 jtag_etr
+__label__二极管 0.3a 700v
+__label__芯片 led_driver
+__label__芯片 u20 stm32g071
+__label__芯片 kwp2000_clk
+__label__芯片 swd_io
+__label__芯片 vdd_5v
+__label__芯片 obd2_can_l
+__label__接地 416gnd_2
+__label__芯片 rs485_re
+__label__芯片 vcc_sd
+__label__芯片 select0
+__label__电感 10mh
+__label__电阻 r_load_motor_100r
+__label__芯片 int
+__label__电感 l27
+__label__芯片 usb_dp
+__label__电容 c53
+__label__压敏电阻 60tvs10_39.0v
+__label__芯片 pwm_out3
+__label__芯片 uart_4_tx
+__label__电阻 usb3_term
+__label__压敏电阻 rv31
+__label__电容 c_ceramic_device_net_10nf
+__label__二极管 2a 500v
+__label__芯片 mipi_csi_data0-
+__label__芯片 mipi_csi_wake
+__label__二极管 0.5a 500v
+__label__芯片 gpioa0_function1
+__label__芯片 rtc_clk_in
+__label__芯片 boot_mode_sel0
+__label__电容 62c47.0mf?7
+__label__芯片 90i2s_24bit_clk_2.5v9
+__label__芯片 4-20ma_signal_in
+__label__二极管 35d35_2.7a_800v+2
+__label__电感 l41
+__label__压敏电阻 rv24 51v
+__label__芯片 rtc_rst
+__label__芯片 hdmi_tx_data1
+__label__电阻 r_pullup_i2c_4_7k
+__label__芯片 en_gps
+__label__二极管 24d24_0.3a_100v#1
+__label__芯片 power_ok
+__label__电感 l51
+__label__芯片 boot_mode_sel2
+__label__芯片 debug_data_2
+__label__芯片 jtag_tck_2
+__label__芯片 vdd_1.2v
+__label__芯片 eth_rx_p
+__label__电机 39m39_7.5a~4
+__label__电容 c41
+__label__芯片 capture_out0
+__label__二极管 14d14_1.2a_200v8
+__label__芯片 zigbee_rx
+__label__电阻 r47
+__label__电感 l26
+__label__压敏电阻 rv40 1100v
+__label__芯片 iso11898_power
+__label__电机 61m61_motor_power_en_3.3v>6
+__label__芯片 cle
+__label__芯片 comp_inn0
+__label__芯片 u4 esp8266
+__label__芯片 rs232_rxd_ind
+__label__芯片 gps_tx
+__label__电感 75mh
+__label__芯片 vss_usb_device_gnd
+__label__接地 sgnd
+__label__电机 56m56_motor_dir_ctrl_5.0v;1
+__label__二极管 d62
+__label__芯片 mipi_dsi_data1+
+__label__电容 c32 1n2f
+__label__电阻 r_term_rs485_120r
+__label__二极管 22d22_3.3a_200v1
+__label__芯片 hdmi_cec
+__label__电机 m1_12v-0.5a
+__label__芯片 82usb3_tx1+_5.0v1
+__label__电容 64c68.0mf.9
+__label__二极管 19d19_2.5a_200v4
+__label__电机 motor_stall_det
+__label__芯片 profinet_mdio
+__label__电容 c17
+__label__电感 36mh
+__label__芯片 sd_data3
+__label__电感 58l18.0μh"3
+__label__接地 8gnd
+__label__接地 25gnd79
+__label__电阻 180ω
+__label__芯片 stm32f767
+__label__芯片 86mipi_csi_clk+_1.8v5
+__label__电阻 32r560.0ω1
+__label__芯片 hart_tx
+__label__电机 33m33_2.7a-8
+__label__电容 c_ceramic_sdio_100pf
+__label__电感 l34
+__label__芯片 vcc_sensor
+__label__电容 c_filter_zigbee_10nf
+__label__芯片 eth_2_rx_n
+__label__电容 37c560.0μf+2
+__label__二极管 31d31_1.8a_600v-8
+__label__电感 180mh
+__label__芯片 sensor_echo_in
+__label__芯片 13gpiob0_3.3v9
+__label__电机 m17
+__label__电容 c_electrolytic_3_3v_680uf
+__label__电阻 r1
+__label__电阻 r48 16kω
+__label__芯片 cam_scl
+__label__芯片 select2
+__label__芯片 sdio_4bit_clk
+__label__芯片 adc_ref
+__label__芯片 u5/esp32
+__label__压敏电阻 rv14 390v
+__label__电阻 r2 470ω
+__label__压敏电阻 59tvs9_33.0v
+__label__电阻 r_gnd_div_68k
+__label__电阻 67r270.0kω'4
+__label__二极管 d_clamp_profibus_5v
+__label__二极管 d1@0.5a 200v
+__label__芯片 hdmi2_0_tx_data1
+__label__电容 c_decouple_mcu_0_01uf
+__label__电容 28c100.0μf&3
+__label__芯片 vdd_usb_device
+__label__芯片 en_bt
+__label__电机 32v
+__label__芯片 sae_j2284_can_h
+__label__芯片 adc_diff_inn1
+__label__芯片 gpioc11_uart
+__label__电阻 5.6mω
+__label__二极管 9d9_5.6a_400v
+__label__电阻 2.7kω
+__label__压敏电阻 125v
+__label__电容 910nf
+__label__芯片 694-20ma_out_1.5v8
+__label__电机 31m31_1.8a*6
+__label__芯片 spi_si_slave
+__label__电感 80l820.0μh5
+__label__电阻 r42 10mω
+__label__电机 26v
+__label__芯片 vss_eth_gnd
+__label__芯片 eeprom_cs_b
+__label__芯片 gpioc7_adc
+__label__芯片 vdd_aux
+__label__电感 74l270.0μh9
+__label__接地 gnd27
+__label__二极管 d52
+__label__接地 sgnd
+__label__芯片 pwm2
+__label__电机 m16 28v 0.9a
+__label__接地 11agnd
+__label__电机 16m16_3.5a8
+__label__芯片 swd_io_test
+__label__芯片 swd_gnd
+__label__电感 6.8μh
+__label__芯片 gpiod3_exti
+__label__芯片 gpiod8_spi
+__label__芯片 capture_in0
+__label__芯片 lin_wake
+__label__芯片 eth_mdio
+__label__芯片 u46 stm32f427
+__label__芯片 uart_rts_3
+__label__芯片 nfc_clk
+__label__芯片 can_high_err
+__label__芯片 uart_rx_2
+__label__接地 gnd_rs232
+__label__电容 1c1.0μf
+__label__接地 12agnd
+__label__芯片 swd_io
+__label__电阻 75r1.0mω2
+__label__电阻 r_gnd_div_82k
+__label__芯片 kwp2000_power
+__label__芯片 wifi_2_4g_wake
+__label__电机 9v 0.4a
+__label__二极管 d_clamp_lin_12v
+__label__芯片 vdd_4.2v
+__label__电容 c11
+__label__芯片 u3-rv2
+__label__二极管 d4 3a 800v
+__label__二极管 12d12_0.8a_200v
+__label__电感 l37
+__label__接地 sgnd
+__label__压敏电阻 230v
+__label__电感 l_filter_hdmi_33uh
+__label__芯片 battery_detect
+__label__芯片 timer_ch3
+__label__芯片 dac_clk
+__label__芯片 40eth_rx_p_3.3v(9
+__label__压敏电阻 63tvs13_68.0v7
+__label__芯片 vpp_program
+__label__芯片 power_save
+__label__二极管 d1
+__label__芯片 usb_dm
+__label__电容 23c47.0μf2
+__label__压敏电阻 tvs_usb_6v8
+__label__电机 67m67_18.0v_1.8a2
+__label__二极管 d40
+__label__芯片 jtag_tms_1
+__label__芯片 select1
+__label__电阻 27kω
+__label__接地 3gnd
+__label__接地 gnd55
+__label__芯片 gpiog1_output
+__label__电阻 r2 470ω
+__label__电容 c_electrolytic_5v_680uf
+__label__二极管 1a 500v
+__label__芯片 stm32f072
+__label__接地 583pgnd=9
+__label__芯片 u39
+__label__芯片 sd_wp
+__label__电机 motor_power_en
+__label__电感 10mh
+__label__芯片 vssa_analog_gnd
+__label__芯片 u9
+__label__芯片 timer_2_ch0
+__label__电阻 59r68.0kω]6
+__label__芯片 eth_1_tx_n
+__label__芯片 adc1
+__label__电阻 r_term_can_120r
+__label__芯片 vrefn_negative
+__label__芯片 dac2
+__label__芯片 spi_cs0_b
+__label__芯片 i2s_data
+__label__接地 gnd6 agnd
+__label__电容 c49
+__label__芯片 debug_tx
+__label__芯片 i2s_sdata_out
+__label__接地 gnd26 pgnd
+__label__二极管 6d6_3.3a_400v
+__label__芯片 opamp_out0
+__label__芯片 spi_1_mosi
+__label__电机 motor_brake_ctrl
+__label__芯片 sdio_8bit_d3
+__label__芯片 89sdio_4bit_cmd_3.3v8
+__label__电机 24v
+__label__芯片 wifi_rx
+__label__电阻 35r910.0ω$2
+__label__芯片 comp_1_inn
+__label__芯片 u7
+__label__电阻 r_pullup_spi_10k
+__label__电感 l_filter_most_10uh
+__label__芯片 opamp_inp0
+__label__接地 gnd46 agnd
+__label__电阻 r11
+__label__二极管 d55
+__label__电机 12m12_1.5a
+__label__芯片 swd_clk_test
+__label__接地 gnd_i2c
+__label__芯片 comp_out0
+__label__电容 c1
+__label__芯片 jtag_trst
+__label__芯片 78lin_master_tx_12.0v7
+__label__芯片 66hart_tx_3.3v5
+__label__芯片 modbus_tcp_data
+__label__电容 c_ceramic_ethernetip_100pf
+__label__芯片 spi_sclk_phase
+__label__接地 gnd_lin
+__label__二极管 d57
+__label__芯片 lpc1850
+__label__芯片 gpioa0_pullup
+__label__电感 l_filter_gnd_22uh
+__label__电阻 r_pullup_spi_22k
+__label__电阻 r12 680ω
+__label__压敏电阻 rv63
+__label__芯片 timer_ch2
+__label__芯片 jtag_gnd
+__label__电阻 77r1.5mω4
+__label__电阻 r15
+__label__芯片 spi_2_mosi
+__label__二极管 0.3a 1000v
+__label__接地 agnd
+__label__芯片 vssd_digital_gnd
+__label__芯片 74rs232_tx_12.0v3
+__label__芯片 iso9141_data
+__label__芯片 timer_clk
+__label__电阻 62r100.0kω|9
+__label__芯片 cam_cs
+__label__压敏电阻 rv10(470v)
+__label__芯片 57modbus_tx_2.5v>6
+__label__芯片 swd_nrst
+__label__芯片 most_reset
+__label__芯片 rs422_err
+__label__电机 13m13_2.0a
+__label__压敏电阻 240v
+__label__芯片 qspi_io2
+__label__芯片 obd2_data
+__label__电容 92c8.2nf7
+__label__电阻 75kω
+__label__芯片 spi_sclk&3
+__label__芯片 debug_1_tx
+__label__芯片 hdmi_rx_clk
+__label__压敏电阻 rv20 1200v
+__label__接地 gnd62 pgnd
+__label__芯片 hdmi_tx_data2_n
+__label__电阻 r61
+__label__压敏电阻 rv12 270v
+__label__接地 19gnd1
+__label__芯片 gpioc1_output
+__label__接地 gnd_obd2
+__label__芯片 can_low_err
+__label__芯片 hdmi_rx_data2
+__label__芯片 adc_diff_inn0
+__label__芯片 eth_rx_n
+__label__电容 c_decouple_motor_47uf
+__label__接地 638gnd*4
+__label__芯片 8can_h_2.5v
+__label__电感 l15 330μh
+__label__芯片 motor_pwm
+__label__芯片 25adc_in4_2.7v%4
+__label__芯片 vcc_usb_device
+__label__电感 18mh
+__label__电阻 r_current_limit_4k7
+__label__电容 c_decouple_usb_1uf
+__label__压敏电阻 rv4 47v
+__label__电机 m51
+__label__电阻 4-20ma_loop+
+__label__接地 gnd#电源地
+__label__压敏电阻 750v
+__label__二极管 d5
+__label__电机 55m55_motor_speed_fb_3.3v\0
+__label__芯片 can_high_data
+__label__电容 c_ceramic_hart_100pf
+__label__芯片 67hart_rx_3.3v6
+__label__芯片 i2s_24bit_sdata_in
+__label__芯片 qspi_io0
+__label__电阻 r_pullup_i2c_10k
+__label__电阻 1.2mω
+__label__芯片 sdio_4bit_err
+__label__接地 694gnd=0
+__label__芯片 devicenet_can_l
+__label__芯片 uart_rx_1
+__label__芯片 mipi_dsi_clk+
+__label__电容 c3-47nf
+__label__接地 gnd15
+__label__电容 80c1.0nf5
+__label__芯片 stm32wb57
+__label__电机 m56
+__label__芯片 lcd_en
+__label__芯片 u27
+__label__电感 l_power_nfc_22uh
+__label__芯片 dac_diff_out0p
+__label__芯片 timer_1_ch0
+__label__电感 l19
+__label__接地 gnd1
+__label__电机 m36 1.9a
+__label__芯片 sd_cd
+__label__芯片 u41
+__label__芯片 vout_3.3v
+__label__电感 l14 150μh
+__label__电阻 r_current_limit_3k3
+__label__电容 c16 330nf
+__label__芯片 gpiob11_i2c
+__label__电阻 98r68.0mω5
+__label__芯片 vss_sd_gnd
+__label__二极管 45d45_d_led_driver_blue_2.0v_2
+__label__芯片 obd2_reserved_3
+__label__芯片 sdio_8bit_err
+__label__电阻 r41
+__label__接地 494gnd%0
+__label__电阻 53r22.0kω)0
+__label__电阻 r1+c1
+__label__电机 6m6_18.0v
+__label__接地 gnd37
+__label__电容 32c220.0μf@7
+__label__芯片 hdmi2_0_wake
+__label__二极管 d47
+__label__芯片 wake_on_gpio_a0
+__label__电阻 55r33.0kω_2
+__label__二极管 5d5_2.7a_400v
+__label__芯片 pwm1
+__label__芯片 vcc_periph
+__label__二极管 d37
+__label__芯片 cs1_b
+__label__电机 50m50_5.0v_0.2a[5
+__label__芯片 can_h_2
+__label__芯片 qspi_io0
+__label__芯片 29dac_out0_1.0v-8
+__label__芯片 ram_cs_b
+__label__接地 15pgnd
+__label__芯片 uart_tx_2
+__label__电阻 70r470.0kω?7
+__label__压敏电阻 360v
+__label__芯片 boot_mode2
+__label__电感 67l82.0μh2
+__label__芯片 mode0
+__label__芯片 trst_b_test
+__label__芯片 comp_1_inp
+__label__电容 74c390.0nf9
+__label__电感 49l4.7h=4
+__label__芯片 stm32f107
+__label__芯片 79lin_slave_tx_12.0v8
+__label__芯片 hdmi_tx_clk_n
+__label__压敏电阻 rv34 430v
+__label__接地 21gnd3
+__label__芯片 ascii_power
+__label__芯片 most_power
+__label__电容 c31
+__label__接地 31dgnd4
+__label__电感 l_power_motor_100uh
+__label__芯片 u28 stm32f746
+__label__接地 23gnd5
+__label__芯片 sdio_8bit_cmd
+__label__电容 c57
+__label__电感 120mh
+__label__电机 1a
+__label__接地 gnd_analog_ana
+__label__电容 c_electrolytic_12v_470uf
+__label__电阻 r20 120ω
+__label__电阻 84r5.6mω1
+__label__芯片 obd2_l_line
+__label__芯片 motor_driver_in1
+__label__二极管 d24
+__label__电机 m22 1.5a
+__label__电感 13mh
+__label__电容 c_filter_i2s_1nf
+__label__芯片 buzzer_driver_ctrl
+__label__芯片 sd_d3
+__label__电感 2.2mh
+__label__芯片 spi_1_miso
+__label__芯片 canopen_can_h
+__label__芯片 ale
+__label__芯片 qspi_io3
+__label__电感 l4 1mh
+__label__电感 23l47.0mh2
+__label__芯片 wifi_tx
+__label__二极管 3a 1000v
+__label__接地 gnd60 agnd
+__label__芯片 hdmi2_0_tx_data0
+__label__接地 gnd45
+__label__芯片 wifi_5g_clk
+__label__芯片 profibus_dp_power
+__label__芯片 lin_slave_reset
+__label__芯片 u44 stm32f412
+__label__电感 69l100.0μh4
+__label__压敏电阻 rv56 200v
+__label__电感 64l56.0μh.9
+__label__芯片 u16 msp430f149
+__label__芯片 iso11898_err
+__label__芯片 adc_2_in1
+__label__压敏电阻 160v
+__label__电阻 r46 8.2kω
+__label__电阻 r3-l2
+__label__芯片 15gpiod0_5.0v6
+__label__芯片 vcc_lcd
+__label__芯片 eth_mdc
+__label__电机 48m48_9.0v_0.5a+3
+__label__接地 gnd58 pgnd
+__label__电阻 r_load_led_220r
+__label__压敏电阻 rv7
+__label__芯片 power_save_en
+__label__电感 l42
+__label__电容 1nf
+__label__二极管 0.3a 1200v
+__label__芯片 spi_csb_slave
+__label__电感 38l680.0mh=3
+__label__电容 c43
+__label__接地 gnd54 sgnd
+__label__芯片 usb3_err
+__label__芯片 hart_power
+__label__二极管 d16 2a 800v
+__label__压敏电阻 57tvs7_22.0v
+__label__芯片 eth_tx_p
+__label__电容 76c560.0nf1
+__label__芯片 zigbee_clk
+__label__芯片 usb3_tx2+
+__label__芯片 en_led
+__label__芯片 qspi_cs
+__label__压敏电阻 450v
+__label__接地 gnd_signal_sig
+__label__电容 c_ceramic_i2s_10nf
+__label__芯片 ram_addr0
+__label__二极管 3a 200v
+__label__电容 c_filter_hart_10nf
+__label__芯片 gpioe0_input
+__label__电容 c_electrolytic_5v_330uf
+__label__芯片 vref_in
+__label__压敏电阻 rv42 1500v
+__label__芯片 u32 stm32wb55
+__label__接地 agnd
+__label__接地 34sgnd7
+__label__芯片 u36 lpc1114
+__label__芯片 status
+__label__接地 35sgnd8
+__label__芯片 comp_thresh
+__label__电机 23m23_7.0a2
+__label__电阻 360ω
+__label__电容 c_decouple_ic_1uf
+__label__电感 39mh
+__label__电容 13c8.2μf
+__label__电机 19m19_5.0a6
+__label__芯片 fault
+__label__芯片 adc_bypass
+__label__芯片 iso11898_can_h
+__label__芯片 hdmi_tx_clk
+__label__电阻 18r47.0ω
+__label__芯片 9can_l_2.5v
+__label__芯片 modbus_ascii_rx
+__label__芯片 adc_2_in0
+__label__芯片 vss_ana_gnd
+__label__芯片 kwp2000_k_line
+__label__芯片 eeprom_sda
+__label__电容 91c7.5nf6
+__label__芯片 sensor_clk
+__label__芯片 u59
+__label__芯片 iso9141_2_k_line
+__label__电容 c46 62nf
+__label__芯片 temp_sensor_power
+__label__芯片 mode2
+__label__电阻 r14 15kω
+__label__压敏电阻 rv22 27v
+__label__芯片 lin_master_wake
+__label__接地 gnd_wifi
+__label__芯片 73rs422_tx-_5.0v2
+__label__电阻 r19
+__label__电容 4n7f
+__label__电机 0.5a
+__label__电感 8l3.9mh
+__label__电阻 34r820.0ω#1
+__label__电阻 97r56.0mω4
+__label__芯片 can_high_speed
+__label__芯片 lin_master_rx
+__label__芯片 sleep_mode
+__label__芯片 msp430fr5994
+__label__芯片 adc_in0_diff
+__label__芯片 vcca_analog
+__label__电容 c9
+__label__芯片 sensor_scl
+__label__电机 motor_en_pwm
+__label__二极管 d9
+__label__芯片 eth_1_tx_p
+__label__芯片 uart_rx
+__label__压敏电阻 56v
+__label__接地 gnd30 dgnd
+__label__芯片 hdmi_hpd
+__label__电机 m35
+__label__芯片 modbus_tcp_reset
+__label__电感 78l560.0μh3
+__label__电阻 91r18.0mω8
+__label__芯片 uart_4_rx
+__label__二极管 d28
+__label__电感 1.8mh
+__label__芯片 reset_n_watchdog
+__label__电容 c_filter_gnd_100nf
+__label__接地 gnd_bt
+__label__芯片 sclk
+__label__压敏电阻 tvs_lin_15v
+__label__电容 56c15.0mf;1
+__label__芯片 i2s_24bit_err
+__label__电容 1.5μf
+__label__芯片 vss_periph_gnd
+__label__芯片 u2 stm32f407
+__label__电机 63m63_24.0v_2.4a8
+__label__电阻 r_pulldown_can_4_7k
+__label__接地 616gnd^2
+__label__芯片 hdmi2_0_err
+__label__芯片 ascii_tx_port
+__label__电感 l22
+__label__芯片 esp32-c3
+__label__电容 100nf
+__label__芯片 thermal_sense_mcu
+__label__芯片 64devicenet_can_l_2.5v3
+__label__电感 20l27.0mh5
+__label__电阻 r_vcc_div_10k
+__label__电阻 4-20ma_loop-
+__label__芯片 adc_in0/9
+__label__芯片 uart_tx_parity
+__label__压敏电阻 61tvs11_47.0v8
+__label__电机 m41
+__label__压敏电阻 rv1
+__label__芯片 debug_test_rx
+__label__芯片 hdmi2_0_tx_clk_n
+__label__芯片 jtag_tms_2
+__label__电机 motor_in2_pwm
+__label__电机 m7
+__label__芯片 1i2c_scl_3.3v
+__label__二极管 d18
+__label__芯片 bt_5_0_tx
+__label__电容 14c9.1μf
+__label__芯片 vcc_gps
+__label__电容 c_ceramic_spi_0_1uf
+__label__二极管 d60
+__label__压敏电阻 76tvs26_18.0v*6
+__label__电感 l3
+__label__接地 7gnd
+__label__压敏电阻 75tvs25_15.0v!5
+__label__芯片 u33
+__label__电容 c2 22μf
+__label__芯片 sensor_sda
+__label__芯片 11usb_dm_4.2v
+__label__芯片 u52 stm32h750
+__label__芯片 mipi_dsi_wake
+__label__芯片 comp_hysteresis
+__label__电感 l8 10μh
+__label__电感 5l2.2mh
+__label__电容 c27
+__label__二极管 d_esd_wifi
+__label__芯片 jtag_tck_open
+__label__芯片 mipi_csi_clk-
+__label__芯片 temp_sensor
+__label__电阻 r29
+__label__电感 8.2mh
+__label__芯片 27adc_in6_3.9v*6
+__label__接地 gnd22 pgnd
+__label__电容 97c18.0pf2
+__label__接地 gnd_spi
+__label__芯片 boot_mode0
+__label__电机 m2 12v 0.5a
+__label__芯片 can_l_2
+__label__电容 c58 870nf
+__label__芯片 sdio_clk
+__label__芯片 gpiob9_dac
+__label__芯片 mipi_dsi_data0-
+__label__接地 449gnd_5
+__label__芯片 vcc_wifi
+__label__电容 c8 10nf
+__label__电感 3.9mh
+__label__电机 m3/rv3
+__label__芯片 nrf9160
+__label__二极管 3d3_1.8a_400v
+__label__芯片 hdmi_rx_data0
+__label__芯片 jtag_tdi
+__label__电阻 r57
+__label__二极管 2a 900v
+__label__电机 m5
+__label__电容 c15
+__label__电阻 r_pulldown_spi_10k
+__label__芯片 u34 nrf52840
+__label__电感 l_filter_sdio_82uh
+__label__压敏电阻 tvs_4_20ma_12v
+__label__电机 motor_dir_ctrl
+__label__芯片 gpiob6_adc
+__label__芯片 comp_inp1
+__label__电阻 1.5kω
+__label__芯片 pwm_deadtime
+__label__接地 572dgnd+8
+__label__电机 m23
+__label__二极管 3a 800v
+__label__芯片 wake_out
+__label__芯片 opamp_2_inp
+__label__电机 m2-gnd2
+__label__芯片 sleep_mode_ctrl
+__label__压敏电阻 18v
+__label__电阻 r38 1m5ω
+__label__电机 29v
+__label__芯片 temp_sensor_in
+__label__芯片 33jtag_tck_3.3v+2
+__label__芯片 i2s_lrck
+__label__电阻 r_term_profibus_150r
+__label__电机 36m36_4.7a)1
+__label__电阻 r13
+__label__芯片 adc_vrefn
+__label__芯片 sd_d0
+__label__芯片 obd2_reset
+__label__芯片 41hdmi_tx_clk_5.0v)0
+__label__电容 29c120.0μf%4
+__label__芯片 vcc_1.0v
+__label__芯片 eeprom_scl
+__label__压敏电阻 rv48 62v
+__label__压敏电阻 rv58 260v
+__label__电机 m39
+__label__芯片 most_wake
+__label__芯片 canopen_reset
+__label__压敏电阻 150v
+__label__芯片 flash_do
+__label__芯片 done
+__label__芯片 lcd_sda
+__label__电阻 11r12.0ω
+__label__电机 m62
+__label__电阻 r22 18kω
+__label__压敏电阻 rv36 620v
+__label__电容 c_filter_wifi_1nf
+__label__电机 m59
+__label__芯片 lpc1768
+__label__电容 c1$10μf
+__label__电阻 r32 10ω
+__label__芯片 60profinet_rx_3.3v.9
+__label__芯片 relay_ctrl
+__label__芯片 int_1
+__label__芯片 adc_diff_inp1
+__label__芯片 gpioh0_input
+__label__电容 43c1.5mf*8
+__label__芯片 pwm_sync
+__label__电容 24c56.0μf1
+__label__电机 58m58_motor_brake_ctrl_12.0v"3
+__label__二极管 2a 1200v
+__label__芯片 u40 stm32f105
+__label__芯片 eeprom_sda
+__label__压敏电阻 rv32 280v
+__label__压敏电阻 67tvs17_100.0v3
+__label__电感 l_filter_can_82uh
+__label__电容 77c680.0nf2
+__label__电阻 41r2.7kω-8
+__label__电阻 12kω
+__label__芯片 uart_rts_2
+__label__电容 c_ceramic_most_10nf
+__label__电机 m58
+__label__电容 2c1.2μf
+__label__芯片 45sdio_clk_3.3v=4
+__label__电容 9c4.7μf
+__label__二极管 d_led_driver_red
+__label__电感 75l330.0μh0
+__label__接地 32pgnd5
+__label__芯片 kwp2000_data
+__label__电阻 r_gnd_div_180k
+__label__芯片 lin_slave_data
+__label__电感 l1_10mh-5%
+__label__电机 3v 0.1a
+__label__芯片 swd_swo
+__label__电阻 57r47.0kω=4
+__label__芯片 u51
+__label__电阻 76r1.2mω3
+__label__芯片 81most_data-_3.3v0
+__label__芯片 can_l
+__label__接地 1gnd
+__label__电感 l38
+__label__芯片 pwm_in0
+__label__电感 87mh
+__label__芯片 can_l_1
+__label__芯片 bt_5_0_err
+__label__芯片 10usb_dp_4.2v
+__label__电机 m6 24v 0.8a
+__label__芯片 adc_1_in1
+__label__电阻 52r18.0kω(9
+__label__电阻 most_term
+__label__电容 c1_10μf-10%
+__label__芯片 rtc_data
+__label__电机 40v
+__label__芯片 most_data+
+__label__芯片 stm32f413
+__label__电容 21c33.0μf4
+__label__电容 180nf
+__label__芯片 u57
+__label__芯片 rtc_clk_in
+__label__接地 gnd_i2s
+__label__电容 66c91.0mf1
+__label__电容 2μ2f
+__label__接地 gnd_ascii
+__label__芯片 standby_mode
+__label__二极管 1a 200v
+__label__电阻 r44 270ω
+__label__芯片 bt_rx
+__label__芯片 wp
+__label__芯片 gpiob7_adc
+__label__压敏电阻 tvs_device_net_12v
+__label__芯片 u12 cc2530
+__label__电机 m30 1.1a
+__label__芯片 rs422_rx+
+__label__电容 69c150.0nf4
+__label__压敏电阻 rv51
+__label__芯片 obd2_reserved_13
+__label__芯片 obd2_power
+__label__芯片 eth_tx
+__label__电容 c34 2n2f
+__label__芯片 stm32l051
+__label__电容 c_filter_can_10nf
+__label__电容 12nf
+__label__电机 28m28_9.5a&3
+__label__电容 46c2.7mf-1
+__label__芯片 jtag_tdo
+__label__接地 sgnd
+__label__芯片 spi_cs_b
+__label__接地 gnd10(agnd)
+__label__电感 91mh
+__label__芯片 gpiod5_pwm
+__label__接地 gnd8 pgnd
+__label__芯片 can_h_!5
+__label__芯片 u17
+__label__电阻 33kω
+__label__芯片 busy
+__label__二极管 d12 3a 400v
+__label__芯片 stm32f469
+__label__芯片 usb_dp_3.3v
+__label__电机 41m41_9.1a^6
+__label__芯片 rs232_rts_ind
+__label__电机 27m27_9.0a$2
+__label__芯片 ram_data1
+__label__电阻 can_high_term
+__label__电容 c_filter_4_20ma_1nf
+__label__芯片 20reset_n_3.3v1
+__label__芯片 4-20ma_wake

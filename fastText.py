@@ -48,7 +48,7 @@ def fasttext_predict(text):
     return {'text': text, 'label': label, 'confidence': round(confidence, 4)}
 
 # 测试
-test_samples = ["R1 100Ω", "C2 10μF", "L3 22mH", "U4 STM32F103", "M5 12V", "D6 1A 400V", "GND7", "RV8 220V"]
+test_samples = ["R1 100Ω", "C2 10μF", "L3 22mH", "U4 STM32F103", "M5 12V", "D6 1A 400V", "1GND7", "RV8 220V", "1.0μF", "R4 2Ω"]
 for sample in test_samples:
     res = fasttext_predict(sample)
     print(f"{res['text']:15} → {res['label']:8} (置信度：{res['confidence']})")

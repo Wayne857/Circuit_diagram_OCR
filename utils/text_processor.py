@@ -143,7 +143,7 @@ class TextProcessor:
             }
     
     def recognize_text_in_cropped_image(self, cropped_image, image_name: str, 
-                                       bbox_coords: Tuple[int, int, int, int]) -> Dict[str, Any]:
+                                       bbox_coords: Tuple[int, int, int, int], output_dir: str = None) -> Dict[str, Any]:
         """
         识别裁剪图像中的文本
         
@@ -210,8 +210,31 @@ class TextProcessor:
                 print(f"图像已放置在1000x1000画布中央: 位置 ({start_x}, {start_y})")
                 
                 # 保存预处理后的图像用于调试
-                debug_output_path = f"debug_preprocessed_{image_name}.jpg"
-                cv2.imwrite(debug_output_path, processed_image)
+                # 如果提供了输出目录，就在该目录下创建debug子目录
+                if output_dir:
+                    debug_dir = Path(output_dir) / "debug"
+                else:
+                    # 否则，尝试寻找最近的run*目录
+                    import os
+                    current_path = Path('.').resolve()
+                    # 搜索当前目录及父目录中是否有run*目录
+                    run_dirs = []
+                    for p in [current_path] + list(current_path.parents):
+                        run_dirs.extend([d for d in p.iterdir() if d.is_dir() and d.name.startswith('run')])
+                        if run_dirs:
+                            break
+                    
+                    if run_dirs:
+                        # 使用最新的run目录
+                        latest_run_dir = max(run_dirs, key=lambda x: x.stat().st_mtime)
+                        debug_dir = latest_run_dir / "debug"
+                    else:
+                        # 如果没找到run目录，创建在当前目录下
+                        debug_dir = Path.cwd() / "debug"
+                
+                debug_dir.mkdir(parents=True, exist_ok=True)
+                debug_output_path = debug_dir / f"debug_preprocessed_{image_name.replace('/', '_').replace('\\', '_')}.jpg"
+                cv2.imwrite(str(debug_output_path), processed_image)
                 print(f"预处理图像已保存至: {debug_output_path}")
             else:
                 # 即使图像尺寸 >= 200，仍然放置在2倍尺寸的空白背景中央
@@ -332,7 +355,7 @@ class TextProcessor:
 
 
     def recognize_texts_concurrent(self, cropped_images_data: List[Dict[str, Any]], 
-                                  max_workers: int = 5) -> List[Dict[str, Any]]:
+                                  max_workers: int = 5, output_dir: str = None) -> List[Dict[str, Any]]:
         """
         顺序识别多个裁剪图像中的文本（由于PaddleOCR线程安全问题，并发处理可能导致错误）
         
@@ -353,7 +376,7 @@ class TextProcessor:
         for data in cropped_images_data:
             try:
                 print(f"顺序处理第 {completed_count + 1}/{len(cropped_images_data)} 个图像")
-                result = self.recognize_text_in_cropped_image(data['image'], data['name'], data['bbox'])
+                result = self.recognize_text_in_cropped_image(data['image'], data['name'], data['bbox'], output_dir)
                 results.append(result)
                 completed_count += 1
             except Exception as e:

@@ -1,220 +1,280 @@
 text,label,label_id
-m1+rv1,电机,5
-l_filter_eth_47uh,电感,4
-adc_in7,芯片,7
-rs232_rts_ind,芯片,7
-motor_en_pwm,电机,5
-u57,芯片,7
-dgnd,接地,2
-gnd_profibus,接地,2
-eeprom_scl,芯片,7
-l29,电感,4
-d63,二极管,0
-reset_n-8,芯片,7
-vdd_periph,芯片,7
-r_pullup_spi_22k,电阻,6
-d_esd_4_20ma,二极管,0
-en_main,芯片,7
-can_high_term,电阻,6
-canopen_wake,芯片,7
-usb_suspend,芯片,7
-canopen_term,电阻,6
-kwp2000_power,芯片,7
-en_bt,芯片,7
-can_high_err,芯片,7
-c_filter_can_10nf,电容,3
-r21,电阻,6
-22μh,电感,4
-r1,电阻,6
-u59,芯片,7
-jtag_tms_2,芯片,7
-l57,电感,4
-c1,电容,3
-c_ceramic_hdmi_1nf,电容,3
-spi_mosi,芯片,7
-rv18 820v,压敏电阻,1
-r22 18kω,电阻,6
-u34 nrf52840,芯片,7
-d51,二极管,0
-qspi_io0,芯片,7
-rv19,压敏电阻,1
-uart_4_rx,芯片,7
-l10(330μh),电感,4
-vpp_program,芯片,7
-u3,芯片,7
-gnd_eth,接地,2
-2a 1100v,二极管,0
-sdio_8bit_d4,芯片,7
-sd_data2,芯片,7
-c_electrolytic_9v_330uf,电容,3
-2.2mω,电阻,6
-wifi_2_4g_rx,芯片,7
-2.7mh,电感,4
-usb_otg_dm,芯片,7
-spi_wpb,芯片,7
-470pf,电容,3
-i2c_sda,芯片,7
-sdio_8bit_d7,芯片,7
-r24 56kω,电阻,6
-gnd62 pgnd,接地,2
-sdio_4bit_wake,芯片,7
-i2c_a0_address,芯片,7
-m23,电机,5
-hdmi_cec,芯片,7
-l_power_4_20ma_47uh,电感,4
-rv4 47v,压敏电阻,1
-750nf,电容,3
-l1,电感,4
-iso15765_can_h,芯片,7
-gnd_canopen,接地,2
-swd_io,芯片,7
-swd_clk_1,芯片,7
-d29,二极管,0
-gpioa10_i2c,芯片,7
-m5/12v 1a,电机,5
-obd2_reserved_12,芯片,7
-r_load_buzzer_2k2,电阻,6
-rv48 62v,压敏电阻,1
-hdmi2_0_tx_data0_n,芯片,7
-u12 cc2530,芯片,7
-0.5a 800v,二极管,0
-3a 1300v,二极管,0
-profinet_txd+,芯片,7
-gpiob8_dac,芯片,7
-dgnd,接地,2
-canopen_can_l,芯片,7
-usb3_rx1-,芯片,7
-c_decouple_sensor_10uf,电容,3
-r_pullup_i2c_22k,电阻,6
-sd_data1,芯片,7
-c_filter_i2c_10nf,电容,3
-uart_tx_parity,芯片,7
-r27,电阻,6
-rv50 87v,压敏电阻,1
-r3,电阻,6
-vdd_led,芯片,7
-most_data,芯片,7
-m46 14v,电机,5
-c_ceramic_bt_100pf,电容,3
-vss_cam_gnd,芯片,7
-m3,电机,5
-220v/5ka,压敏电阻,1
-l35,电感,4
-d34,二极管,0
-stm32f072,芯片,7
-r43,电阻,6
-spi_cs1_b,芯片,7
-c13,电容,3
-profibus_dp_reset,芯片,7
-sdio_8bit_d5,芯片,7
-c51,电容,3
-rv6 82v,压敏电阻,1
-c_filter_most_1nf,电容,3
-adc_in2,芯片,7
-mode2,芯片,7
-rtc_data,芯片,7
-r_load_led_220r,电阻,6
-u42 stm32f373,芯片,7
-l24,电感,4
-relay_driver_ctrl,芯片,7
-rv20 1200v,压敏电阻,1
-gnd3-pgnd,接地,2
-i2c_a2_address,芯片,7
-lin_master_reset,芯片,7
-u58 msp430f5529,芯片,7
-timer_ch0,芯片,7
-d14 0.5a 600v,二极管,0
-c_filter_device_net_1nf,电容,3
-vdd_sram,芯片,7
-obd2_reserved_11,芯片,7
-obd2_signal_gnd,接地,2
-gpioh0_input,芯片,7
-gnd55,接地,2
-r_pulldown_can_22k,电阻,6
-sd_data0,芯片,7
-tvs_can_5v,压敏电阻,1
-lcd_en_ctrl,芯片,7
-l13,电感,4
-comp_1_inp,芯片,7
-obd2_reserved_13,芯片,7
-timer_trig,芯片,7
-220ω,电阻,6
-jtag_tck_test,芯片,7
-opamp_2_inp,芯片,7
-canopen_stb,芯片,7
-d32,二极管,0
-m34 1.7a,电机,5
-m20 0.8a,电机,5
-dgnd(数字地),接地,2
-jtag_tck_2,芯片,7
-c_electrolytic_5v_330uf,电容,3
-zigbee_term,电阻,6
-lcd_d6_data,芯片,7
-usb3_tx2-,芯片,7
-mipi_csi_data0-,芯片,7
-c_filter_i2s_1nf,电容,3
-150nf,电容,3
-750mh,电感,4
-l1,电感,4
-l_power_led_33uh,电感,4
-0.3a 400v,二极管,0
+18gpiog0_2.5v3,芯片,7
+649gnd(5,接地,2
+sdio_8bit_d6,芯片,7
+pwm_out1,芯片,7
+gpioa0_input,芯片,7
 gpioa0_interrupt,芯片,7
-spi_cs2_b,芯片,7
-u28 stm32f746,芯片,7
-can_stb,芯片,7
-rs485_power,芯片,7
-2a,电机,5
-rs485_a,芯片,7
-wake_up,芯片,7
-1a 700v,二极管,0
-32v,电机,5
-160v,压敏电阻,1
-eth_tx_n,芯片,7
-d_clamp_sdio_3_3v,二极管,0
-motor_driver_pwm,芯片,7
-modbus_tcp_err,芯片,7
-obd2_reset,芯片,7
-jtag_tck+jtag_tms,芯片,7
-esp32-c3,芯片,7
-qspi_cs,芯片,7
-flash_do,芯片,7
-profibus_dp_err,芯片,7
-0.3a 600v,二极管,0
-95v,压敏电阻,1
-5.6mω,电阻,6
-gnd22 pgnd,接地,2
-r1#100ω,电阻,6
-gnd14 sgnd,接地,2
-0.4a,电机,5
-msp430fr5994,芯片,7
-wifi_rx,芯片,7
-vdd_aux,芯片,7
-wifi_2_4g_term,电阻,6
-c62 1.8μf,电容,3
-en_gps,芯片,7
-gnd_ethernetip,接地,2
-wifi_2_4g_clk,芯片,7
-0.5a,电机,5
-lin_master_rx,芯片,7
-ethernetip_wake,芯片,7
-gpiob3_exti,芯片,7
-1.8mh,电感,4
-adc_in4,芯片,7
-r_load_motor_220r,电阻,6
-tvs_zigbee_6v8,压敏电阻,1
-l61,电感,4
-wake_out,芯片,7
-gpiof0_input,芯片,7
-sensor_echo,芯片,7
+i2s_lrck,芯片,7
+spi_cs1_b,芯片,7
+dgnd,接地,2
+r43,电阻,6
+55nfc_tx_5.0v'4,芯片,7
+iso15765_can_h,芯片,7
+can_h_1,芯片,7
+47v,电机,5
+vdd_sensor,芯片,7
+12c7.5μf,电容,3
+rv60 330v,压敏电阻,1
+4r4.7ω,电阻,6
+100μh,电感,4
+68l91.0μh3,电感,4
+motor_current_fb,电机,5
+56μh,电感,4
+m29,电机,5
+l62,电感,4
+rv46 43v,压敏电阻,1
+24adc_in3_2.2v&3,芯片,7
+c6/l4,电容,3
+l58,电感,4
+i2s_24bit_mclk,芯片,7
+u49,芯片,7
+ethernetip_mdio,芯片,7
+l17,电感,4
+lin_tx,芯片,7
+gnd40 pgnd,接地,2
+48l3.9h+3,电感,4
+93bt_5_0_tx_1.8v2,芯片,7
+stm32f030,芯片,7
+dgnd,接地,2
+910ω,电阻,6
+l2 22mh,电感,4
+32d32_2.0a_600v/9,二极管,0
+i2c_scl_master,芯片,7
+u8 51单片机,芯片,7
+15r27.0ω,电阻,6
+d3-2a 600v,二极管,0
+684-20ma_in_1.2v7,芯片,7
+45m45_48.0v_4.0a)0,电机,5
+l12 68μh,电感,4
+uart_cts_3,芯片,7
+c_decouple_most_22uf,电容,3
+r_current_limit_6k8,电阻,6
+96c15.0pf1,电容,3
+uart_tx_3,芯片,7
+gnd_hart,接地,2
+3n3f,电容,3
+eeprom_cs_b,芯片,7
+71r560.0kω8,电阻,6
+95c12.0pf0,电容,3
+uart_cts_1,芯片,7
+55l10.0h\0,电感,4
+oe_b,芯片,7
+2r2.4ω,电阻,6
+71tvs21_6.8v#1,压敏电阻,1
+m48 19v,电机,5
+rv16 560v,压敏电阻,1
 rv1,压敏电阻,1
-jtag_tdi,芯片,7
-ascii_tx_port,芯片,7
-m4 6v 0.3a,电机,5
-910nf,电容,3
-u1,芯片,7
-swd_io,芯片,7
-r14 15kω,电阻,6
-sgnd(信号地),接地,2
-d15,二极管,0
-canopen_power,芯片,7
-c1,电容,3
+gpioc2_exti,芯片,7
+36jtag_tdo_5.0v`5,芯片,7
+d30,二极管,0
+ram_clk,芯片,7
+gnd33,接地,2
+38m38_6.8a=3,电机,5
+rs422_term,电阻,6
+sd_cmd,芯片,7
+stm32f303,芯片,7
+rv35,压敏电阻,1
+obd2_wake,芯片,7
+iso9141_wake,芯片,7
+m46 14v,电机,5
+uart_tx_9600,芯片,7
+4.7mh,电感,4
+gnd44 pgnd,接地,2
+rv2 22v,压敏电阻,1
+u6 arduino uno,芯片,7
+can_high_clk,芯片,7
+36v 1.2a,电机,5
+l_filter_lin_22uh,电感,4
+m21,电机,5
+53c9.1mf}8,电容,3
+lin_slave_wake,芯片,7
+66l75.0μh1,电感,4
+eth_1_rx_n,芯片,7
+rv55,压敏电阻,1
+c_electrolytic_18v_470uf,电容,3
+1a 400v,二极管,0
+adc_in0+adc_in1,芯片,7
+ram_clk,芯片,7
+d10 1a 800v,二极管,0
+hart_wake,芯片,7
+21v,电机,5
+rs422_tx+,芯片,7
+55tvs5_15.0v,压敏电阻,1
+gpiod6_adc,芯片,7
+1a 700v,二极管,0
+c51,电容,3
+sdio_4bit_wake,芯片,7
+hdmi2_0_term,电阻,6
+eth_2_tx_n,芯片,7
+c47,电容,3
+d_clamp_can_3_3v,二极管,0
+100v,压敏电阻,1
+gnd_nfc,接地,2
+gpiod0_input,芯片,7
+sae_j2284_can_l,芯片,7
+m1*12v,电机,5
+i2s_24bit_lrck,芯片,7
+25c68.0μf0,电容,3
+63devicenet_can_h_2.5v2,芯片,7
+eth_clk,芯片,7
+330v/2ka,压敏电阻,1
+c_decouple_profibus_10uf,电容,3
+34d34_2.5a_600v)1,二极管,0
+4c1.8μf,电容,3
+i2c_scl+i2c_sda,芯片,7
+lin_master_power,芯片,7
+c38 8n2f,电容,3
+rs485_a,芯片,7
+29agnd2,接地,2
+l10(330μh),电感,4
+76obd2_can_h_2.5v5,芯片,7
+c60 1.2μf,电容,3
+usart_rx,芯片,7
+esp32-c3,芯片,7
+lin_master_err,芯片,7
+d49,二极管,0
+usb_id,芯片,7
+21l33.0mh4,电感,4
+2a 700v,二极管,0
+23adc_in2_1.8v$2,芯片,7
+d34,二极管,0
+0.3a 1100v,二极管,0
+usb_suspend,芯片,7
+gnd47,接地,2
+r_load_relay_220r,电阻,6
+wifi_5g_wake,芯片,7
+100kω,电阻,6
+2a 1100v,二极管,0
+26gnd87,接地,2
+r54 91kω,电阻,6
+flash_cs_b,芯片,7
+50d50_d_esd_hdmi_3.3v{7,二极管,0
+adc_in0_averaged,芯片,7
+m24 0.3a,电机,5
+91nf,电容,3
+r_current_limit_12k,电阻,6
+dgnd,接地,2
+sd_data1,芯片,7
+gnd36 sgnd,接地,2
+gpioc0_input,芯片,7
+61r91.0kω}8,电阻,6
+sdio_cmd,芯片,7
+2.2mω,电阻,6
+gnd39,接地,2
+89r12.0mω6,电阻,6
+20v 0.65a,电机,5
+22μh,电感,4
+68kω,电阻,6
+43d43_d_led_driver_red_2.0v)0,二极管,0
+eth_rst,芯片,7
+33l270.0mh-8,电感,4
+m25,电机,5
+47μf,电容,3
+r_current_limit_2k2,电阻,6
+c_decouple_can_22uf,电容,3
+47i2s_clk_2.5v]6,芯片,7
+43mipi_dsi_clk_1.8v_2,芯片,7
+lin_master_clk,芯片,7
+7m7_24.0v,电机,5
+zigbee_err,芯片,7
+atmega8,芯片,7
+43l1.5h*8,电感,4
+l60,电感,4
+nfc_tx,芯片,7
+canopen_stb,芯片,7
+26l82.0mh#1,电感,4
+gpioa0+gpioa1,芯片,7
+r3,电阻,6
+c5,电容,3
+rs485_b,芯片,7
+r_pullup_uart_10k,电阻,6
+gnd42 agnd,接地,2
+c_ceramic_bt_100pf,电容,3
+i2c_a0_address,芯片,7
+c_electrolytic_3_3v_220uf,电容,3
+c_electrolytic_18v_680uf,电容,3
+adc_calib,芯片,7
+17r39.0ω,电阻,6
+usb3_rx2+,芯片,7
+u58 msp430f5529,芯片,7
+led_ctrl,芯片,7
+70tvs20_180.0v0,压敏电阻,1
+39d39_3.9a_800v^6,二极管,0
+ram_addr1,芯片,7
+rtc_data,芯片,7
+rv5,压敏电阻,1
+gpioc9_spi,芯片,7
+4.7kω,电阻,6
+u60 pic32mx795f512l,芯片,7
+en_wifi,芯片,7
+r_load_led_1k,电阻,6
+mode1,芯片,7
+17d17_2.0a_200v6,二极管,0
+r_pullup_can_22k,电阻,6
+relay_driver,芯片,7
+c2(22μf)+l1(10mh),电容,3
+spi_miso,芯片,7
+obd2_reserved_1,芯片,7
+r28 1.2kω,电阻,6
+33c270.0μf-8,电容,3
+dvi,芯片,7
+hdmi_rx_data1,芯片,7
+r_vcc_div_15k,电阻,6
+59m59_motor_stall_det_24.0v'4,电机,5
+usb_otg_dm,芯片,7
+r_term_usb_45r,电阻,6
+can_h+can_l,芯片,7
+usb3_tx2-,芯片,7
+gnd38 agnd,接地,2
+vddq_memory,芯片,7
+l59,电感,4
+361agnd,接地,2
+obd2_chassis_gnd,接地,2
+power_en,芯片,7
+u4/d4,芯片,7
+427gnd_3,接地,2
+flash_di,芯片,7
+u56 cc1352p,芯片,7
+13v,电机,5
+adc_diff_inp0,芯片,7
+rv3-33v,压敏电阻,1
+mipi_csi_term,电阻,6
+usb_otg_vbus,芯片,7
+c24 6μ8f,电容,3
+14m14_2.5a,电机,5
+r50 30kω,电阻,6
+15m15_3.0a,电机,5
+c26 10pf,电容,3
+gnd34 dgnd,接地,2
+5v 0.2a,电机,5
+u15,芯片,7
+jtag_tck+jtag_tms,芯片,7
+75v,压敏电阻,1
+usart_tx,芯片,7
+d58,二极管,0
+c_ceramic_4_20ma_10nf,电容,3
+81r3.3mω8,电阻,6
+gpiob10_i2c,芯片,7
+36l470.0mh)1,电感,4
+lin_slave_tx,芯片,7
+d2(0.5a 200v)+gnd,二极管,0
+qspi_io2,芯片,7
+dac_1_out1,芯片,7
+50c5.6mf[5,电容,3
+75nf,电容,3
+most_err,芯片,7
+0.3a 600v,二极管,0
+power_monitor,芯片,7
+pic16f877a,芯片,7
+538gnd-4,接地,2
+gpioa2_exti,芯片,7
+u26 stm32f429,芯片,7
+r_gnd_div_120k,电阻,6
+profibus_term,电阻,6
+820μh,电感,4
+tvs_profibus_12v,压敏电阻,1
+59l22.0μh'4,电感,4
+53zigbee_tx_3.3v:2,芯片,7
+spi_1_cs,芯片,7
+current_sense_motor,芯片,7

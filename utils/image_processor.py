@@ -4,6 +4,7 @@ from typing import List, Tuple
 from ultralytics import YOLO
 from .text_processor import TextProcessor
 from .fasttext_classifier import FastTextComponentClassifier
+from .text_component_matcher import TextComponentMatcher
 import os
 from pathlib import Path
 
@@ -436,7 +437,7 @@ class ImageProcessor:
         # 如果有text类别的图像，进行并发文本识别
         if text_cropped_images_data:
             print(f"  开始识别 {len(text_cropped_images_data)} 个text类别的图像")
-            text_results = text_processor.recognize_texts_concurrent(text_cropped_images_data, max_workers=5)
+            text_results = text_processor.recognize_texts_concurrent(text_cropped_images_data, max_workers=5, output_dir=output_path)
             
             # 保存文本识别结果到txt文件
             text_result_file = output_path / "text_results.txt"
@@ -497,6 +498,68 @@ class ImageProcessor:
                     f.write("\n分割结果:\n")
                     for seg_info in segmentation_info:
                         f.write(f"类别: {seg_info['class_name']}, 检测框坐标: {seg_info['bbox_coords']}, 分割坐标: {seg_info['mask_coords'][:10]}... (置信度: {seg_info['confidence']:.2f})\n")  # 只显示前10个坐标点以避免输出过长
+                            
+                # 收集文本识别结果用于匹配
+                text_data = []
+                for result in text_results:
+                    if result['success']:
+                        extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                        # 根据文本内容推断类别
+                        text_lower = extracted_content.lower()
+                        if any(keyword in text_lower for keyword in ['r', 'ω', 'ohm', 'kΩ', 'mΩ']):
+                            text_category = "电阻"
+                        elif any(keyword in text_lower for keyword in ['c', 'μf', 'nf', 'pf', 'farad']):
+                            text_category = "电容"
+                        elif any(keyword in text_lower for keyword in ['gnd', 'ground', 'earth']):
+                            text_category = "接地"
+                        elif any(keyword in text_lower for keyword in ['u', 'ic', 'chip', 'tps', 'stm', 'arduino']):
+                            text_category = "芯片"
+                        elif 'nc' in text_lower:
+                            text_category = "芯片"  # NC (No Connection) 通常与芯片引脚相关
+                        elif 'ct' in text_lower:
+                            text_category = "电容"  # CT (Capacitor Tag) 通常与电容相关
+                        else:
+                            text_category = "芯片"  # 默认类别
+                        text_data.append({
+                            'text': extracted_content,
+                            'coord': result['bbox_coords'],
+                            'category': text_category,
+                            'conf': 0.8  # 假设文本识别置信度
+                        })
+                            
+                # 收集元件检测结果用于匹配
+                component_data = []
+                for seg_info in segmentation_info:
+                    if seg_info['bbox_coords']:
+                        component_data.append({
+                            'category': seg_info['class_name'],
+                            'bbox': seg_info['bbox_coords'],
+                            'conf': seg_info['confidence'],
+                            'segmentation': seg_info['mask_coords']
+                        })
+                            
+                # 如果有文本和元件数据，执行匹配
+                if text_data and component_data:
+                    matcher = TextComponentMatcher()
+                    matches, _, _ = matcher.optimal_text_component_matching(text_data, component_data)
+                                
+                    # 将匹配结果写入文件
+                    match_result_str = matcher.format_match_results(matches)
+                    f.write(match_result_str)
+                                
+                    # 保存可视化结果到run目录
+                    try:
+                        visualization_path = matcher.save_visualization(matches, text_data, str(output_path))
+                        print(f"  匹配可视化结果已保存到: {visualization_path}")
+                    except Exception as e:
+                        print(f"  保存可视化结果时出错: {e}")
+                        # 如果出错，尝试直接保存到output_path目录
+                        try:
+                            visualization_path = str(Path(output_path) / "matching_result.png")
+                            matcher.visualize_matching_result(matches, text_data, 800, 600, visualization_path)
+                            print(f"  匹配可视化结果已保存到: {visualization_path}")
+                        except Exception as e2:
+                            print(f"  备用保存方式也失败: {e2}")
             print(f"  文本识别结果已保存到: {text_result_file}")
         
         print(f"  检测框内的图像已保存到: {output_path}/detection_results/")
