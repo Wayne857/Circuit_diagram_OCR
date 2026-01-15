@@ -319,6 +319,10 @@ class ImageProcessor:
         # 收集分割结果
         segmentation_info = []
         
+        # 创建segmented_out目录，用于保存去掉分割内容的图像
+        segmented_out_dir = output_path / "segmented_out"
+        segmented_out_dir.mkdir(exist_ok=True)
+        
         # 保存分割的整体结果
         if segmentation_results and len(segmentation_results) > 0:
             seg_result = segmentation_results[0]
@@ -329,6 +333,9 @@ class ImageProcessor:
                 annotated_img = seg_result.plot()  # 包含分割掩码和边界框的图像
                 segmented_output_path = segmented_dir / f"{image_filename}_segmented.jpg"
                 self.save_image(annotated_img, str(segmented_output_path))
+                
+                # 创建一个副本用于移除分割内容
+                image_without_segments = processed_image.copy()
                 
                 # 处理每个检测到的分割实例
                 for i, (mask, cls, conf) in enumerate(zip(seg_result.masks.xy, seg_result.boxes.cls, seg_result.boxes.conf)):
@@ -355,6 +362,11 @@ class ImageProcessor:
                     # 获取类别名称
                     class_name = class_names_12class.get(class_id, f"class_{class_id}")
                     
+                    # 从原图中移除分割部分（将掩码区域设为白色），但跳过'line'类别
+                    if class_name != 'line':  # 不移除line类别
+                        white_mask = np.ones_like(processed_image) * 255
+                        image_without_segments = np.where(class_mask_3ch == 255, white_mask, image_without_segments)
+                    
                     # 获取检测框坐标
                     if seg_result.boxes is not None and len(seg_result.boxes) > i:
                         box = seg_result.boxes.xyxy[i]
@@ -376,10 +388,52 @@ class ImageProcessor:
                     self.save_image(class_result, str(class_output_path))
                     
                     print(f"  保存类别 {class_name} 实例 {i+1}，置信度 {confidence:.2f}")
+                
+                # 保存去掉分割内容的图像
+                segmented_out_path = segmented_out_dir / f"{image_filename}_without_segments.jpg"
+                self.save_image(image_without_segments, str(segmented_out_path))
+                print(f"  保存去掉分割内容的图像: {segmented_out_path}")
+                
+                # 使用霍夫直线检测，将检测到的直线变成红色
+                # 转换为灰度图
+                gray = cv2.cvtColor(image_without_segments, cv2.COLOR_BGR2GRAY)
+                
+                # 应用边缘检测
+                edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+                
+                # 使用霍夫变换检测直线
+                lines = cv2.HoughLines(edges, 1, np.pi/180, threshold=100)
+                
+                # 创建图像副本用于绘制直线
+                hough_lines_img = image_without_segments.copy()
+                
+                if lines is not None:
+                    for rho, theta in lines[:, 0]:
+                        a = np.cos(theta)
+                        b = np.sin(theta)
+                        x0 = a * rho
+                        y0 = b * rho
+                        x1 = int(x0 + 1000 * (-b))
+                        y1 = int(y0 + 1000 * (a))
+                        x2 = int(x0 - 1000 * (-b))
+                        y2 = int(y0 - 1000 * (a))
+                        
+                        # 绘制红色直线
+                        cv2.line(hough_lines_img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                
+                # 保存带有红色直线的图像
+                hough_output_path = segmented_out_dir / f"{image_filename}_with_hough_lines.jpg"
+                self.save_image(hough_lines_img, str(hough_output_path))
+                print(f"  保存带有霍夫直线的图像: {hough_output_path}")
             else:
                 # 如果没有掩码，只保存处理后的图像
                 segmented_output_path = segmented_dir / f"{image_filename}_segmented.jpg"
                 self.save_image(processed_image, str(segmented_output_path))
+                
+                # 保存原始处理后的图像到segmented_out目录（因为没有分割内容可以移除）
+                segmented_out_path = segmented_out_dir / f"{image_filename}_without_segments.jpg"
+                self.save_image(processed_image, str(segmented_out_path))
+                print(f"  保存图像到segmented_out目录: {segmented_out_path}")
         
         # 初始化文本处理器并识别text类别的文本
         text_processor = TextProcessor()
@@ -449,17 +503,93 @@ class ImageProcessor:
                 model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'component_fasttext.bin')
                 classifier = FastTextComponentClassifier(model_path)
                 
-                # 收集所有成功识别的文本内容，用于批量分类
+                # 初始化分类结果列表
+                classification_results = []
+                
+                # 收集所有成功识别的文本内容，用于分类
                 texts_to_classify = []
+                texts_to_process = []  # 保存需要处理的result对象
+                
                 for result in text_results:
                     if result['success']:
                         extracted_content = result.get('extracted_content', str(result.get('data', '')))
-                        texts_to_classify.append(extracted_content)
+                        # 检查是否符合正则匹配规则，如果是则直接分类
+                        import re
+                        text_lower = extracted_content.lower()
+                        
+                        # 检查特定符号进行直接分类
+                        if 'Ω' in extracted_content:  # 包含Ω符号直接判定为电阻
+                            classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                        elif 'μf' in text_lower:  # 包含μF直接判定为电容
+                            classification_results.append({'predicted_label': '电容', 'confidence': 1.0})
+                        elif 'mh' in text_lower or 'μh' in text_lower:  # 包含mH或μH直接判定为电感
+                            classification_results.append({'predicted_label': '电感', 'confidence': 1.0})
+                        elif re.match(r'^\d+k$', text_lower):  # 以k结尾且前面都是数字的判定为电阻
+                            classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                        else:
+                            # 不符合正则匹配规则的文本才进行FastText分类
+                            texts_to_classify.append(extracted_content)
+                            texts_to_process.append(result)  # 保存对应的result对象
                 
-                # 批量进行分类预测
-                classification_results = []
+                # 批量进行FastText分类预测（仅对不符合正则规则的文本）
                 if texts_to_classify:
-                    classification_results = classifier.predict_batch(texts_to_classify)
+                    fasttext_classification_results = classifier.predict_batch(texts_to_classify)
+                    
+                    # 将FastText分类结果插入到对应位置
+                    regular_idx = 0  # 指向下一个正则匹配结果
+                    fasttext_idx = 0  # 指向下一个FastText结果
+                    
+                    # 重建完整的classification_results列表，按原始顺序
+                    full_classification_results = []
+                    for result in text_results:
+                        if result['success']:
+                            extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                            text_lower = extracted_content.lower()
+                            
+                            # 检查是否是正则匹配的文本
+                            if ('Ω' in extracted_content or 'μf' in text_lower or 
+                                'mh' in text_lower or 'μh' in text_lower or 
+                                re.match(r'^\d+k$', text_lower)):
+                                # 正则匹配的文本，使用预先设定的结果
+                                # 由于我们已经将这些结果放在了classification_results中，需要按顺序取出
+                                # 但更好的方式是重新生成
+                                if 'Ω' in extracted_content:
+                                    full_classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                                elif 'μf' in text_lower:
+                                    full_classification_results.append({'predicted_label': '电容', 'confidence': 1.0})
+                                elif 'mh' in text_lower or 'μh' in text_lower:
+                                    full_classification_results.append({'predicted_label': '电感', 'confidence': 1.0})
+                                elif re.match(r'^\d+k$', text_lower):
+                                    full_classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                            else:
+                                # FastText分类的文本
+                                if fasttext_idx < len(fasttext_classification_results):
+                                    full_classification_results.append(fasttext_classification_results[fasttext_idx])
+                                    fasttext_idx += 1
+                                else:
+                                    full_classification_results.append(None)
+                    
+                    classification_results = full_classification_results
+                else:
+                    # 如果所有文本都通过正则匹配分类了，我们需要确保classification_results是完整且有序的
+                    full_classification_results = []
+                    for result in text_results:
+                        if result['success']:
+                            extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                            text_lower = extracted_content.lower()
+                            
+                            if 'Ω' in extracted_content:
+                                full_classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                            elif 'μf' in text_lower:
+                                full_classification_results.append({'predicted_label': '电容', 'confidence': 1.0})
+                            elif 'mh' in text_lower or 'μh' in text_lower:
+                                full_classification_results.append({'predicted_label': '电感', 'confidence': 1.0})
+                            elif re.match(r'^\d+k$', text_lower):
+                                full_classification_results.append({'predicted_label': '电阻', 'confidence': 1.0})
+                            else:
+                                full_classification_results.append(None)
+                    
+                    classification_results = full_classification_results
             except Exception as e:
                 print(f"  FastText分类器初始化或预测失败: {e}")
                 classification_results = [None] * len([r for r in text_results if r['success']])
@@ -505,8 +635,19 @@ class ImageProcessor:
                     if result['success']:
                         extracted_content = result.get('extracted_content', str(result.get('data', '')))
                         # 根据文本内容推断类别
+                        import re
                         text_lower = extracted_content.lower()
-                        if any(keyword in text_lower for keyword in ['r', 'ω', 'ohm', 'kΩ', 'mΩ']):
+                        
+                        # 检查特定符号进行直接分类
+                        if 'Ω' in extracted_content:  # 包含Ω符号直接判定为电阻
+                            text_category = "电阻"
+                        elif 'μf' in text_lower:  # 包含μF直接判定为电容
+                            text_category = "电容"
+                        elif 'mh' in text_lower or 'μh' in text_lower:  # 包含mH或μH直接判定为电感
+                            text_category = "电感"
+                        elif re.match(r'^\d+k$', text_lower):  # 以k结尾且前面都是数字的判定为电阻
+                            text_category = "电阻"
+                        elif any(keyword in text_lower for keyword in ['r', 'ω', 'ohm', 'kΩ', 'mΩ']):
                             text_category = "电阻"
                         elif any(keyword in text_lower for keyword in ['c', 'μf', 'nf', 'pf', 'farad']):
                             text_category = "电容"

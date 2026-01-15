@@ -336,16 +336,40 @@ class TextComponentMatcher:
         print(f"✅ 可视化结果已保存到： {save_path}")
 
     def hungarian_matching_for_normal_comps(self, texts: List[Dict], comps: List[Dict]) -> List[Tuple[int, int]]:
-        """普通元件匹配：无硬阈值，得分主导，兼顾覆盖率"""
+        """普通元件匹配：扩展版本，支持一个元件对应多个文本"""
         t_count = len(texts)
         c_count = len(comps)
         if t_count == 0 or c_count == 0:
             return []
         
+        # 如果文本数量大于元件数量，我们可以复制元件来实现一对多匹配
+        expanded_comps = []
+        expanded_mapping = []  # 记录扩展元件与原元件的映射关系
+        
+        if t_count > c_count and c_count > 0:
+            # 计算每个元件最多可以匹配多少个文本
+            texts_per_comp = max(1, t_count // c_count)  # 每个元件至少匹配1个文本
+            remainder = t_count % c_count  # 余数
+            
+            for i, comp in enumerate(comps):
+                # 每个原始元件创建多个副本，以容纳更多文本
+                copies = texts_per_comp
+                if i < remainder:  # 将余数分配给前面的元件
+                    copies += 1
+                for j in range(copies):
+                    expanded_comps.append(comp)
+                    expanded_mapping.append(i)  # 记录这个副本对应原始元件的索引
+        else:
+            # 如果文本数量小于等于元件数量，无需扩展
+            expanded_comps = comps
+            for i in range(len(comps)):
+                expanded_mapping.append(i)
+        
         # 构建得分矩阵（添加距离硬约束）
-        score_matrix = np.zeros((t_count, c_count))
+        # 行为文本，列为扩展后的元件
+        score_matrix = np.zeros((t_count, len(expanded_comps)))
         for t_idx, t in enumerate(texts):
-            for c_idx, c in enumerate(comps):
+            for c_idx, c in enumerate(expanded_comps):
                 # 先检查距离约束
                 text_center = self.get_center(t["coord"])
                 comp_center = self.get_center(c["bbox"])
@@ -371,9 +395,11 @@ class TextComponentMatcher:
         try:
             row_ind, col_ind = linear_sum_assignment(cost_matrix)
             valid_matches = []
-            for t_idx, c_idx in zip(row_ind, col_ind):
-                if score_matrix[t_idx, c_idx] > MATCH_SCORE_THRESH:
-                    valid_matches.append((t_idx, c_idx))
+            for t_idx, exp_c_idx in zip(row_ind, col_ind):
+                if score_matrix[t_idx, exp_c_idx] > MATCH_SCORE_THRESH:
+                    # 将扩展元件索引转换回原始元件索引
+                    orig_c_idx = expanded_mapping[exp_c_idx]
+                    valid_matches.append((t_idx, orig_c_idx))
             return valid_matches
         except ValueError:
             return []
