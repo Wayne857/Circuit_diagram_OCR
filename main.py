@@ -19,6 +19,7 @@ from ultralytics import YOLO
 from utils.image_processor import ImageProcessor
 from utils.text_processor import TextProcessor
 from utils.config import Config
+from utils.line_connection_detector import LineConnectionDetector  # 导入新的线连接检测器
 
 def get_device():
     """自动检测可用设备"""

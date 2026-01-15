@@ -702,6 +702,39 @@ class ImageProcessor:
                         except Exception as e2:
                             print(f"  备用保存方式也失败: {e2}")
             print(f"  文本识别结果已保存到: {text_result_file}")
+            
+            # 线连接检测：对去掉分割内容的图像进行线连接分析
+            try:
+                from .line_connection_detector import LineConnectionDetector
+                detector = LineConnectionDetector()
+                
+                # 创建connect_process目录
+                connect_process_dir = output_path / "connect_process"
+                
+                # 获取去掉分割内容的图像路径
+                without_segments_path = segmented_out_dir / f"{image_filename}_without_segments.jpg"
+                
+                if without_segments_path.exists():
+                    # 执行线连接检测
+                    result = detector.detect_line_connections(
+                        str(without_segments_path), 
+                        str(connect_process_dir), 
+                        image_filename
+                    )
+                    
+                    if result:
+                        print(f"  线连接检测完成，结果已保存到: {connect_process_dir}")
+                        print(f"  检测到 {len(result['segments'])} 条导线段")
+                        print(f"  检测到 {len(result['feature_points'])} 个特征点")
+                    else:
+                        print("  线连接检测失败")
+                else:
+                    print(f"  警告: 未找到去掉分割内容的图像: {without_segments_path}")
+                    
+            except ImportError:
+                print("  警告: 无法导入LineConnectionDetector，跳过线连接检测")
+            except Exception as e:
+                print(f"  线连接检测出错: {e}")
         
         print(f"  检测框内的图像已保存到: {output_path}/detection_results/")
         print(f"  分割结果已保存到: {output_path}")
