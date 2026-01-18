@@ -1,0 +1,39 @@
+[project]
+name = "image-pcb-extract"
+version = "0.1.0"
+description = "PCB图像文本与元件提取及匹配项目"
+authors = [{name = "Wayen", email = "wayen@example.com"}]
+requires-python = ">=3.8"
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "torchaudio>=2.0.0",
+    "ultralytics>=8.0.0",
+    "opencv-python>=4.8.0",
+    "opencv-contrib-python>=4.8.0",
+    "numpy>=1.21.0",
+    "matplotlib>=3.5.0",
+    "networkx>=2.8.0",
+    "fasttext>=0.9.2",
+    "paddlepaddle-gpu>=2.4.0",
+    "paddleocr>=3.0.0",
+    "scikit-learn>=1.1.0",
+    "pandas>=1.4.0",
+    "Pillow>=9.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+]
