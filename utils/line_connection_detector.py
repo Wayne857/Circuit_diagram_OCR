@@ -4,6 +4,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from math import sqrt
 from pathlib import Path
+import json
 
 
 class LineConnectionDetector:
@@ -278,7 +279,177 @@ class LineConnectionDetector:
         
         return skeleton_output_path, result_output_path
 
-    def detect_line_connections(self, image_path, output_dir, image_filename):
+    def find_connected_components_or_texts(self, segments, components, texts, radius_threshold=30):
+        """
+        查找线段两端连接的元件或文本
+        """
+        connections = []
+        for idx, (start_point, end_point, path) in enumerate(segments):
+            connection_info = {
+                'segment_id': idx + 1,  # 线段编号（从1开始，与可视化中的编号一致）
+                'segment': (start_point, end_point, path),
+                'start_connected': self._find_nearest_object(start_point, components, texts, radius_threshold),
+                'end_connected': self._find_nearest_object(end_point, components, texts, radius_threshold)
+            }
+            connections.append(connection_info)
+        return connections
+
+    def _find_nearest_object(self, point, components, texts, radius_threshold):
+        """
+        在指定半径内查找最近的元件或文本
+        """
+        px, py = point
+        nearest_obj = None
+        min_dist = float('inf')
+        
+        # 检查元件
+        for comp in components:
+            cx1, cy1, cx2, cy2 = comp['bbox']
+            comp_center_x = (cx1 + cx2) / 2
+            comp_center_y = (cy1 + cy2) / 2
+            dist = self.distance((px, py), (comp_center_x, comp_center_y))
+            if dist < min_dist and dist <= radius_threshold:
+                min_dist = dist
+                nearest_obj = {
+                    'type': 'component',
+                    'data': comp,
+                    'distance': dist
+                }
+        
+        # 检查文本
+        for text in texts:
+            tx1, ty1, tx2, ty2 = text['coord']
+            text_center_x = (tx1 + tx2) / 2
+            text_center_y = (ty1 + ty2) / 2
+            dist = self.distance((px, py), (text_center_x, text_center_y))
+            if dist < min_dist and dist <= radius_threshold:
+                min_dist = dist
+                nearest_obj = {
+                    'type': 'text',
+                    'data': text,
+                    'distance': dist
+                }
+        
+        return nearest_obj
+
+    def generate_detailed_visualizations(self, connections, original_image, output_dir, image_filename):
+        """
+        为每条线段生成详细的连接关系可视化图像
+        """
+        # 创建details目录
+        details_dir = Path(output_dir) / "details"
+        details_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 为每条连接生成详细图像
+        for connection in connections:
+            segment_id = connection['segment_id']
+            start_point, end_point, path = connection['segment']
+            start_connected = connection['start_connected']
+            end_connected = connection['end_connected']
+            
+            # 复制原始图像用于绘制
+            result_img = original_image.copy()
+            
+            # 绘制线段（使用绿色，线宽为2以突出显示）
+            for i in range(len(path) - 1):
+                cv2.line(result_img, path[i], path[i+1], (0, 255, 0), 2)
+            
+            # 绘制线段编号
+            mid_idx = len(path) // 2
+            if 0 <= mid_idx < len(path):
+                mid_point = path[mid_idx]
+                cv2.putText(result_img, str(segment_id), mid_point, 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)  # 黄色编号
+            
+            # 高亮起点连接的对象
+            if start_connected:
+                if start_connected['type'] == 'component':
+                    comp_data = start_connected['data']
+                    x1, y1, x2, y2 = comp_data['bbox']
+                    # 用蓝色矩形框高亮元件
+                    cv2.rectangle(result_img, (x1, y1), (x2, y2), (255, 0, 0), 2)  # 蓝色框
+                    # 标注元件类别
+                    cv2.putText(result_img, f"{comp_data['category']}", 
+                               (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 1)
+                elif start_connected['type'] == 'text':
+                    text_data = start_connected['data']
+                    x1, y1, x2, y2 = text_data['coord']
+                    # 用红色矩形框高亮文本
+                    cv2.rectangle(result_img, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 红色框
+                    # 标注文本内容
+                    cv2.putText(result_img, f"文本:{text_data['text']}", 
+                               (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
+            
+            # 高亮终点连接的对象
+            if end_connected:
+                if end_connected['type'] == 'component':
+                    comp_data = end_connected['data']
+                    x1, y1, x2, y2 = comp_data['bbox']
+                    # 用蓝色矩形框高亮元件
+                    cv2.rectangle(result_img, (x1, y1), (x2, y2), (255, 0, 0), 2)  # 蓝色框
+                    # 标注元件类别
+                    cv2.putText(result_img, f"{comp_data['category']}", 
+                               (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 1)
+                elif end_connected['type'] == 'text':
+                    text_data = end_connected['data']
+                    x1, y1, x2, y2 = text_data['coord']
+                    # 用红色矩形框高亮文本
+                    cv2.rectangle(result_img, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 红色框
+                    # 标注文本内容
+                    cv2.putText(result_img, f"文本:{text_data['text']}", 
+                               (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
+            
+            # 保存详细图像
+            detail_path = details_dir / f"connection_{segment_id}.jpg"
+            cv2.imwrite(str(detail_path), result_img)
+            
+            print(f"  保存连接 {segment_id} 的详细图像: {detail_path}")
+    
+    def generate_connection_markdown(self, connections, output_dir, image_filename):
+        """
+        生成连接关系的文本文件
+        """
+        markdown_path = Path(output_dir) / "details" / "connection_summary.md"
+        
+        with open(markdown_path, 'w', encoding='utf-8') as f:
+            f.write(f"# 线段连接关系摘要\n\n")
+            f.write(f"## 图像: {image_filename}\n\n")
+            f.write(f"总共检测到 {len(connections)} 个连接关系\n\n")
+            
+            for connection in connections:
+                segment_id = connection['segment_id']
+                start_connected = connection['start_connected']
+                end_connected = connection['end_connected']
+                
+                f.write(f"### 连接 {segment_id}\n")
+                
+                # 描述起点连接的对象
+                start_desc = "无连接"
+                if start_connected:
+                    if start_connected['type'] == 'component':
+                        comp_data = start_connected['data']
+                        start_desc = f"元件: {comp_data['category']}, 坐标: {comp_data['bbox']}"
+                    elif start_connected['type'] == 'text':
+                        text_data = start_connected['data']
+                        start_desc = f"文本: '{text_data['text']}', 坐标: {text_data['coord']}"
+                
+                # 描述终点连接的对象
+                end_desc = "无连接"
+                if end_connected:
+                    if end_connected['type'] == 'component':
+                        comp_data = end_connected['data']
+                        end_desc = f"元件: {comp_data['category']}, 坐标: {comp_data['bbox']}"
+                    elif end_connected['type'] == 'text':
+                        text_data = end_connected['data']
+                        end_desc = f"文本: '{text_data['text']}', 坐标: {text_data['coord']}"
+                
+                f.write(f"- 起点连接: {start_desc}\n")
+                f.write(f"- 终点连接: {end_desc}\n")
+                f.write("\n")
+        
+        print(f"  保存连接关系摘要: {markdown_path}")
+    
+    def detect_line_connections(self, image_path, output_dir, image_filename, components=None, texts=None, original_image=None):
         """检测线连接关系的主函数"""
         try:
             # 1. 预处理（含闭运算补断裂）
@@ -296,15 +467,29 @@ class LineConnectionDetector:
             connection_graph = self.build_connection_graph(segments)
             print(f"连接图节点数：{connection_graph.number_of_nodes()}，边数：{connection_graph.number_of_edges()}")
             
-            # 5. 保存可视化结果
+            # 5. 分析线段连接关系（如果提供了元件和文本信息）
+            connections = []
+            if components is not None and texts is not None:
+                connections = self.find_connected_components_or_texts(segments, components, texts)
+            
+            # 6. 保存可视化结果
             skeleton_path, result_path = self.visualize_results(
                 img, skeleton, feature_points, segments, output_dir, image_filename
             )
+            
+            # 7. 生成详细连接关系可视化
+            # 如果提供了原始图像，则使用原始图像进行详细可视化；否则使用骨架图像
+            visualization_image = original_image if original_image is not None else img
+            if connections and visualization_image is not None:
+                self.generate_detailed_visualizations(connections, visualization_image, output_dir, image_filename)
+                # 生成连接关系的markdown摘要
+                self.generate_connection_markdown(connections, output_dir, image_filename)
             
             return {
                 'feature_points': feature_points,
                 'segments': segments,
                 'connection_graph': connection_graph,
+                'connections': connections,  # 新增连接信息
                 'skeleton_path': skeleton_path,
                 'result_path': result_path
             }

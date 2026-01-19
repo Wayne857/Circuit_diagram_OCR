@@ -715,17 +715,48 @@ class ImageProcessor:
                 without_segments_path = segmented_out_dir / f"{image_filename}_without_segments.jpg"
                 
                 if without_segments_path.exists():
+                    # 准备元件和文本数据用于线连接分析
+                    components = []
+                    texts = []
+                    
+                    # 从分割结果中提取元件数据
+                    for seg_info in segmentation_info:
+                        if seg_info['bbox_coords']:
+                            components.append({
+                                'category': seg_info['class_name'],
+                                'bbox': seg_info['bbox_coords'],
+                                'conf': seg_info['confidence'],
+                                'segmentation': seg_info['mask_coords']
+                            })
+                    
+                    # 从文本结果中提取文本数据
+                    for result in text_results:
+                        if result['success']:
+                            extracted_content = result.get('extracted_content', str(result.get('data', '')))
+                            texts.append({
+                                'text': extracted_content,
+                                'coord': result['bbox_coords'],
+                                'conf': 0.8  # 假设文本识别置信度
+                            })
+                    
+                    # 读取原始图像用于可视化（彩色图像，保留元件和文本的颜色信息）
+                    original_without_segments = cv2.imread(str(without_segments_path))
+                    
                     # 执行线连接检测
                     result = detector.detect_line_connections(
                         str(without_segments_path), 
                         str(connect_process_dir), 
-                        image_filename
+                        image_filename,
+                        components=components,
+                        texts=texts,
+                        original_image=original_without_segments  # 传递原始图像用于可视化
                     )
                     
                     if result:
                         print(f"  线连接检测完成，结果已保存到: {connect_process_dir}")
                         print(f"  检测到 {len(result['segments'])} 条导线段")
                         print(f"  检测到 {len(result['feature_points'])} 个特征点")
+                        print(f"  分析了 {len(result['connections'])} 个连接关系")
                     else:
                         print("  线连接检测失败")
                 else:
