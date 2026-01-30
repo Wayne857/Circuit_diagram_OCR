@@ -468,41 +468,14 @@ class ImageProcessor:
                             # 真正被黑色线段完全包围的封闭区域 = 所有白色区域 - 与边缘相连的背景区域
                             enclosed_areas = cv2.bitwise_and(all_white_areas, cv2.bitwise_not(edge_connected_bg))
                             
-                            # 4. 【验证封闭区域】检查是否主要由横平竖直线段组成
+                            # 4. 【验证封闭区域】移除面积和形状比例限制，接受所有检测到的封闭区域
                             contours, _ = cv2.findContours(enclosed_areas, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
                             
                             valid_enclosed_regions = np.zeros_like(enclosed_areas)
                             
                             for contour in contours:
-                                area = cv2.contourArea(contour)
-                                if area < 100:  # 过滤小噪声
-                                    continue
-                                    
-                                # 检查轮廓的形状特征
-                                if len(contour) >= 4:
-                                    # 计算轮廓的方向分布
-                                    horizontal_count = 0
-                                    vertical_count = 0
-                                    total_count = 0
-                                    
-                                    points = contour.reshape(-1, 2)
-                                    for i in range(len(points)):
-                                        p1 = points[i]
-                                        p2 = points[(i + 1) % len(points)]
-                                        
-                                        dx = abs(p2[0] - p1[0])
-                                        dy = abs(p2[1] - p1[1])
-                                        
-                                        if dx > dy and dx > 2:  # 水平线段
-                                            horizontal_count += 1
-                                        elif dy > dx and dy > 2:  # 垂直线段
-                                            vertical_count += 1
-                                        total_count += 1
-                                    
-                                    # 如果主要是横平竖直线段组成的区域
-                                    hor_ver_ratio = (horizontal_count + vertical_count) / max(total_count, 1)
-                                    if hor_ver_ratio > 0.7:  # 70%以上是横平竖直线段
-                                        cv2.fillPoly(valid_enclosed_regions, [contour], 255)
+                                # 接受所有检测到的封闭区域，不限制面积和形状比例
+                                cv2.fillPoly(valid_enclosed_regions, [contour], 255)
                             
                             # 5. 【外扩处理】
                             # 计算外扩半径：线段宽度 + 1
@@ -547,7 +520,7 @@ class ImageProcessor:
                             # 验证后的有效封闭区域
                             plt.subplot(2, 4, 4)
                             plt.imshow(valid_enclosed_regions, cmap='hot')
-                            plt.title(f'Valid Rectangular Areas\n(Area > 100px, Hor/Ver > 70%)')
+                            plt.title(f'Valid Enclosed Areas\n(All detected areas accepted)')
                             plt.axis('off')
                             
                             # 扩展后的掩码
