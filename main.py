@@ -533,7 +533,7 @@ def main():
             )
         else:
             # 仅检测模式（保持原有功能）
-            process_single_image(detection_model, image_processor, image_path, detection_classes_to_remove, 'whiten', output_dir)
+            process_single_image(detection_model, image_processor, image_path, detection_classes_to_remove, 'background_color', output_dir)
     
     # 处理文件夹中的图像
     elif args.folder:
@@ -547,7 +547,7 @@ def main():
             process_folder_images_with_segmentation(detection_model, segmentation_model, image_processor, input_folder, detection_classes_to_remove, segmentation_conf, output_dir)
         else:
             # 仅检测模式（保持原有功能）
-            process_folder_images(detection_model, image_processor, input_folder, detection_classes_to_remove, 'whiten', output_dir)
+            process_folder_images(detection_model, image_processor, input_folder, detection_classes_to_remove, 'background_color', output_dir)
 
 if __name__ == "__main__":
     main()

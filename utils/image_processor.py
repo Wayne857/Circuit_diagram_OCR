@@ -66,22 +66,35 @@ class ImageProcessor:
             
         return mask
     
-    def whiten_areas(self, image: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    def colorize_areas(self, image: np.ndarray, mask: np.ndarray, color_type: str = "white") -> np.ndarray:
         """
-        将掩码区域变为纯白色
+        将掩码区域变为指定颜色（白色或背景色）
         
         Args:
             image (np.ndarray): 原始图像
             mask (np.ndarray): 掩码图像
+            color_type (str): 颜色类型，"white" 或 "background"
             
         Returns:
             np.ndarray: 处理后的图像
         """
-        # 创建白色图像
-        white_image = np.ones_like(image) * 255
+        if color_type == "white":
+            # 创建白色图像
+            colored_image = np.ones_like(image) * 255
+        elif color_type == "background":
+            # 使用背景色
+            from .background_detector import get_background_color_advanced
+            bg_color = get_background_color_advanced(image)
+            if len(image.shape) == 3:
+                colored_image = np.full_like(image, bg_color)
+            else:
+                colored_image = np.full_like(image, bg_color, dtype=image.dtype)
+        else:
+            # 默认使用白色
+            colored_image = np.ones_like(image) * 255
         
-        # 使用掩码合并原图和白色图像
-        result = np.where(mask[..., None] == 255, white_image, image)
+        # 使用掩码合并原图和着色图像
+        result = np.where(mask[..., None] == 255, colored_image, image)
         
         return result
     
@@ -108,14 +121,14 @@ class ImageProcessor:
     def process_detection_results(self, image_path: str, detection_results, selected_classes: List[int], 
                                output_path: str, process_type: str = "whiten") -> None:
         """
-        处理检测结果，将选定类别的检测框区域变为纯白色
+        处理检测结果，将选定类别的检测框区域变为纯白色或背景色
         
         Args:
             image_path (str): 原始图像路径
             detection_results: YOLO检测结果对象
             selected_classes (List[int]): 选中的类别ID列表
             output_path (str): 输出图像路径
-            process_type (str): 处理类型，"whiten" 或 "blur"
+            process_type (str): 处理类型，"whiten", "background_color", 或 "blur"
         """
         # 加载原始图像
         image = self.load_image(image_path)
@@ -146,11 +159,13 @@ class ImageProcessor:
         
         # 根据处理类型选择处理方法
         if process_type == "whiten":
-            result_image = self.whiten_areas(image, mask)
+            result_image = self.colorize_areas(image, mask, "white")
+        elif process_type == "background_color":
+            result_image = self.colorize_areas(image, mask, "background")
         elif process_type == "blur":
             result_image = self.blur_areas(image, mask)
         else:
-            result_image = self.whiten_areas(image, mask)  # 默认使用白化
+            result_image = self.colorize_areas(image, mask, "white")  # 默认使用白化
         
         # 保存结果图像
         self.save_image(result_image, output_path)
@@ -306,8 +321,17 @@ class ImageProcessor:
         
         # 创建处理后的图像（移除指定类别）
         processed_image = original_image.copy()
-        # 将需要移除的区域设为白色
-        processed_image[mask_to_remove == 255] = [255, 255, 255]
+        
+        # 计算背景色
+        from .background_detector import get_background_color_advanced
+        bg_color = get_background_color_advanced(original_image)
+        
+        # 将需要移除的区域设为背景色（而不是白色）
+        if len(processed_image.shape) == 3:
+            bg_mask = np.full_like(processed_image, bg_color)
+        else:
+            bg_mask = np.full_like(processed_image, bg_color, dtype=processed_image.dtype)
+        processed_image[mask_to_remove == 255] = bg_mask[mask_to_remove == 255]
         
         # 保存处理后的图像
         processed_output_path = processed_dir / f"{image_filename}_after_detection.jpg"
@@ -362,10 +386,16 @@ class ImageProcessor:
                     # 获取类别名称
                     class_name = class_names_12class.get(class_id, f"class_{class_id}")
                     
-                    # 从原图中移除分割部分（将掩码区域设为白色），但跳过'line'类别
-                    if class_name != 'line':  # 不移除line类别
-                        white_mask = np.ones_like(processed_image) * 255
-                        image_without_segments = np.where(class_mask_3ch == 255, white_mask, image_without_segments)
+                    # 从原图中移除分割部分（将掩码区域设为背景色），但跳过'line'类别和'chip'类别
+                    if class_name != 'line' and class_name != 'chip':  # 不移除line类别和chip类别
+                        # 导入背景色检测工具
+                        from .background_detector import get_background_color_advanced
+                        bg_color = get_background_color_advanced(processed_image)
+                        if len(processed_image.shape) == 3:
+                            bg_mask = np.full_like(processed_image, bg_color)
+                        else:
+                            bg_mask = np.full_like(processed_image, bg_color, dtype=processed_image.dtype)
+                        image_without_segments = np.where(class_mask_3ch == 255, bg_mask, image_without_segments)
                     
                     # 获取检测框坐标
                     if seg_result.boxes is not None and len(seg_result.boxes) > i:
