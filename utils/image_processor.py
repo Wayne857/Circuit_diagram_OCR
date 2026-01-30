@@ -387,15 +387,245 @@ class ImageProcessor:
                     class_name = class_names_12class.get(class_id, f"class_{class_id}")
                     
                     # 根据类别设置不同的颜色
-                    # line类别保持不变，chip类别设置为红色，其他类别设置为背景色
+                    # line类别保持不变，chip类别进行特殊处理（检测封闭区域并变背景色），其他类别设置为背景色
                     if class_name == 'chip':
-                        # chip类别设置为红色
-                        red_color = [0, 0, 255]  # BGR格式的红色
-                        if len(processed_image.shape) == 3:
-                            color_mask = np.full_like(processed_image, red_color)
-                        else:
-                            color_mask = np.full_like(processed_image, red_color[2], dtype=processed_image.dtype)  # 灰度图取蓝色通道值
-                        image_without_segments = np.where(class_mask_3ch == 255, color_mask, image_without_segments)
+                        # 对chip类别进行特殊处理：使用proc_aa.py中的逻辑检测chip矩形框内的封闭区域并变背景色
+                        # 首先获取chip区域的边界框
+                        chip_coords = np.where(class_mask == 255)
+                        if len(chip_coords[0]) > 0 and len(chip_coords[1]) > 0:
+                            y_min, y_max = np.min(chip_coords[0]), np.max(chip_coords[0])
+                            x_min, x_max = np.min(chip_coords[1]), np.max(chip_coords[1])
+                            
+                            # 提取chip矩形框内的图像
+                            chip_bbox_image = processed_image[y_min:y_max+1, x_min:x_max+1]
+                            
+                            # 将图像转换为灰度图以便检测黑色内容
+                            if len(chip_bbox_image.shape) == 3:
+                                gray_img = cv2.cvtColor(chip_bbox_image, cv2.COLOR_BGR2GRAY)
+                            else:
+                                gray_img = chip_bbox_image
+                            
+                            # 1. 提取chip矩形框内的黑色线段
+                            _, chip_black_mask = cv2.threshold(gray_img, 50, 255, cv2.THRESH_BINARY_INV)
+                            
+                            # 2. 【统计线段宽度】通过形态学操作估计
+                            # 腐蚀操作，直到大部分线段消失，记录腐蚀次数
+                            eroded = chip_black_mask.copy()
+                            erosion_count = 0
+                            while np.any(eroded > 0):
+                                eroded = cv2.erode(eroded, np.ones((3,3), np.uint8), iterations=1)
+                                erosion_count += 1
+                                if erosion_count > 20:  # 防止无限循环
+                                    break
+                            
+                            # 线段宽度约为腐蚀次数的2倍（因为从两边腐蚀）
+                            estimated_line_width = max(1, erosion_count * 2 - 2)
+                            
+                            # 3. 【检测封闭区域】使用更严格的逻辑 - 只检测完全由黑色线段围成的封闭白色区域
+                            # 从图像四个边缘开始洪水填充，标记所有与边缘相连的区域
+                            h, w = chip_black_mask.shape
+                            
+                            # 创建反向掩膜（白色区域变黑，黑色区域变白）
+                            inverted_mask = cv2.bitwise_not(chip_black_mask)
+                            
+                            # 创建一个稍大的掩码用于洪水填充
+                            flood_mask = np.zeros((h + 2, w + 2), np.uint8)
+                            
+                            # 从图像的四条边缘开始洪水填充，而不仅仅是四个角落
+                            # 遍历顶部和底部边缘
+                            for x in range(w):
+                                if inverted_mask[0, x] == 255:  # 顶部边缘
+                                    if flood_mask[1, x+1] == 0:  # 检查是否已被填充
+                                        temp_mask = inverted_mask.copy()
+                                        cv2.floodFill(temp_mask, flood_mask, (x, 0), 128,
+                                                     loDiff=0, upDiff=0, flags=4 | (255 << 8))
+                                if inverted_mask[h-1, x] == 255:  # 底部边缘
+                                    if flood_mask[h, x+1] == 0:  # 检查是否已被填充
+                                        temp_mask = inverted_mask.copy()
+                                        cv2.floodFill(temp_mask, flood_mask, (x, h-1), 128,
+                                                     loDiff=0, upDiff=0, flags=4 | (255 << 8))
+                            
+                            # 遍历左侧和右侧边缘
+                            for y in range(h):
+                                if inverted_mask[y, 0] == 255:  # 左侧边缘
+                                    if flood_mask[y+1, 1] == 0:  # 检查是否已被填充
+                                        temp_mask = inverted_mask.copy()
+                                        cv2.floodFill(temp_mask, flood_mask, (0, y), 128,
+                                                     loDiff=0, upDiff=0, flags=4 | (255 << 8))
+                                if inverted_mask[y, w-1] == 255:  # 右侧边缘
+                                    if flood_mask[y+1, w] == 0:  # 检查是否已被填充
+                                        temp_mask = inverted_mask.copy()
+                                        cv2.floodFill(temp_mask, flood_mask, (w-1, y), 128,
+                                                     loDiff=0, upDiff=0, flags=4 | (255 << 8))
+                            
+                            # 获取与图像边缘相连的背景区域
+                            edge_connected_bg = flood_mask[1:-1, 1:-1].copy()
+                            edge_connected_bg = (edge_connected_bg > 0).astype(np.uint8) * 255
+                            
+                            # 找到所有白色区域（原始白色区域）
+                            all_white_areas = (chip_black_mask == 0).astype(np.uint8) * 255
+                            
+                            # 真正被黑色线段完全包围的封闭区域 = 所有白色区域 - 与边缘相连的背景区域
+                            enclosed_areas = cv2.bitwise_and(all_white_areas, cv2.bitwise_not(edge_connected_bg))
+                            
+                            # 4. 【验证封闭区域】检查是否主要由横平竖直线段组成
+                            contours, _ = cv2.findContours(enclosed_areas, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                            
+                            valid_enclosed_regions = np.zeros_like(enclosed_areas)
+                            
+                            for contour in contours:
+                                area = cv2.contourArea(contour)
+                                if area < 100:  # 过滤小噪声
+                                    continue
+                                    
+                                # 检查轮廓的形状特征
+                                if len(contour) >= 4:
+                                    # 计算轮廓的方向分布
+                                    horizontal_count = 0
+                                    vertical_count = 0
+                                    total_count = 0
+                                    
+                                    points = contour.reshape(-1, 2)
+                                    for i in range(len(points)):
+                                        p1 = points[i]
+                                        p2 = points[(i + 1) % len(points)]
+                                        
+                                        dx = abs(p2[0] - p1[0])
+                                        dy = abs(p2[1] - p1[1])
+                                        
+                                        if dx > dy and dx > 2:  # 水平线段
+                                            horizontal_count += 1
+                                        elif dy > dx and dy > 2:  # 垂直线段
+                                            vertical_count += 1
+                                        total_count += 1
+                                    
+                                    # 如果主要是横平竖直线段组成的区域
+                                    hor_ver_ratio = (horizontal_count + vertical_count) / max(total_count, 1)
+                                    if hor_ver_ratio > 0.7:  # 70%以上是横平竖直线段
+                                        cv2.fillPoly(valid_enclosed_regions, [contour], 255)
+                            
+                            # 5. 【外扩处理】
+                            # 计算外扩半径：线段宽度 + 1
+                            expansion_radius = estimated_line_width + 1
+                            
+                            # 创建外扩的核
+                            kernel_size = 2 * expansion_radius + 1
+                            kernel = np.ones((kernel_size, kernel_size), np.uint8)
+                            
+                            # 对有效封闭区域进行膨胀（外扩）
+                            expanded_mask = cv2.dilate(valid_enclosed_regions, kernel, iterations=1)
+                            
+                            # 6. 【可视化】显示处理步骤
+                            import matplotlib.pyplot as plt
+                            
+                            # 创建可视化图像
+                            if len(chip_bbox_image.shape) == 3:
+                                chip_rgb = cv2.cvtColor(chip_bbox_image, cv2.COLOR_BGR2RGB)
+                            else:
+                                chip_rgb = cv2.cvtColor(chip_bbox_image, cv2.COLOR_GRAY2RGB)
+                            
+                            plt.figure(figsize=(20, 12))
+                            
+                            # 原始图像
+                            plt.subplot(2, 4, 1)
+                            plt.imshow(chip_rgb)
+                            plt.title(f'Original Chip BBox (Class: {class_name})')
+                            plt.axis('off')
+                            
+                            # Chip矩形框内的黑色线段
+                            plt.subplot(2, 4, 2)
+                            plt.imshow(chip_black_mask, cmap='gray')
+                            plt.title(f'Black Lines in Chip BBox\n(Estimated Line Width: {estimated_line_width}px)')
+                            plt.axis('off')
+                            
+                            # 封闭区域检测结果
+                            plt.subplot(2, 4, 3)
+                            plt.imshow(enclosed_areas, cmap='hot')
+                            plt.title(f'Enclosed Areas (White areas surrounded by black lines)\n(Total: {len(contours)})')
+                            plt.axis('off')
+                            
+                            # 验证后的有效封闭区域
+                            plt.subplot(2, 4, 4)
+                            plt.imshow(valid_enclosed_regions, cmap='hot')
+                            plt.title(f'Valid Rectangular Areas\n(Area > 100px, Hor/Ver > 70%)')
+                            plt.axis('off')
+                            
+                            # 扩展后的掩码
+                            plt.subplot(2, 4, 5)
+                            plt.imshow(expanded_mask, cmap='hot')
+                            plt.title(f'Expanded Mask\n(Radius: {expansion_radius}px)')
+                            plt.axis('off')
+                            
+                            # Chip矩形框内的扩展结果
+                            plt.subplot(2, 4, 6)
+                            plt.imshow(expanded_mask, cmap='hot')
+                            plt.title(f'Expanded in Chip BBox')
+                            plt.axis('off')
+                            
+                            # 最终结果预览
+                            plt.subplot(2, 4, 7)
+                            chip_result_preview = chip_bbox_image.copy()
+                            # 应用背景色到扩展区域
+                            from .background_detector import get_background_color_advanced
+                            bg_color = get_background_color_advanced(processed_image)
+                            
+                            if len(chip_result_preview.shape) == 3:
+                                bg_mask = np.full_like(chip_result_preview, bg_color)
+                                chip_result_preview = np.where(expanded_mask[:, :, np.newaxis] == 255, bg_mask, chip_result_preview)
+                                result_preview_rgb = cv2.cvtColor(chip_result_preview, cv2.COLOR_BGR2RGB)
+                            else:
+                                bg_mask = np.full_like(chip_result_preview, bg_color, dtype=chip_result_preview.dtype)
+                                chip_result_preview = np.where(expanded_mask == 255, bg_mask, chip_result_preview)
+                                result_preview_rgb = cv2.cvtColor(chip_result_preview, cv2.COLOR_GRAY2RGB)
+                            
+                            plt.imshow(result_preview_rgb)
+                            plt.title(f'Final Chip BBox Result')
+                            plt.axis('off')
+                            
+                            # 在原图上显示chip矩形框位置
+                            plt.subplot(2, 4, 8)
+                            if len(processed_image.shape) == 3:
+                                original_with_bbox = processed_image.copy()
+                                cv2.rectangle(original_with_bbox, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+                                original_rgb = cv2.cvtColor(original_with_bbox, cv2.COLOR_BGR2RGB)
+                            else:
+                                original_with_bbox = processed_image.copy()
+                                cv2.rectangle(original_with_bbox, (x_min, y_min), (x_max, y_max), 255, 2)
+                                original_rgb = cv2.cvtColor(original_with_bbox, cv2.COLOR_GRAY2RGB)
+                            plt.imshow(original_rgb)
+                            plt.title(f'Chip BBox Location in Original')
+                            plt.axis('off')
+                            
+                            plt.tight_layout()
+                            plt.show()
+                            
+                            # 7. 【应用处理】将处理后的chip区域结果放回原图像的对应位置
+                            # 导入背景色检测工具
+                            from .background_detector import get_background_color_advanced
+                            bg_color = get_background_color_advanced(processed_image)
+                            
+                            # 创建背景色掩码
+                            if len(processed_image.shape) == 3:
+                                bg_mask = np.full_like(processed_image, bg_color)
+                            else:
+                                bg_mask = np.full_like(processed_image, bg_color, dtype=processed_image.dtype)
+                            
+                            # 创建扩展掩码在原图上的对应位置
+                            expanded_mask_full = np.zeros_like(processed_image if len(processed_image.shape) == 3 else np.expand_dims(processed_image, axis=-1))
+                            if len(expanded_mask_full.shape) == 3:
+                                expanded_mask_full[y_min:y_max+1, x_min:x_max+1, :] = np.stack([expanded_mask]*expanded_mask_full.shape[2], axis=2)
+                            else:
+                                expanded_mask_full = np.zeros_like(processed_image)
+                                expanded_mask_full[y_min:y_max+1, x_min:x_max+1] = expanded_mask
+                            
+                            # 使用np.where来更新image_without_segments，只在chip扩展区域设置背景色
+                            if len(image_without_segments.shape) == 3:
+                                if len(expanded_mask_full.shape) == 3:
+                                    image_without_segments = np.where(expanded_mask_full == 255, bg_mask, image_without_segments)
+                                else:
+                                    image_without_segments = np.where(expanded_mask_full[:, :, np.newaxis] == 255, bg_mask, image_without_segments)
+                            else:
+                                image_without_segments = np.where(expanded_mask_full == 255, bg_mask.squeeze(), image_without_segments)
                     elif class_name != 'line':  # 其他非line类别设置为背景色
                         # 导入背景色检测工具
                         from .background_detector import get_background_color_advanced
