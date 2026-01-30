@@ -386,8 +386,17 @@ class ImageProcessor:
                     # 获取类别名称
                     class_name = class_names_12class.get(class_id, f"class_{class_id}")
                     
-                    # 从原图中移除分割部分（将掩码区域设为背景色），但跳过'line'类别和'chip'类别
-                    if class_name != 'line' and class_name != 'chip':  # 不移除line类别和chip类别
+                    # 根据类别设置不同的颜色
+                    # line类别保持不变，chip类别设置为红色，其他类别设置为背景色
+                    if class_name == 'chip':
+                        # chip类别设置为红色
+                        red_color = [0, 0, 255]  # BGR格式的红色
+                        if len(processed_image.shape) == 3:
+                            color_mask = np.full_like(processed_image, red_color)
+                        else:
+                            color_mask = np.full_like(processed_image, red_color[2], dtype=processed_image.dtype)  # 灰度图取蓝色通道值
+                        image_without_segments = np.where(class_mask_3ch == 255, color_mask, image_without_segments)
+                    elif class_name != 'line':  # 其他非line类别设置为背景色
                         # 导入背景色检测工具
                         from .background_detector import get_background_color_advanced
                         bg_color = get_background_color_advanced(processed_image)
