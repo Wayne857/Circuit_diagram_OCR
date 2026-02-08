@@ -78,6 +78,37 @@ class LineConnectionDetector:
     def distance(self, p1, p2):
         """计算两个点之间的欧氏距离"""
         return sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+    
+    def _point_in_polygon(self, x, y, polygon):
+        """
+        使用射线投射算法检查点是否在多边形内
+        polygon: 多边形顶点列表，格式为[[x1,y1], [x2,y2], ...]
+        """
+        if not polygon:
+            return False
+        
+        n = len(polygon)
+        inside = False
+        
+        # 将第一个顶点存储为起始点
+        p1x, p1y = polygon[0]
+        for i in range(1, n + 1):
+            # 获取下一个顶点
+            p2x, p2y = polygon[i % n]
+            
+            # 检查点是否在当前边的y范围内
+            if y > min(p1y, p2y) and y <= max(p1y, p2y) and x <= max(p1x, p2x):
+                # 检查射线是否与当前边相交
+                if p1y != p2y:
+                    xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x
+                    
+                # 如果点在边上或射线穿过边，则翻转inside标志
+                if p1x == p2x or x <= xinters:
+                    inside = not inside
+            
+            p1x, p1y = p2x, p2y
+        
+        return inside
 
     def merge_close_points(self, points, threshold=3):
         """合并距离小于阈值的特征点（去重）"""
@@ -297,13 +328,50 @@ class LineConnectionDetector:
     def _find_nearest_object(self, point, components, texts, radius_threshold):
         """
         在指定半径内查找最近的元件或文本
+        优先检查点是否在元件的分割掩码内
+        排除line类别的连接
         """
         px, py = point
         nearest_obj = None
         min_dist = float('inf')
         
+        # 首先检查点是否在任何元件的分割掩码内
+        for comp in components:
+            # 排除line类别
+            if comp['category'] == 'line':
+                continue
+            # 检查是否有分割掩码信息
+            if 'segmentation' in comp and comp['segmentation']:
+                # 创建掩码并检查点是否在其中
+                segmentation_coords = comp['segmentation']
+                if self._point_in_polygon(px, py, segmentation_coords):
+                    # 如果点在元件的分割区域内，直接返回该元件
+                    return {
+                        'type': 'component',
+                        'data': comp,
+                        'distance': 0  # 距离为0，因为点在内部
+                    }
+        
+        # 然后检查文本的分割掩码
+        for text in texts:
+            # 检查是否有分割掩码信息
+            if 'segmentation' in text and text['segmentation']:
+                # 创建掩码并检查点是否在其中
+                segmentation_coords = text['segmentation']
+                if self._point_in_polygon(px, py, segmentation_coords):
+                    # 如果点在文本的分割区域内，直接返回该文本
+                    return {
+                        'type': 'text',
+                        'data': text,
+                        'distance': 0  # 距离为0，因为点在内部
+                    }
+        
+        # 如果点不在任何分割掩码内，使用原有的距离检查
         # 检查元件
         for comp in components:
+            # 排除line类别
+            if comp['category'] == 'line':
+                continue
             cx1, cy1, cx2, cy2 = comp['bbox']
             comp_center_x = (cx1 + cx2) / 2
             comp_center_y = (cy1 + cy2) / 2
