@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from math import sqrt
 from pathlib import Path
 import json
+from collections import Counter
 
 
 class LineConnectionDetector:
@@ -79,6 +80,170 @@ class LineConnectionDetector:
         """计算两个点之间的欧氏距离"""
         return sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
     
+    def calculate_segment_width_statistics(self, segment_path, original_image):
+        """
+        计算线段的宽度统计信息
+        使用垂直扫描的方法统计线段的实际像素宽度
+        Args:
+            segment_path: 线段的骨架路径点列表
+            original_image: 原始图像
+        Returns:
+            线段的宽度统计信息字典
+        """
+        if len(original_image.shape) == 3:
+            gray_img = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
+        else:
+            gray_img = original_image
+        
+        # 二值化图像
+        _, binary = cv2.threshold(gray_img, 127, 255, cv2.THRESH_BINARY_INV)
+        
+        h, w = binary.shape
+        widths = []
+        
+        # 对路径上的关键点进行宽度测量
+        sample_points = segment_path[::max(1, len(segment_path)//10)]  # 采样10个点
+        if len(segment_path) < 10:
+            sample_points = segment_path
+        
+        for point in sample_points:
+            x, y = point
+            if 0 <= x < w and 0 <= y < h:
+                # 计算该点的垂直宽度
+                width = self._calculate_point_width(binary, x, y)
+                if width > 0:
+                    widths.append(width)
+        
+        if not widths:
+            return {'avg_width': 1.0, 'max_width': 1.0, 'min_width': 1.0, 'width_list': [1.0]}
+        
+        # 统计信息
+        width_counter = Counter(widths)
+        most_common_width = width_counter.most_common(1)[0][0]
+        
+        return {
+            'avg_width': float(np.mean(widths)),
+            'max_width': float(np.max(widths)),
+            'min_width': float(np.min(widths)),
+            'most_common_width': float(most_common_width),
+            'width_list': [float(w) for w in widths]
+        }
+    
+    def _calculate_point_width(self, binary, x, y):
+        """
+        计算单个点的垂直宽度
+        Args:
+            binary: 二值化图像
+            x, y: 点坐标
+        Returns:
+            该点的垂直宽度
+        """
+        h, w = binary.shape
+        
+        # 首先确认这个点是否在线段上
+        if binary[y, x] != 255:
+            return 1
+        
+        # 向上搜索（限制在较小范围内）
+        up_count = 0
+        for dy in range(1, min(15, y + 1)):  # 最多搜索15像素
+            if binary[y - dy, x] == 255:
+                up_count += 1
+            else:
+                break
+        
+        # 向下搜索
+        down_count = 0
+        for dy in range(1, min(15, h - y)):
+            if binary[y + dy, x] == 255:
+                down_count += 1
+            else:
+                break
+        
+        # 向左搜索
+        left_count = 0
+        for dx in range(1, min(15, x + 1)):
+            if binary[y, x - dx] == 255:
+                left_count += 1
+            else:
+                break
+        
+        # 向右搜索
+        right_count = 0
+        for dx in range(1, min(15, w - x)):
+            if binary[y, x + dx] == 255:
+                right_count += 1
+            else:
+                break
+        
+        # 取垂直方向和水平方向的最大值作为宽度
+        vertical_width = up_count + down_count + 1
+        horizontal_width = left_count + right_count + 1
+        
+        # 返回较小的值，避免过度估计
+        return min(vertical_width, horizontal_width, 10)
+    
+    def filter_segments_by_width_statistics(self, segments, width_stats_list, threshold_ratio=2.0, show_plot=False):
+        """
+        基于宽度统计信息过滤线段
+        Args:
+            segments: 线段列表
+            width_stats_list: 对应的宽度统计信息列表
+            threshold_ratio: 宽度比例阈值，小于该比例的线段将被过滤
+            show_plot: 是否显示宽度分布图
+        Returns:
+            过滤后的线段列表
+        """
+        if len(segments) <= 1:
+            return segments
+        
+        # 提取平均宽度
+        avg_widths = [stats['avg_width'] for stats in width_stats_list]
+        
+        # 找到最大宽度
+        max_width = max(avg_widths)
+        threshold = max_width / threshold_ratio
+        
+        # 显示统计图
+        if show_plot:
+            import matplotlib.pyplot as plt
+            plt.figure(figsize=(10, 6))
+            segment_nums = range(1, len(avg_widths) + 1)
+            colors = ['red' if w < threshold else 'green' for w in avg_widths]
+            bars = plt.bar(segment_nums, avg_widths, color=colors)
+            plt.axhline(y=threshold, color='orange', linestyle='--', label='阈值 ({:.2f})'.format(threshold))
+            plt.xlabel('线段编号')
+            plt.ylabel('宽度')
+            plt.title('线段宽度分布')
+            plt.legend()
+            plt.grid(True, alpha=0.3)
+            
+            # 在柱状图上添加数值标签
+            for i, bar in enumerate(bars):
+                height = bar.get_height()
+                plt.text(bar.get_x() + bar.get_width()/2., height,
+                        '{:.2f}'.format(avg_widths[i]),
+                        ha='center', va='bottom')
+            
+            plt.tight_layout()
+            plt.show()
+        
+        # 过滤线段
+        filtered_segments = []
+        filtered_stats = []
+        
+        for i, (segment, stats) in enumerate(zip(segments, width_stats_list)):
+            avg_width = stats['avg_width']
+            # 如果宽度大于等于阈值，则保留
+            if avg_width >= threshold:
+                filtered_segments.append(segment)
+                filtered_stats.append(stats)
+                print(f"  保留线段 {i+1}，宽度: {avg_width:.2f}")
+            else:
+                print(f"  过滤线段 {i+1}，宽度: {avg_width:.2f} (阈值: {threshold:.2f})")
+        
+        return filtered_segments, filtered_stats
+    
     def _point_in_polygon(self, x, y, polygon):
         """
         使用射线投射算法检查点是否在多边形内
@@ -132,7 +297,9 @@ class LineConnectionDetector:
         return merged
 
     def merge_close_segments(self, segments, threshold=5):
-        """合并端点距离小于阈值的线段（避免一条线拆成多条）"""
+        """合并端点距离小于阈值的线段（避免一条线拆成多条）
+        但保留有意义的转角（如L型、Z型结构）
+        """
         merged_segments = []
         used = [False] * len(segments)
         
@@ -151,33 +318,44 @@ class LineConnectionDetector:
                     start_j, end_j, path_j = segments[j]
                     
                     # 检查当前线段的端点是否和j线段的端点接近
-                    if (self.distance(end_i, start_j) < threshold or 
-                        self.distance(end_i, end_j) < threshold or
-                        self.distance(start_i, start_j) < threshold or
-                        self.distance(start_i, end_j) < threshold):
+                    # 包括所有可能的端点配对情况
+                    merge_condition = (self.distance(end_i, start_j) < threshold or 
+                                     self.distance(end_i, end_j) < threshold or
+                                     self.distance(start_i, start_j) < threshold or
+                                     self.distance(start_i, end_j) < threshold)
                     
-                        # 合并两条线段的路径
-                        if self.distance(end_i, start_j) < threshold:
-                            new_path = path_i + path_j
-                            new_start = start_i
-                            new_end = end_j
-                        elif self.distance(end_i, end_j) < threshold:
-                            new_path = path_i + path_j[::-1]
-                            new_start = start_i
-                            new_end = start_j
-                        elif self.distance(start_i, start_j) < threshold:
-                            new_path = path_j + path_i
-                            new_start = start_j
-                            new_end = end_i
-                        else: # distance(start_i, end_j) < threshold
-                            new_path = path_j[::-1] + path_i
-                            new_start = end_j
-                            new_end = end_i
+                    # 如果满足合并条件，还需要检查是否应该保留转角
+                    if merge_condition:
+                        should_merge = self._should_merge_segments(
+                            current_segment, (start_j, end_j, path_j), threshold)
                         
-                        current_segment = (new_start, new_end, new_path)
-                        used[j] = True
-                        merged = True
-                        break
+                        if should_merge:
+                            # 合并两条线段的路径（处理所有四种连接情况）
+                            if self.distance(end_i, start_j) < threshold:
+                                # end_i -> start_j: 正常连接
+                                new_path = path_i + path_j
+                                new_start = start_i
+                                new_end = end_j
+                            elif self.distance(end_i, end_j) < threshold:
+                                # end_i -> end_j: 反向连接
+                                new_path = path_i + path_j[::-1]
+                                new_start = start_i
+                                new_end = start_j
+                            elif self.distance(start_i, start_j) < threshold:
+                                # start_i -> start_j: 反向连接
+                                new_path = path_j + path_i
+                                new_start = start_j
+                                new_end = end_i
+                            else: # distance(start_i, end_j) < threshold
+                                # start_i -> end_j: 反向连接
+                                new_path = path_j[::-1] + path_i
+                                new_start = end_j
+                                new_end = end_i
+                            
+                            current_segment = (new_start, new_end, new_path)
+                            used[j] = True
+                            merged = True
+                            break
                 if not merged:
                     break
             
@@ -185,6 +363,63 @@ class LineConnectionDetector:
             used[i] = True
         
         return merged_segments
+    
+    def _should_merge_segments(self, segment1, segment2, threshold):
+        """
+        判断两个线段是否应该合并
+        对于直角和Z字型结构，允许合并成连通线段
+        Args:
+            segment1: 第一个线段 (start, end, path)
+            segment2: 第二个线段 (start, end, path)
+            threshold: 合并阈值
+        Returns:
+            bool: 是否应该合并
+        """
+        start1, end1, path1 = segment1
+        start2, end2, path2 = segment2
+        
+        # 计算所有可能的端点距离
+        distances = [
+            self.distance(end1, start2),    # segment1终点 -> segment2起点
+            self.distance(end1, end2),      # segment1终点 -> segment2终点
+            self.distance(start1, start2),  # segment1起点 -> segment2起点
+            self.distance(start1, end2)     # segment1起点 -> segment2终点
+        ]
+        min_distance = min(distances)
+        
+        # 计算两个线段的方向向量
+        def get_direction_vector(start, end):
+            dx = end[0] - start[0]
+            dy = end[1] - start[1]
+            length = max(1, self.distance(start, end))
+            return (dx/length, dy/length)
+        
+        # 获取线段方向
+        dir1 = get_direction_vector(start1, end1)
+        dir2 = get_direction_vector(start2, end2)
+        
+        # 计算方向向量的夹角（点积）
+        dot_product = dir1[0] * dir2[0] + dir1[1] * dir2[1]
+        angle_cos = abs(dot_product)  # 取绝对值，因为方向可能相反
+        
+        # 改进的合并策略：
+        # 1. 方向相似的线段（接近平行）- 合并
+        # 2. 方向差异较大的线段（接近垂直）- 也允许合并（用于直角/Z字型）
+        # 3. 只有完全相反方向且连接松散的线段才不合并
+        
+        # 更宽松的角度阈值
+        angle_threshold = 0.3  # cos(72.5°) ≈ 0.3，允许更大角度差异的合并
+        
+        if angle_cos >= angle_threshold:
+            # 方向相似或中等差异，可以合并
+            return True
+        else:
+            # 即使方向差异较大，如果连接很紧密也允许合并
+            # 这样可以处理直角和Z字型结构
+            close_connection_threshold = threshold * 0.5
+            if min_distance <= close_connection_threshold:
+                return True
+            return False
 
     def preprocess_image(self, image_path):
         """读取图片并预处理（新增闭运算填补微小断裂）"""
@@ -226,42 +461,99 @@ class LineConnectionDetector:
         return feature_points
 
     def trace_wire_segments(self, skeleton, feature_points):
-        """追踪导线线段（优化BFS，允许微小偏移）"""
+        """追踪导线线段（重写的追踪算法，专门处理直角和Z型结构）"""
         h, w = skeleton.shape
         visited = set()
         segments = []
         point_coords = {p[1] for p in feature_points}
 
-        def bfs(start_point):
-            queue = [start_point]
+        def trace_from_point(start_point, target_point):
+            """从起点追踪到目标点，遵循直线路径"""
+            if start_point == target_point:
+                return [start_point]
+            
             path = [start_point]
-            visited.add(start_point)
-            while queue:
-                x, y = queue.pop(0)
-                # 检查8邻域（增加容错：允许1像素偏移）
-                for dx in [-1, 0, 1]:
-                    for dy in [-1, 0, 1]:
-                        if dx == 0 and dy == 0:
+            current = start_point
+            visited.add(current)
+            
+            # 计算主要追踪方向
+            dx = target_point[0] - start_point[0]
+            dy = target_point[1] - start_point[1]
+            
+            # 确定主要追踪方向
+            if abs(dx) > abs(dy):  # 主要水平方向
+                step_x = 1 if dx > 0 else -1
+                step_y = 0
+            else:  # 主要垂直方向
+                step_x = 0
+                step_y = 1 if dy > 0 else -1
+            
+            # 追踪到目标点或遇到障碍
+            while current != target_point:
+                x, y = current
+                # 尝试主要方向
+                next_x, next_y = x + step_x, y + step_y
+                
+                if (0 <= next_x < w and 0 <= next_y < h and 
+                    skeleton[next_y, next_x] == 255 and 
+                    (next_x, next_y) not in visited):
+                    current = (next_x, next_y)
+                    visited.add(current)
+                    path.append(current)
+                    continue
+                
+                # 如果主要方向不行，尝试其他方向
+                found = False
+                for dx_offset in [-1, 0, 1]:
+                    for dy_offset in [-1, 0, 1]:
+                        if dx_offset == 0 and dy_offset == 0:
                             continue
-                        nx_, ny_ = x + dx, y + dy
-                        if 0 <= nx_ < w and 0 <= ny_ < h:
-                            if skeleton[ny_, nx_] == 255 and (nx_, ny_) not in visited:
-                                visited.add((nx_, ny_))
-                                path.append((nx_, ny_))
-                                queue.append((nx_, ny_))
-                                # 遇到特征点则终止，但允许微小距离容错
-                                if (nx_, ny_) in point_coords:
-                                    return path
+                        next_x, next_y = x + dx_offset, y + dy_offset
+                        if (0 <= next_x < w and 0 <= next_y < h and 
+                            skeleton[next_y, next_x] == 255 and 
+                            (next_x, next_y) not in visited):
+                            current = (next_x, next_y)
+                            visited.add(current)
+                            path.append(current)
+                            found = True
+                            break
+                    if found:
+                        break
+                
+                if not found or current == target_point:
+                    break
+            
             return path
 
+        # 为每个特征点找到最近的相邻特征点
+        def find_nearest_neighbors(point, all_points):
+            """找到最近的相邻特征点"""
+            neighbors = []
+            px, py = point
+            
+            for other_point in all_points:
+                if other_point != point:
+                    distance = self.distance(point, other_point)
+                    if distance < 50:  # 限制搜索范围
+                        neighbors.append((distance, other_point))
+            
+            # 按距离排序
+            neighbors.sort(key=lambda x: x[0])
+            return [point for _, point in neighbors[:2]]  # 返回最近的2个点
+
         # 追踪所有特征点
+        feature_coords = [p[1] for p in feature_points]
         for point_type, point in feature_points:
             if point not in visited:
-                path = bfs(point)
-                if len(path) >= 2:
-                    segments.append((path[0], path[-1], path))
+                # 找到最近的相邻点
+                neighbors = find_nearest_neighbors(point, feature_coords)
+                for neighbor in neighbors:
+                    if neighbor not in visited or neighbor in point_coords:
+                        path = trace_from_point(point, neighbor)
+                        if len(path) >= 2:
+                            segments.append((path[0], path[-1], path))
         
-        # 合并距离极近的线段（核心优化：避免一条线拆成多条）
+        # 合并距离极近的线段
         segments = self.merge_close_segments(segments, threshold=5)
         return segments
 
@@ -531,21 +823,52 @@ class LineConnectionDetector:
             segments = self.trace_wire_segments(skeleton, feature_points)
             print(f"合并后导线线段：{len(segments)}条")
             
-            # 4. 构建连接图
-            connection_graph = self.build_connection_graph(segments)
+            # 4. 线段宽度分析和噪声过滤
+            filtered_segments = segments
+            width_stats_list = []
+            
+            if original_image is not None and len(segments) > 0:
+                print("开始线段宽度分析...")
+                
+                # 计算所有线段的宽度统计信息
+                width_stats_list = []
+                for i, (start, end, path) in enumerate(segments):
+                    width_stats = self.calculate_segment_width_statistics(path, original_image)
+                    width_stats_list.append(width_stats)
+                    print(f"  线段 {i+1}: 平均宽度 {width_stats['avg_width']:.2f}, "
+                          f"最常见宽度 {width_stats['most_common_width']:.2f}")
+                
+                # 基于宽度统计进行过滤
+                if len(segments) > 1:
+                    # 可视化宽度分布
+                    self.filter_segments_by_width_statistics(
+                        segments, width_stats_list, threshold_ratio=2.0, show_plot=True)
+                    
+                    # 实际过滤
+                    filtered_segments, filtered_stats = self.filter_segments_by_width_statistics(
+                        segments, width_stats_list, threshold_ratio=2.0, show_plot=False)
+                    print(f"宽度过滤后线段数: {len(filtered_segments)}条 (原始: {len(segments)}条)")
+                    width_stats_list = filtered_stats  # 更新统计信息
+                else:
+                    print("线段数量不足，跳过宽度过滤")
+            else:
+                print("未提供原始图像或线段数量为0，跳过宽度分析")
+            
+            # 5. 构建连接图（使用过滤后的线段）
+            connection_graph = self.build_connection_graph(filtered_segments)
             print(f"连接图节点数：{connection_graph.number_of_nodes()}，边数：{connection_graph.number_of_edges()}")
             
-            # 5. 分析线段连接关系（如果提供了元件和文本信息）
+            # 6. 分析线段连接关系（使用过滤后的线段）
             connections = []
             if components is not None and texts is not None:
-                connections = self.find_connected_components_or_texts(segments, components, texts)
+                connections = self.find_connected_components_or_texts(filtered_segments, components, texts)
             
-            # 6. 保存可视化结果
+            # 7. 保存可视化结果（显示过滤后的线段）
             skeleton_path, result_path = self.visualize_results(
-                img, skeleton, feature_points, segments, output_dir, image_filename
+                img, skeleton, feature_points, filtered_segments, output_dir, image_filename
             )
             
-            # 7. 生成详细连接关系可视化
+            # 8. 生成详细连接关系可视化
             # 如果提供了原始图像，则使用原始图像进行详细可视化；否则使用骨架图像
             visualization_image = original_image if original_image is not None else img
             if connections and visualization_image is not None:
@@ -555,7 +878,9 @@ class LineConnectionDetector:
             
             return {
                 'feature_points': feature_points,
-                'segments': segments,
+                'segments': filtered_segments,  # 返回过滤后的线段
+                'original_segments': segments,  # 保留原始线段信息
+                'width_stats': width_stats_list,  # 宽度统计信息
                 'connection_graph': connection_graph,
                 'connections': connections,  # 新增连接信息
                 'skeleton_path': skeleton_path,
